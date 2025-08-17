@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mehar Physiotherapy Clinic - vCard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0; padding: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      background: #f4f4f4; color: #333;
+      min-height: 100vh;
+    }
+    .card {
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      max-width: 420px;
+      width: 90%;
+      text-align: center;
+    }
+    .card img.logo {
+      width: 120px;
+      border-radius: 50%;
+      margin-bottom: 15px;
+    }
+    h1 {
+      font-size: 1.4em;
+      margin: 10px 0;
+    }
+    h1 strong {
+      font-weight: bold;
+      color: #0077cc;
+    }
+    p {
+      margin: 6px 0;
+      font-size: 0.95em;
+    }
+    .btn {
+      display: block;
+      width: 100%;
+      margin: 8px 0;
+      padding: 12px;
+      text-decoration: none;
+      border-radius: 6px;
+      color: white;
+      font-weight: bold;
+    }
+    .btn-call { background: #28a745; }
+    .btn-email { background: #d93025; }
+    .btn-website { background: #1a73e8; }
+    .btn-location { background: #ff9800; }
+    .btn-whatsapp { background: #25D366; }
+    .qr {
+      margin-top: 15px;
+    }
+    .qr img {
+      width: 120px;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      padding: 5px;
+      background: #fff;
+    }
+  </style>
+  
+  <!-- Structured Data for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Physiotherapy",
+    "name": "Mehar Physiotherapy Clinic",
+    "image": "https://meharphysiotherapyclinic.github.io/vcard/logo.png",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "F-42 (Ground floor), 16th Avenue, Gaur City-2",
+      "addressLocality": "Greater Noida West",
+      "postalCode": "201318",
+      "addressRegion": "U.P.",
+      "addressCountry": "IN"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": "28.60095",
+      "longitude": "77.40839"
+    },
+    "url": "https://meharphysiotherapyclinic.github.io/vcard",
+    "telephone": "+91-9810359247",
+    "email": "physiogsarneja@gmail.com",
+    "sameAs": [
+      "https://maps.app.goo.gl/24Ryeu3vgkUWpB7a8",
+      "https://meharphysiotherapyclinic.github.io/website"
+    ]
+  }
+  </script>
+</head>
+<body>
+  <div class="card">
+    <img src="logo.png" alt="Clinic Logo" class="logo">
+    <h1><strong>MEHAR PHYSIOTHERAPY CLINIC</strong></h1>
+    <p>Dr. Govindpreet Singh Arneja</p>
+    <p>Senior Physiotherapist</p>
+    <p>📍 F-42 (Ground floor), 16th Avenue,<br>Gaur City-2, Greater Noida West-201318 (U.P.)</p>
+    <p>📞 +91 9810359247</p>
+
+    <!-- Buttons -->
+    <a href="tel:+919810359247" class="btn btn-call">📞 Call</a>
+    <a href="mailto:physiogsarneja@gmail.com" class="btn btn-email">✉️ Email</a>
+    <a href="https://meharphysiotherapyclinic.github.io/website" class="btn btn-website" target="_blank">🌐 Website</a>
+    <a href="https://maps.app.goo.gl/24Ryeu3vgkUWpB7a8" class="btn btn-location" target="_blank">📍 Location</a>
+    <a href="https://wa.me/919810359247?text=Hello%20Dr.%20Arneja%2C%20I%20would%20like%20to%20book%20an%20appointment." class="btn btn-whatsapp" target="_blank">💬 WhatsApp</a>
+
+    <!-- QR Code -->
+    <div class="qr">
+      <p>Scan to view vCard</p>
+      <img src="qr_vcard.png" alt="QR Code">
+    </div>
+
+    <!-- Download vCard -->
+    <p><a href="govindpreet.vcf" download>📥 Save Contact</a></p>
+  </div>
+</body>
+</html>
