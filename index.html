@@ -59,6 +59,8 @@
       --loc:  #FF9800;
       --wa:   #25D366;
       --vcf:  #9C27B0;
+      --share:#009688; /* Changed to teal */
+      --copy:#607D8B;  /* Grey for Copy Link */
     }
     * { box-sizing: border-box; }
     body {
@@ -84,14 +86,14 @@
     }
     h1 {
       font-size: 22px;
-      font-weight: 800; /* bold clinic name */
+      font-weight: 800;
       margin: 10px 0 6px;
       color: #111;
       letter-spacing: 0.3px;
     }
     .name {
       font-size: 16px;
-      font-weight: 700; /* bold doctor name */
+      font-weight: 700;
       margin: 6px 0 2px;
     }
     .title {
@@ -112,15 +114,22 @@
       font-weight: 700;
       width: var(--btn-w);
       max-width: 360px;
-      transition: transform 0.06s ease, opacity 0.2s ease;
+      transition: all 0.2s ease;
       color: #fff;
     }
-    .btn:active { transform: translateY(1px); }
+    .btn:hover {
+      filter: brightness(1.1);
+      transform: scale(1.03);
+      cursor: pointer;
+    }
+    .btn:active { transform: translateY(1px) scale(1); }
     .call { background: var(--call); }
     .website { background: var(--site); }
     .location { background: var(--loc); }
     .whatsapp { background: var(--wa); }
     .vcf { background: var(--vcf); }
+    .share { background: var(--share); }
+    .copy { background: var(--copy); }
     .qr {
       margin-top: 18px;
     }
@@ -153,12 +162,16 @@
     <p class="addr">📍 F-42 (Ground floor), 16th Avenue, Gaur City-2,<br/>Greater Noida West - 201318 (U.P.)</p>
     <p class="phone">📞 <a href="tel:+919810359247" style="color:inherit;text-decoration:none;">+91 9810359247</a></p>
 
-    <!-- Action Buttons (Email removed as requested) -->
+    <!-- Action Buttons -->
     <a href="tel:+919810359247" class="btn call">📞 Call</a>
     <a href="https://meharphysiotherapyclinic.github.io/website/" target="_blank" rel="noopener" class="btn website">🌐 Website</a>
     <a href="https://maps.app.goo.gl/24Ryeu3vgkUWpB7a8" target="_blank" rel="noopener" class="btn location">📍 Location</a>
     <a href="https://wa.me/919810359247?text=Hello%20Dr.%20Arneja%2C%20I%20would%20like%20to%20book%20an%20appointment." target="_blank" rel="noopener" class="btn whatsapp">💬 WhatsApp</a>
     <a href="govindpreet.vcf" download class="btn vcf">💾 Save Contact</a>
+
+    <!-- Share Buttons -->
+    <button onclick="shareVCard()" class="btn share">📤 Share Contact</button>
+    <button onclick="copyLink()" class="btn copy">🔗 Copy Link</button>
 
     <!-- QR Code -->
     <div class="qr">
@@ -166,5 +179,29 @@
       <img src="qr_vcard.png" alt="vCard QR Code" />
     </div>
   </div>
+
+  <script>
+    function shareVCard() {
+      const shareData = {
+        title: "Mehar Physiotherapy Clinic",
+        text: "Here’s the vCard of Mehar Physiotherapy Clinic",
+        url: "https://meharphysiotherapyclinic.github.io/vcard/"
+      };
+      if (navigator.share) {
+        navigator.share(shareData).catch((err) => console.log("Share failed:", err));
+      } else {
+        alert("Sharing is not supported on this browser. Please use Copy Link instead.");
+      }
+    }
+
+    function copyLink() {
+      const link = "https://meharphysiotherapyclinic.github.io/vcard/";
+      navigator.clipboard.writeText(link).then(() => {
+        alert("Link copied to clipboard:\n" + link);
+      }).catch(err => {
+        alert("Failed to copy link. Please copy manually:\n" + link);
+      });
+    }
+  </script>
 </body>
-</html>
+  </html>
