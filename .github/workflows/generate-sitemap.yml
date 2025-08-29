@@ -8,6 +8,9 @@ on:
     - cron: '30 17 * * *'  # Runs daily at 11 PM IST (17:30 UTC)
   workflow_dispatch:
 
+permissions:
+  contents: write  # ✅ Allow workflow to push changes
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -15,6 +18,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          persist-credentials: true  # ✅ Ensure git can push back
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
