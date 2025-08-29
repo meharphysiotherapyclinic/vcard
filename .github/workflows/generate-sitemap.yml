@@ -1,0 +1,89 @@
+name: Generate Sitemap for vCard with Lastmod Update
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: '30 17 * * *'  # Runs daily at 11 PM IST (17:30 UTC)
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install sitemap generator
+        run: npm install sitemap-generator-cli
+
+      - name: Generate the sitemap
+        run: npx sitemap-generator-cli https://meharphysiotherapyclinic.github.io/vcard/ -o sitemap.xml --verbose
+
+      - name: Install xmlstarlet
+        run: sudo apt-get update && sudo apt-get install -y xmlstarlet
+
+      - name: Update lastmod dates in sitemap
+        run: |
+          git ls-files '*.html' > files.txt
+
+          while IFS= read -r file; do
+            lastmod_date=$(git log -1 --format=%cd --date=iso-strict "$file")
+
+            if [ "$file" = "index.html" ]; then
+              urls=("https://meharphysiotherapyclinic.github.io/vcard/" "https://meharphysiotherapyclinic.github.io/vcard/index.html")
+            else
+              urls=("https://meharphysiotherapyclinic.github.io/vcard/$file")
+            fi
+
+            for url in "${urls[@]}"; do
+              echo "Updating $url with lastmod $lastmod_date"
+
+              lastmod_exists=$(xmlstarlet sel -N x="http://www.sitemaps.org/schemas/sitemap/0.9" \
+                -t -v "count(//x:url[x:loc[text()='$url']]/x:lastmod)" sitemap.xml)
+
+              if [ "$lastmod_exists" -eq 0 ]; then
+                xmlstarlet ed -N x="http://www.sitemaps.org/schemas/sitemap/0.9" \
+                  -s "//x:url[x:loc[text()='$url']]" -t elem -n lastmod -v "$lastmod_date" sitemap.xml > sitemap.tmp && mv sitemap.tmp sitemap.xml
+              else
+                xmlstarlet ed -N x="http://www.sitemaps.org/schemas/sitemap/0.9" \
+                  -u "//x:url[x:loc[text()='$url']]/x:lastmod" -v "$lastmod_date" sitemap.xml > sitemap.tmp && mv sitemap.tmp sitemap.xml
+              fi
+            done
+          done < files.txt
+
+      - name: Ensure robots.txt includes sitemap
+        run: |
+          ROBOTS_FILE="robots.txt"
+          SITEMAP_URL="https://meharphysiotherapyclinic.github.io/vcard/sitemap.xml"
+
+          # Create robots.txt if it doesn't exist
+          if [ ! -f "$ROBOTS_FILE" ]; then
+            echo "User-agent: *" > $ROBOTS_FILE
+            echo "Allow: /" >> $ROBOTS_FILE
+          fi
+
+          # Remove any old Sitemap lines
+          grep -v -i '^Sitemap:' $ROBOTS_FILE > robots.tmp || true
+          mv robots.tmp $ROBOTS_FILE
+
+          # Add the correct Sitemap line at the end
+          echo "Sitemap: $SITEMAP_URL" >> $ROBOTS_FILE
+
+      - name: Commit and push sitemap + robots.txt
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "docs: Auto-generate sitemap.xml and ensure robots.txt is updated"
+          file_pattern: |
+            sitemap.xml
+            robots.txt
+          commit_user_name: "GitHub Actions Bot"
+          commit_user_email: "github-actions[bot]@users.noreply.github.com"
+          commit_author: "GitHub Actions Bot <github-actions[bot]@users.noreply.github.com>"
