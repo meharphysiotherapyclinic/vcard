@@ -20,6 +20,7 @@
   <meta property="og:type" content="website" />
 
   <!-- Verification Meta (replace token values with the exact strings from GSC / Bing) -->
+  <!-- Example format: content="google6d91481cd7d4c371" -->
   <meta name="google-site-verification" content="google6d91481cd7d4c371" />
   <meta name="msvalidate.01" content="YOUR_BING_VERIFICATION_CODE" />
 
@@ -81,7 +82,6 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      flex-direction: column;
     }
     .card {
       background: var(--card);
@@ -168,17 +168,6 @@
       color: #666;
       font-size: 13px;
     }
-    footer {
-      margin-top: 16px;
-      padding: 10px 20px;
-      font-size: 13px;
-      color: var(--muted);
-      background-color: #e0e0e0;
-      border-radius: 10px;
-      width: 100%;
-      max-width: 440px;
-      text-align: center;
-    }
     @media (max-width: 600px) {
       .card { margin: 12px; padding: 18px; max-height: 100vh; }
       .logo { width: 110px; }
@@ -209,7 +198,7 @@
     <p class="title"><strong>Senior Physiotherapist</strong></p>
 
     <address class="addr"><strong>📍 F-42 (Ground floor), 16th Avenue,<br/>Gaur City-2, Greater Noida West,<br/>Gautam Buddh Nagar - 201318 (U.P.)</strong></address>
-    <p class="phone">📞 <a href="tel:+919810359247" style="color:inherit;text-decoration:none;"><strong>+91 9810359247</strong></a></p>
+    <p class="phone"<📞 <a href="tel:+919810359247" style="color:inherit;text-decoration:none;"><strong>+91 9810359247</strong></a></p>
 
     <!-- Action Buttons -->
     <a href="tel:+919810359247" class="btn call" aria-label="Call Clinic">📞 Call</a>
@@ -228,10 +217,6 @@
       <img src="qr_vcard.png" alt="Scan QR Code to open Mehar Physiotherapy Clinic vCard" loading="lazy" width="180" height="180" />
     </div>
   </div>
-
-  <footer>
-    &copy; 2025 Mehar Physiotherapy Clinic — Dr. Govindpreet Singh Arneja
-  </footer>
 
   <script>
     function shareVCard() {
@@ -254,8 +239,7 @@
     function copyLink() {
       const link = "https://meharphysiotherapyclinic.github.io/vcard/";
       copyToClipboard(link)
-        .then(() => alert("Link copied to clipboard:
-" + link))
+        .then(() => alert("Link copied to clipboard:\n" + link))
         .catch(() => {
           prompt("Copy this link manually:", link);
         });
@@ -290,3 +274,4 @@
   </script>
 </body>
   </html>
+    
