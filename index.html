@@ -20,11 +20,10 @@
   <meta property="og:type" content="website" />
 
   <!-- Verification Meta (replace token values with the exact strings from GSC / Bing) -->
-  <!-- Example format: content="google6d91481cd7d4c371" -->
   <meta name="google-site-verification" content="google6d91481cd7d4c371" />
   <meta name="msvalidate.01" content="YOUR_BING_VERIFICATION_CODE" />
 
-  <!-- JSON-LD Structured Data (IDs/URLs aligned with canonical) -->
+  <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -186,6 +185,20 @@
     @media (prefers-reduced-motion: reduce) {
       .btn { transition: none; }
     }
+
+    /* 🌙 Dark mode support */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #121212;
+        --card: #1e1e1e;
+        --text: #f0f0f0;
+        --muted: #bbbbbb;
+        --shadow: 0 4px 12px rgba(0,0,0,0.6);
+      }
+      h1 { color: #4da3ff; }
+      .title, .addr, .phone { color: #e0e0e0; }
+      .qr p { color: #aaa; }
+    }
   </style>
 </head>
 <body>
@@ -198,7 +211,7 @@
     <p class="title"><strong>Senior Physiotherapist</strong></p>
 
     <address class="addr"><strong>📍 F-42 (Ground floor), 16th Avenue,<br/>Gaur City-2, Greater Noida West,<br/>Gautam Buddh Nagar - 201318 (U.P.)</strong></address>
-    <p class="phone"<📞 <a href="tel:+919810359247" style="color:inherit;text-decoration:none;"><strong>+91 9810359247</strong></a></p>
+    <p class="phone">📞 <a href="tel:+919810359247" style="color:inherit;text-decoration:none;"><strong>+91 9810359247</strong></a></p>
 
     <!-- Action Buttons -->
     <a href="tel:+919810359247" class="btn call" aria-label="Call Clinic">📞 Call</a>
@@ -273,5 +286,4 @@
     }
   </script>
 </body>
-  </html>
-    
+</html>
