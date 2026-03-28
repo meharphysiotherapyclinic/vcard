@@ -140,7 +140,22 @@
     .feedback.show { opacity: 1; }
 
     .qr img { width: 120px; border-radius: 8px; padding: 6px; }
+    @media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #121212;
+    --card: #1e1e1e;
+    --text: #f0f0f0;
+    --shadow: 0 4px 12px rgba(0,0,0,0.6);
+    --success-bg: #193c1f;
+    --success-color: #69ff99;
+  }
 
+  h1 { color: #4da3ff; }
+
+  .title, .addr, .phone { color: #e0e0e0; }
+
+  .qr p { color: #aaa; }
+      }
   </style>
 </head>
 
@@ -174,7 +189,7 @@
     </div>
 
   </div>
-
+  
 <script>
 function showFeedback(msg){
   const fb=document.getElementById('feedback');
