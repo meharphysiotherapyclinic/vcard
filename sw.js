@@ -1,4 +1,4 @@
-const CACHE_NAME = "mehar-vcard-v1";
+const CACHE_NAME = "mehar-vcard-v2";
 const urlsToCache = [
   "/vcard/",
   "/vcard/index.html",
