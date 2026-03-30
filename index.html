@@ -146,6 +146,51 @@
         border: none;
       }
 
+      .btn {
+        display: block;
+        text-decoration: none;
+        margin: 6px auto;
+        padding: 10px 12px;
+        border-radius: var(--btn-radius);
+        font-weight: 700;
+        width: var(--btn-w);
+        max-width: 320px;
+        color: #fff;
+        border: none;
+        transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+      }
+
+      /* Desktop hover */
+      .btn:hover {
+        transform: translateY(-3px);
+        filter: brightness(1.05);
+        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+      }
+
+      /* Mobile tap effect (IMPORTANT) */
+      .btn:active {
+        transform: scale(0.96);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Better touch feedback */
+      .btn:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(14, 90, 149, 0.2);
+      }
+
+      .btn {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .btn:active::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(255, 255, 255, 0.2);
+      }
+
       .call {
         background: var(--call);
       }
@@ -235,7 +280,7 @@
       </p>
       <address class="addr">
         <strong>
-      <img width="20" src="https://cdn-icons-png.flaticon.com/512/684/684908.png" alt="">F-42 (Ground floor), 16th Avenue, <br />Gaur City-2, Greater Noida West, <br />Gautam Buddh Nagar - 201318 (U.P.) </strong>
+          <img width="20" src="https://cdn-icons-png.flaticon.com/512/684/684908.png" alt="">F-42 (Ground floor), 16th Avenue, <br />Gaur City-2, Greater Noida West, <br />Gautam Buddh Nagar - 201318 (U.P.) </strong>
       </address>
       <p class="phone">
         <img width="20" src="https://cdn-icons-png.flaticon.com/512/3059/3059498.png" alt="">
@@ -299,4 +344,4 @@
       }
     </script>
   </body>
-  </html>
+      </html>
