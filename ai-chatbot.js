@@ -11,38 +11,49 @@ window.addEventListener("DOMContentLoaded", () => {
 
 // AI Logic
 function getAIResponse(msg) {
-  msg = msg.toLowerCase();
+  msg = msg.toLowerCase().trim();
 
-  if (msg.includes("neck") || msg.includes("cervical") || msg.includes("spondylosis")) {
-    if (msg.includes("exercise")) {
-      return "For cervical spondylosis:\n• Chin tucks\n• Neck isometric\n• Scapular retraction\n• Shoulder rolls";
-    }
-    if (msg.includes("radiating") || msg.includes("arm")) {
-      return "Pain radiating to arm may indicate nerve involvement. Visit clinic.";
-    }
-    return "Neck pain is often posture-related. Physiotherapy helps.";
+  /* GREETINGS */
+  if (msg.includes("hi") || msg.includes("hello") || msg.includes("hey")) {
+    return "Hello 👋 Welcome to Mehar Physiotherapy Clinic. How can I help you today?";
   }
 
-  if (msg.includes("back")) {
-    if (msg.includes("exercise")) {
-      return "Back pain exercises:\n• McKenzie extension\n• Pelvic tilts\n• Core strengthening";
-    }
-    return "Back pain is common. Physiotherapy helps long-term.";
+  /* THANK YOU */
+  if (msg.includes("thank")) {
+    return "You're welcome 😊 If you need any help, feel free to ask or contact Mehar Physiotherapy Clinic.";
   }
 
-  if (msg.includes("knee")) {
-    return "Knee pain can improve with strengthening exercises.";
+  /* LOCATION */
+  if (msg.includes("location") || msg.includes("where")) {
+    return "We are located in Gaur City 2, Greater Noida West. Please use the Location button above for directions.";
   }
 
-  if (msg.includes("where") || msg.includes("location")) {
-    return "We are in Gaur City 2, Greater Noida West. Use Location button above.";
+  /* APPOINTMENT */
+  if (msg.includes("appointment") || msg.includes("book")) {
+    return "To book an appointment, please Call or WhatsApp +91 9810359247.";
   }
 
-  if (msg.includes("appointment")) {
-    return "Call or WhatsApp +91 9810359247 to book.";
+  /* CLINIC NAME */
+  if (msg.includes("clinic") || msg.includes("name")) {
+    return "This is Mehar Physiotherapy Clinic, providing expert physiotherapy care in Greater Noida West.";
   }
 
-  return "Please describe your problem (neck, back, knee etc.)";
+  /* PAIN CONDITIONS */
+  if (
+    msg.includes("pain") ||
+    msg.includes("neck") ||
+    msg.includes("back") ||
+    msg.includes("knee") ||
+    msg.includes("shoulder") ||
+    msg.includes("sciatica") ||
+    msg.includes("slip disc") ||
+    msg.includes("spondylosis")
+  ) {
+    return "Your condition requires proper assessment. For safe and effective recovery, please contact Mehar Physiotherapy Clinic for personalized physiotherapy treatment.";
+  }
+
+  /* DEFAULT RESPONSE */
+  return "For accurate guidance and personalized treatment, please contact Mehar Physiotherapy Clinic at +91 9810359247.";
 }
 
 // Send Message
