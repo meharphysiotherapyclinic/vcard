@@ -20,6 +20,7 @@
     <meta property="og:type" content="website" />
     <meta name="google-site-verification" content="google6d91481cd7d4c371" />
     <meta name="msvalidate.01" content="E76D8F3241A1CA7BF1BA3E868527348B" />
+    <link rel="stylesheet" href="ai-chatbot.css">
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -369,5 +370,17 @@
         navigator.serviceWorker.register('sw.js');
       }
     </script>
+    <!-- AI CHAT UI -->
+<button id="chat-toggle">💬</button>
+
+<div id="chatbox">
+  <div id="chat-header">Ask Physiotherapist</div>
+  <div id="chat-messages"></div>
+  <div id="chat-input">
+    <input type="text" id="userInput" placeholder="Type your problem..." />
+    <button onclick="sendMessage()">Send</button>
+  </div>
+</div>
+    <script src="ai-chatbot.js"></script>
   </body>
   </html>
