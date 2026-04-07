@@ -129,6 +129,12 @@
   color: #444;
 }
 
+.msg-user, 
+.msg-ai {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
 @media (prefers-color-scheme: dark) {
   .msg-ai {
     color: #ddd;
