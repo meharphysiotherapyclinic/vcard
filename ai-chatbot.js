@@ -1,3 +1,4 @@
+let chatInitialized = false;
 // TOGGLE CHAT
 function toggleChat() {
   const chat = document.querySelector('.chatbot');
