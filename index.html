@@ -372,34 +372,36 @@
     </script>
     <!-- AI CHAT UI -->
 
-<div class="chat-header">
-  <span>Ask Physiotherapist</span>
-  <div class="chat-actions">
-    <button type="button" onclick="resetChat()" title="Reset Chat" class="header-btn">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M23 4v6h-6"></path>
-        <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
-      </svg>
-    </button>
-    
-    <button type="button" onclick="toggleChat()" title="Close Chat" class="header-btn">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-        <line x1="18" y1="6" x2="6" y2="18"></line>
-        <line x1="6" y1="6" x2="18" y2="18"></line>
-      </svg>
-    </button>
+<div class="chatbot" id="chatbot">
+  <div class="chat-header">
+    <span>Ask Physiotherapist</span>
+    <div class="chat-actions">
+      <button type="button" onclick="resetChat()" title="Reset Chat" class="header-btn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M23 4v6h-6"></path>
+          <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+        </svg>
+      </button>
+      
+      <button type="button" onclick="toggleChat()" title="Close Chat" class="header-btn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
   </div>
-</div>
 
   <div id="chat-messages" class="chatbox"></div>
 
   <div class="chat-input">
-  <input type="text" id="userInput" placeholder="Type your problem..." autocomplete="off" />
-  <button onclick="sendMessage()">Send</button>
-</div>
+    <input type="text" id="userInput" placeholder="Type your problem..." autocomplete="off" />
+    <button onclick="sendMessage()">Send</button>
+  </div>
 </div>
 
 <button id="chat-toggle-btn" onclick="toggleChat()">💬</button>
+
     <script src="ai-chatbot.js"></script>
   </body>
   </html>
