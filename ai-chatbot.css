@@ -80,11 +80,17 @@
 
 /* MESSAGES */
 .chatbox {
+  flex: 1;                 /* IMPORTANT */
   padding: 10px;
-  height: 250px;
   overflow-y: auto;
   font-size: 13px;
   line-height: 1.5;
+
+  max-height: 260px;
+  min-height: 200px;
+
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* INPUT */
