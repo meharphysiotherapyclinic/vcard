@@ -64,7 +64,7 @@ function getAIResponse(msg) {
   }
 
   // 5. APPOINTMENT / BOOKING
-  if (msg.includes("appointment") || msg.includes("book") || msg.includes("consultation")) {
+  if (msg.includes("appointment") || msg.includes("book") || msg.includes("consultation") || msg.includes("contact")) {
     return "To book an appointment, you can call us or click here: <br><br><a href='https://wa.me/919810359247?text=I%20want%20to%20book%20an%20appointment' target='_blank' style='color:#0a7833; font-weight:bold;'>Direct WhatsApp Booking</a>";
   }
 
