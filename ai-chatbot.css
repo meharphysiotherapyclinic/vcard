@@ -80,14 +80,14 @@
 
 /* MESSAGES */
 .chatbox {
-  flex: 1;                 /* IMPORTANT */
+  display: flex;
+  flex-direction: column;
+
+  flex: 1;
   padding: 10px;
   overflow-y: auto;
   font-size: 13px;
   line-height: 1.5;
-
-  max-height: 260px;
-  min-height: 200px;
 
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
