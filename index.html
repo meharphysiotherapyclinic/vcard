@@ -373,25 +373,23 @@
     <!-- AI CHAT UI -->
 <button id="chat-toggle">💬</button>
 
-<div id="chatbot" class="chatbot">
+<div class="chatbot" id="chatbot">
   <div class="chat-header">
-    <span>Ask Physiotherapist</span>
-
+    Ask Physiotherapist
     <div class="chat-actions">
-      <button onclick="resetChat()" title="Refresh">↻</button>
-      <button onclick="toggleChat()" title="Close">✕</button>
+      <button onclick="resetChat()">⟳</button>
+      <button onclick="toggleChat()">✖</button>
     </div>
   </div>
 
-  <div id="chatbox" class="chatbox"></div>
+  <div id="chat-messages"></div>
 
   <div class="chat-input">
-    <input type="text" id="userInput" placeholder="Type your query..." />
+    <input type="text" id="userInput" placeholder="Type your problem..." />
     <button onclick="sendMessage()">Send</button>
   </div>
 </div>
 
-<!-- Floating open button -->
 <button id="chat-toggle-btn" onclick="toggleChat()">💬</button>
     <script src="ai-chatbot.js"></script>
   </body>
