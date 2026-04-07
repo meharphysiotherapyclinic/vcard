@@ -74,3 +74,25 @@ function sendMessage() {
 
   input.value = "";
 }
+
+function toggleChat() {
+  const chat = document.getElementById("chatbot");
+  chat.style.display = chat.style.display === "flex" ? "none" : "flex";
+}
+
+function resetChat() {
+  const chatbox = document.getElementById("chatbox");
+  chatbox.innerHTML = "";
+
+  // Optional welcome message after reset
+  addMessage("AI", "Hello 👋 How can I help you today?");
+}
+
+function addMessage(sender, text) {
+  const chatbox = document.getElementById("chatbox");
+  const msg = document.createElement("div");
+  msg.innerHTML = `<strong>${sender}:</strong> ${text}`;
+  msg.style.marginBottom = "8px";
+  chatbox.appendChild(msg);
+  chatbox.scrollTop = chatbox.scrollHeight;
+}
