@@ -1,104 +1,83 @@
 let chatInitialized = false;
 
-// TOGGLE CHAT
 function toggleChat() {
-  const chat = document.querySelector('.chatbot');
+  const chat = document.getElementById('chatbot');
+  const input = document.getElementById("userInput");
+  
   chat.classList.toggle('show');
 
-  // Show welcome message ONLY once
-  if (!chatInitialized) {
-    addMessage("ai", "Hello 👋 Welcome to Mehar Physiotherapy Clinic. How can I help you today?");
-    chatInitialized = true;
+  if (chat.classList.contains('show')) {
+    // Auto-focus input when opened
+    setTimeout(() => input.focus(), 300);
+    
+    if (!chatInitialized) {
+      addMessage("ai", "Hello 👋 Welcome to Mehar Physiotherapy Clinic. How can I help you today?");
+      chatInitialized = true;
+    }
   }
 }
 
-// RESET CHAT
 function resetChat() {
   const messages = document.getElementById("chat-messages");
   messages.innerHTML = "";
-  addMessage("ai", "Hello 👋 Welcome to Mehar Physiotherapy Clinic. How can I help you today?");
+  addMessage("ai", "Chat reset. How can I help you?");
 }
 
-// ADD MESSAGE
 function addMessage(type, text) {
   const messages = document.getElementById("chat-messages");
   const msg = document.createElement("div");
 
   msg.className = type === "user" ? "msg-user" : "msg-ai";
-  msg.textContent = text; // FIXED (was innerHTML)
+  // Use innerHTML so we can include clickable links/bold text
+  msg.innerHTML = text; 
 
   messages.appendChild(msg);
-  messages.scrollTop = messages.scrollHeight;
+  
+  // Improved scroll logic
+  messages.scrollTo({
+    top: messages.scrollHeight,
+    behavior: 'smooth'
+  });
 }
 
-// AI RESPONSE LOGIC
 function getAIResponse(msg) {
   msg = msg.toLowerCase().trim();
 
-  // GREETING (strict match)
   if (/^(hi|hello|hey|hii)$/.test(msg)) {
-    return "Hello 👋 Welcome to Mehar Physiotherapy Clinic. How can I help you today?";
+    return "Hello 👋 How can I help you today?";
   }
 
-  // THANK YOU
-  if (msg.includes("thank")) {
-    return "You're welcome 😊 If you need any assistance, feel free to contact Mehar Physiotherapy Clinic.";
+  if (msg.includes("location") || msg.includes("where") || msg.includes("address")) {
+    return "We are located at <strong>F-42, 16th Avenue, Gaur City 2</strong>. <br><br><a href='https://www.google.com/maps/search/?api=1&query=Mehar+Physiotherapy+Clinic&query_place_id=ChIJ4_vGaUnvDDkR5vtYeucjsNU' target='_blank' style='color:#0e5a95'>Click here for Directions</a>";
   }
 
-  // LOCATION
-  if (msg.includes("location") || msg.includes("where")) {
-    return "We are located in Gaur City 2, Greater Noida West. Please use the Location button above for directions.";
+  if (msg.includes("appointment") || msg.includes("book") || msg.includes("fee") || msg.includes("charge")) {
+    return "To book an appointment or inquire about fees, please WhatsApp Dr. Arneja: <br><br><a href='https://wa.me/919810359247' target='_blank' style='color:#0a7833'><b>Chat on WhatsApp</b></a>";
   }
 
-  // APPOINTMENT
-  if (msg.includes("appointment") || msg.includes("book")) {
-    return "To book an appointment, please Call or WhatsApp +91 9810359247.";
+  if (msg.includes("pain") || msg.includes("neck") || msg.includes("back") || msg.includes("knee")) {
+    return "I'm sorry to hear you're in pain. For a proper diagnosis and treatment plan, please call us at <a href='tel:+919810359247'>+91 9810359247</a>.";
   }
 
-  // CLINIC INFO
-  if (msg.includes("clinic") || msg.includes("name")) {
-    return "This is Mehar Physiotherapy Clinic, providing expert physiotherapy care in Greater Noida West.";
-  }
-
-  // PAIN / CONDITIONS
-  if (
-    msg.includes("pain") ||
-    msg.includes("neck") ||
-    msg.includes("back") ||
-    msg.includes("knee") ||
-    msg.includes("shoulder") ||
-    msg.includes("sciatica") ||
-    msg.includes("slip disc") ||
-    msg.includes("spondylosis") ||
-    msg.includes("arm") ||
-    msg.includes("leg")
-  ) {
-    return "This requires proper assessment. For safe and effective recovery, please contact Mehar Physiotherapy Clinic for personalized physiotherapy treatment.";
-  }
-
-  // DEFAULT
-  return "For accurate guidance and personalized treatment, please contact Mehar Physiotherapy Clinic at +91 9810359247.";
+  return "For accurate guidance, please contact Mehar Physiotherapy Clinic at +91 9810359247 or visit our website.";
 }
 
-// SEND MESSAGE
 function sendMessage() {
   const input = document.getElementById("userInput");
   const text = input.value.trim();
   if (!text) return;
 
   addMessage("user", text);
-
-  const reply = getAIResponse(text);
-
-  // Typing delay (more natural)
-  setTimeout(() => {
-    addMessage("ai", reply);
-  }, 500);
-
   input.value = "";
+
+  // Show a "typing" feel
+  setTimeout(() => {
+    const reply = getAIResponse(text);
+    addMessage("ai", reply);
+  }, 600);
 }
 
-// ENTER KEY SUPPORT (NEW)
+// Enter key support
 document.getElementById("userInput").addEventListener("keypress", function(e) {
   if (e.key === "Enter") {
     sendMessage();
