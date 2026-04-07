@@ -1,7 +1,15 @@
 // TOGGLE CHAT
 function toggleChat() {
   const chat = document.querySelector('.chatbot');
+  const isOpening = !chat.classList.contains('show');
+
   chat.classList.toggle('show');
+
+  if (isOpening) {
+    const messages = document.getElementById("chat-messages");
+    messages.innerHTML = "";
+    addMessage("ai", "Hello 👋 Welcome to Mehar Physiotherapy Clinic. How can I help you today?");
+  }
 }
 
 // RESET CHAT
