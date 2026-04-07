@@ -43,23 +43,52 @@ function addMessage(type, text) {
 function getAIResponse(msg) {
   msg = msg.toLowerCase().trim();
 
-  if (/^(hi|hello|hey|hii)$/.test(msg)) {
-    return "Hello 👋 How can I help you today?";
+  // 1. GREETINGS
+  if (/^(hi|hello|hey|hii|good morning|good evening)$/.test(msg)) {
+    return "Hello 👋 Welcome to Mehar Physiotherapy Clinic. How can I help you today?";
   }
 
-  if (msg.includes("location") || msg.includes("where") || msg.includes("address")) {
-    return "We are located at <strong>F-42, 16th Avenue, Gaur City 2</strong>. <br><br><a href='https://www.google.com/maps/search/?api=1&query=Mehar+Physiotherapy+Clinic&query_place_id=ChIJ4_vGaUnvDDkR5vtYeucjsNU' target='_blank' style='color:#0e5a95'>Click here for Directions</a>";
+  // 2. THANK YOU / APPRECIATION
+  if (msg.includes("thank") || msg.includes("thx") || msg.includes("thanks")) {
+    return "You're very welcome! 😊 We are here to help you recover. Feel free to ask if you have more questions.";
   }
 
-  if (msg.includes("appointment") || msg.includes("book") || msg.includes("fee") || msg.includes("charge")) {
-    return "To book an appointment or inquire about fees, please WhatsApp Dr. Arneja: <br><br><a href='https://wa.me/919810359247' target='_blank' style='color:#0a7833'><b>Chat on WhatsApp</b></a>";
+  // 3. TIMINGS / OPENING HOURS
+  if (msg.includes("time") || msg.includes("open") || msg.includes("hours") || msg.includes("sunday")) {
+    return "We are open <strong>Monday to Sunday, 8:00 AM to 9:00 PM</strong>. Would you like to check availability for today?";
   }
 
-  if (msg.includes("pain") || msg.includes("neck") || msg.includes("back") || msg.includes("knee")) {
-    return "I'm sorry to hear you're in pain. For a proper diagnosis and treatment plan, please call us at <a href='tel:+919810359247'>+91 9810359247</a>.";
+  // 4. HOME VISITS
+  if (msg.includes("home") || msg.includes("visit") || msg.includes("at house")) {
+    return "Yes, we provide <strong>Home Visit Physiotherapy</strong> in Gaur City 1, 2, and across Greater Noida West. Please share your location on WhatsApp for booking.";
   }
 
-  return "For accurate guidance, please contact Mehar Physiotherapy Clinic at +91 9810359247 or visit our website.";
+  // 5. APPOINTMENT / BOOKING
+  if (msg.includes("appointment") || msg.includes("book") || msg.includes("consultation")) {
+    return "To book an appointment, you can call us or click here: <br><br><a href='https://wa.me/919810359247?text=I%20want%20to%20book%20an%20appointment' target='_blank' style='color:#0a7833; font-weight:bold;'>Direct WhatsApp Booking</a>";
+  }
+
+  // 6. FEES / CHARGES
+  if (msg.includes("fee") || msg.includes("charge") || msg.includes("cost") || msg.includes("price")) {
+    return "Our charges are very competitive. For a specific quote (Clinic visit vs. Home visit), please contact us at <strong>+91 9810359247</strong>.";
+  }
+
+  // 7. SPECIFIC PAIN / CONDITIONS
+  if (
+    msg.includes("back") || msg.includes("neck") || msg.includes("knee") || 
+    msg.includes("sciatica") || msg.includes("slip disc") || msg.includes("shoulder") ||
+    msg.includes("frozen") || msg.includes("injury") || msg.includes("post surgery")
+  ) {
+    return "Dr. Arneja specializes in treating " + msg + ". Proper assessment is key to recovery. Would you like to schedule a clinical examination?";
+  }
+
+  // 8. LOCATION
+  if (msg.includes("location") || msg.includes("where") || msg.includes("address") || msg.includes("map")) {
+    return "We are located at: <strong>F-42, 16th Avenue, Gaur City-2, Greater Noida West</strong>. <br><br><a href='https://www.google.com/maps/search/?api=1&query=Mehar+Physiotherapy+Clinic&query_place_id=ChIJ4_vGaUnvDDkR5vtYeucjsNU' target='_blank' style='color:#0e5a95'>Open in Google Maps</a>";
+  }
+
+  // DEFAULT FALLBACK
+  return "I'm not sure I understood that correctly. For expert guidance regarding your condition, please call <strong>+91 9810359247</strong> or type 'Appointment'.";
 }
 
 function sendMessage() {
