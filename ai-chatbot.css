@@ -49,11 +49,21 @@
 }
 
 /* DARK MODE */
-@media (prefers-color-scheme: dark) {
+@@media (prefers-color-scheme: dark) {
   .chatbot {
     background: rgba(30, 30, 30, 0.95);
     color: #fff;
     backdrop-filter: blur(10px);
+  }
+
+  .msg-ai {
+    background: #2a2a2a;
+    color: #eee;
+  }
+
+  .msg-user {
+    background: #0e5a95;
+    color: #fff;
   }
 }
 
