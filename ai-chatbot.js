@@ -1,15 +1,14 @@
 let chatInitialized = false;
+
 // TOGGLE CHAT
 function toggleChat() {
   const chat = document.querySelector('.chatbot');
-  const isOpening = !chat.classList.contains('show');
-
   chat.classList.toggle('show');
 
-  if (isOpening) {
-    const messages = document.getElementById("chat-messages");
-    messages.innerHTML = "";
+  // Show welcome message ONLY once
+  if (!chatInitialized) {
     addMessage("ai", "Hello 👋 Welcome to Mehar Physiotherapy Clinic. How can I help you today?");
+    chatInitialized = true;
   }
 }
 
@@ -26,7 +25,7 @@ function addMessage(type, text) {
   const msg = document.createElement("div");
 
   msg.className = type === "user" ? "msg-user" : "msg-ai";
-  msg.innerHTML = text;
+  msg.textContent = text; // FIXED (was innerHTML)
 
   messages.appendChild(msg);
   messages.scrollTop = messages.scrollHeight;
@@ -98,3 +97,10 @@ function sendMessage() {
 
   input.value = "";
 }
+
+// ENTER KEY SUPPORT (NEW)
+document.getElementById("userInput").addEventListener("keypress", function(e) {
+  if (e.key === "Enter") {
+    sendMessage();
+  }
+});
