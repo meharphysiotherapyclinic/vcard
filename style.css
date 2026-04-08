@@ -223,7 +223,7 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
   padding: 0 15px 15px;
   font-size: 13.5px;
   line-height: 1.5;
-  color: var(--muted);
+  color: #ffffff;
 }
 
 .about-content p {
@@ -238,6 +238,9 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
   }
   .about-section summary {
     color: #4da3ff;
+  }
+  .about-content {
+    color: #ffffff; /* Ensures it stays white in dark mode */
   }
 }
 
