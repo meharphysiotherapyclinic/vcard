@@ -183,6 +183,65 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
   justify-content: center;
 }
 
+/* ABOUT SECTION STYLES */
+.about-section {
+  width: 100%;
+  max-width: 360px;
+  margin: 10px auto;
+  text-align: left;
+  background: var(--card);
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.about-section summary {
+  padding: 12px 15px;
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--site);
+  cursor: pointer;
+  list-style: none; /* Removes default arrow */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Custom arrow */
+.about-section summary::after {
+  content: '▼';
+  font-size: 10px;
+  transition: transform 0.3s;
+}
+
+.about-section[open] summary::after {
+  transform: rotate(180deg);
+}
+
+.about-content {
+  padding: 0 15px 15px;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.about-content p {
+  margin: 8px 0 0;
+}
+
+/* Dark Mode adjustment */
+@media (prefers-color-scheme: dark) {
+  .about-section {
+    border-color: rgba(255,255,255,0.1);
+    background: #1e1e1e;
+  }
+  .about-section summary {
+    color: #4da3ff;
+  }
+}
+
+
 
 /* FEEDBACK */
 .feedback {
