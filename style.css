@@ -252,6 +252,24 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
     box-shadow: none;
     border: 1px solid rgba(255,255,255,0.05);
   }
+    /* Inside Dark Mode Media Query */
+  .about-section { border-color: rgba(255,255,255,0.1); }
+  .about-section summary { color: #4da3ff; }
+
+  .services-grid span:nth-child(6),
+  .services-grid span:nth-child(7),
+  .services-grid span:nth-child(8),
+  .services-grid span:nth-child(9) {
+    background: #1a2a3a;
+    border-color: #2f68ba;
+    color: #4da3ff;
+  }
+  
+  .services-grid span:last-child {
+    background: #1b3320;
+    border-color: #2e7d32;
+    color: #69ff99;
+  }
 }
 
 /* MOBILE SAFE */
