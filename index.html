@@ -57,227 +57,247 @@
       }
     </script>
     <style>
-      :root {
-        --bg: #f9f9f9;
-        --card: #ffffff;
-        --text: #161617;
-        --muted: #555555;
-        --btn-radius: 10px;
-        --btn-w: 100%;
-        --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        --call: #ab214d;
-        --site: #0e5a95;
-        --loc: #145369;
-        --wa: #0a7833;
-        --vcf: #9C27B0;
-        --share: #036a60;
-        --copy: #a15a25;
-        --focus: 3px solid rgba(14, 90, 149, 0.15);
-        --success-bg: #e8f5e9;
-        --success-color: #2e7d32;
-      }
+    :root {
+  --bg: #f9f9f9;
+  --card: #ffffff;
+  --text: #161617;
+  --muted: #555555;
+  --btn-radius: 12px;
+  --btn-w: 100%;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 
-      * {
-        box-sizing: border-box;
-      }
+  --call: #ab214d;
+  --site: #0e5a95;
+  --loc: #145369;
+  --wa: #0a7833;
+  --vcf: #9C27B0;
+  --share: #036a60;
+  --copy: #a15a25;
 
-      body {
-        font-family: Arial, Helvetica, sans-serif;
-        background: var(--bg);
-        margin: 0;
-        padding: 16px 12px 40px;
-        padding-bottom: calc(40px + env(safe-area-inset-bottom));
-        color: var(--text);
-        text-align: center;
-        min-height: 100vh;
-      }
+  --focus: 3px solid rgba(14, 90, 149, 0.15);
+  --success-bg: #e8f5e9;
+  --success-color: #2e7d32;
+}
 
-      .card {
-        background: var(--card);
-        max-width: 440px;
-        width: 100%;
-        margin: 10px auto;
-        padding: 14px 22px;
-        border-radius: 14px;
-        box-shadow: var(--shadow);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
+* { box-sizing: border-box; }
 
-      .logo {
-        max-width: 100px;
-        height: auto;
-        margin-bottom: 10px;
-      }
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  margin: 0;
+  padding: 16px 12px 40px;
+  padding-bottom: calc(40px + env(safe-area-inset-bottom));
+  color: var(--text);
+  text-align: center;
+  min-height: 100vh;
+}
 
-      h1 {
-        font-size: 20px;
-        font-weight: 800;
-        margin: 6px 0 4px;
-        color: #2f68ba;
-      }
+/* CARD */
+.card {
+  background: var(--card);
+  max-width: 440px;
+  width: 100%;
+  margin: 10px auto;
+  padding: 14px 20px;
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-      .name {
-        font-size: 16px;
-        font-weight: 750;
-        margin: 4px 0 1px;
-      }
+/* HEADER */
+.logo { max-width: 100px; margin-bottom: 10px; }
+h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
+.name { font-size: 16px; font-weight: 700; }
+.title { font-size: 14px; font-weight: 600; }
+.addr, .phone {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.4;
+}
 
-      .title {
-        margin: 2px 0;
-        font-size: 15px;
-        font-weight: 600;
-      }
+/* BUTTON BASE */
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-decoration: none;
+  padding: 14px;
+  border-radius: var(--btn-radius);
+  font-weight: 700;
+  font-size: 17px;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s;
+}
 
-      .addr,
-      .phone {
-        margin: 2px 0;
-        line-height: 1.4;
-        font-size: 14px;
-        font-weight: 700;
-      }
+.btn:hover { transform: translateY(-2px); }
+.btn:active { transform: scale(0.96); }
 
-      /* MAIN BUTTONS - Updated with larger font and flex alignment */
-      .btn {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        text-decoration: none;
-        margin: 8px auto;
-        padding: 12px 15px;
-        border-radius: var(--btn-radius);
-        font-weight: 700;
-        font-size: 18px;
-        /* Increased Font Size */
-        width: var(--btn-w);
-        max-width: 340px;
-        color: #fff;
-        border: none;
-        transition: transform 0.15s ease, box-shadow 0.15s ease;
-        cursor: pointer;
-        position: relative;
-        overflow: hidden;
-      }
+/* BUTTON COLORS */
+.call { background: var(--call); }
+.website { background: var(--site); }
+.location { background: var(--loc); }
+.whatsapp { background: var(--wa); }
+.vcf { background: var(--vcf); }
+.share { background: var(--share); }
+.copy { background: var(--copy); }
 
-      .btn:hover {
-        transform: translateY(-3px);
-        filter: brightness(1.05);
-      }
+/* GRID BUTTONS */
+.btn-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  width: 100%;
+  max-width: 360px;
+  margin: 10px auto;
+}
 
-      .btn:active {
-        transform: scale(0.96);
-      }
+.btn-grid .btn {
+  width: 100%;
+  padding: 16px;
+  border-radius: 16px;
+}
 
-      .call {
-        background: var(--call);
-      }
+/* SECONDARY BUTTONS */
+.btn-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  max-width: 360px;
+  margin: 10px auto;
+}
 
-      .website {
-        background: var(--site);
-      }
+.btn.small {
+  font-size: 14px;
+  padding: 12px;
+}
 
-      .location {
-        background: var(--loc);
-      }
+/* SERVICES BOX */
+.services-box {
+  background: linear-gradient(135deg, #f0f7ff, #ffffff);
+  border-left: 5px solid #0e5a95;
+  padding: 12px;
+  border-radius: 12px;
+  margin: 12px auto;
+  max-width: 360px;
+  text-align: left;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+}
 
-      .whatsapp {
-        background: var(--wa);
-      }
+.services-box h3 {
+  margin: 0 0 6px;
+  font-size: 15px;
+  color: #0e5a95;
+}
 
-      .vcf {
-        background: var(--vcf);
-      }
+.services-box h4 {
+  margin: 8px 0 4px;
+  font-size: 14px;
+}
 
-      .share {
-        background: var(--share);
-      }
+.services-box p {
+  margin: 0;
+  font-size: 13.5px;
+}
 
-      .copy {
-        background: var(--copy);
-      }
+/* SERVICES GRID */
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px 10px;
+  margin-top: 6px;
+}
 
-      .feedback {
-        opacity: 0;
-        transition: 0.3s;
-        font-size: 13px;
-        margin-top: 8px;
-        border-radius: 7px;
-        padding: 7px;
-        background: var(--success-bg);
-        color: var(--success-color);
-      }
+.services-grid span {
+  background: #ffffff;
+  padding: 6px 8px;
+  border-radius: 8px;
+  font-size: 13px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
 
-      .feedback.show {
-        opacity: 1;
-      }
+/* FEEDBACK */
+.feedback {
+  opacity: 0;
+  transition: 0.3s;
+  font-size: 13px;
+  margin-top: 8px;
+  border-radius: 7px;
+  padding: 7px;
+  background: var(--success-bg);
+  color: var(--success-color);
+}
+.feedback.show { opacity: 1; }
 
-      .qr img {
-        width: 120px;
-        border-radius: 8px;
-        padding: 6px;
-        margin-bottom: 20px;
-      }
+/* QR */
+.qr img {
+  width: 120px;
+  border-radius: 8px;
+  padding: 6px;
+  margin-bottom: 20px;
+}
 
-      /* DARK MODE */
-      @media (prefers-color-scheme: dark) {
-        :root {
-          --bg: #121212;
-          --card: #1e1e1e;
-          --text: #f0f0f0;
-          --shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
-          --success-bg: #193c1f;
-          --success-color: #69ff99;
-        }
+/* CHATBOT FIX */
+.chatbot {
+  position: fixed;
+  bottom: 80px;
+  right: 15px;
+  width: 320px;
+  max-width: 90%;
+  z-index: 9999;
+}
 
-        h1 {
-          color: #4da3ff;
-        }
+#chat-toggle-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 15px;
+  z-index: 10000;
+}
 
-        .title,
-        .addr,
-        .phone {
-          color: #e0e0e0;
-        }
-      }
+/* DARK MODE */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #121212;
+    --card: #1e1e1e;
+    --text: #f0f0f0;
+    --shadow: 0 4px 12px rgba(0,0,0,0.6);
+    --success-bg: #193c1f;
+    --success-color: #69ff99;
+  }
 
-      .qr p {
-        color: #aaa;
-      }
+  h1 { color: #4da3ff; }
+  .title, .addr, .phone { color: #e0e0e0; }
 
-      /* GRID FOR TOP 4 BUTTONS */
-      .btn-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 12px;
-        width: 100%;
-        max-width: 360px;
-        margin: 10px auto;
-      }
+  .services-box {
+    background: linear-gradient(135deg, #1f2a36, #18222c);
+    border-left: 5px solid #4da3ff;
+  }
 
-      .btn-grid .btn {
-        width: 100%;
-        font-size: 18px;
-        padding: 16px;
-        border-radius: 16px;
-      }
+  .services-box h3 { color: #4da3ff; }
+  .services-box h4 { color: #ccc; }
+  .services-box p { color: #ddd; }
 
-      /* SECOND ROW (SAVE / SHARE / LINK) */
-      .btn-row {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 10px;
-        max-width: 360px;
-        margin: 10px auto;
-      }
+  .services-grid span {
+    background: #2a3542;
+    color: #f0f0f0;
+    box-shadow: none;
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+}
 
-      .btn.small {
-        font-size: 15px;
-        padding: 12px;
-        border-radius: 12px;
-      }
-    </style>
+/* MOBILE SAFE */
+@media (max-width: 480px) {
+  .chatbot {
+    bottom: 90px;
+    right: 10px;
+  }
+}
+  
+</style>
   </head>
   <body>
     <div class="card">
@@ -300,6 +320,30 @@
           <strong>+91 9810359247</strong>
         </a>
       </p>
+       <div class="services-box">
+  <h3>Physiotherapy Services</h3>
+
+<div class="services-grid">
+  <span>Back Pain</span>
+  <span>Neck Pain</span>
+  <span>Knee Pain</span>
+  <span>Slip Disc</span>
+  <span>Sciatica</span>
+  <span>Stroke Rehab</span>
+  <span>Paralysis Care</span>
+  <span>Parkinson's</span>
+  <span>Bell's Palsy</span>
+  <span>Sports Injury</span>
+  <span>Post Surgery</span>
+  <span>Home Visit</span>
+</div>
+
+
+  <h4>Areas Served</h4>
+  <p>
+    Gaur City 1 • Gaur City 2 • Noida Extension • Greater Noida West • Techzone 4 • Noida
+  </p>
+</div>
       <!-- MAIN BUTTON GRID -->
       <div class="btn-grid">
         <a href="tel:+919810359247" class="btn call">
@@ -321,13 +365,6 @@
       <div class="qr">
         <p>Scan QR</p>
         <img src="qr_vcard.png" />
-      </div>
-      <div style="margin-top:15px; font-size:13px; color:#666; line-height:1.5;">
-        <strong>Physiotherapy Services:</strong>
-        <br> Back Pain Treatment • Neck Pain • Knee Pain • Shoulder Pain • Slip Disc • Sciatica • Sports Injury Rehabilitation • Post Surgery Rehab • Home Visit Physiotherapy <br>
-        <br>
-        <strong>Areas Served:</strong>
-        <br> Gaur City 1, Gaur City 2, Noida Extension, Greater Noida West, Techzone 4, Noida
       </div>
     </div>
     <script>
