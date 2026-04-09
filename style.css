@@ -183,22 +183,23 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
   justify-content: center;
 }
 
-/* ABOUT SECTION STYLES - REPEATABLE SLOW FALL */
+/* ABOUT SECTION STYLES */
 .about-section {
   width: 100%;
   max-width: 360px;
   margin: 15px auto;
   text-align: left;
   background: var(--card);
+  /* Ultra-Prominent Blue Border */
   border: 3px solid #0e5a95; 
   border-radius: 14px;
   overflow: hidden;
-  transition: all 0.4s ease;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .about-section summary {
   padding: 16px 20px;
-  font-weight: 900;
+  font-weight: 900; /* Max Bold */
   font-size: 17px;
   color: #0e5a95;
   cursor: pointer;
@@ -208,6 +209,7 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
   align-items: center;
   outline: none;
   -webkit-tap-highlight-color: transparent;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.05); /* Makes text pop */
 }
 
 .about-section summary::after {
@@ -220,45 +222,43 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
   transform: rotate(180deg);
 }
 
-/* THE FALL & FADE LOGIC */
+/* THE FIX: Set default state to hidden and up */
 .about-content {
-  /* Closed State - Hidden and Pushed Up */
-  opacity: 0;
-  filter: blur(10px);
-  transform: translateY(-50px) scale(0.9);
-  max-height: 0;
-  padding: 0 20px;
-  overflow: hidden;
-  
-  /* Fast snap-back when closing so it's ready to fall again */
-  transition: 
-    opacity 0.2s ease, 
-    transform 0.2s ease, 
-    filter 0.2s ease,
-    max-height 0.2s ease,
-    padding 0.2s ease;
+  padding: 0 20px 20px;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--text);
+  opacity: 0; /* Hidden by default */
+  transform: translateY(-40px); /* Positioned up by default */
+  pointer-events: none; /* Prevents clicks while hidden */
 }
 
-/* Open State - Slow Materialize */
+/* Repeatable slow cinematic animation */
+@keyframes slowSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-40px) scale(0.92);
+    filter: blur(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+/* Apply animation and force it to stay visible at the end */
 .about-section[open] .about-content {
-  opacity: 1;
-  filter: blur(0);
-  transform: translateY(0) scale(1);
-  max-height: 1000px; /* High enough for your text */
-  padding: 0 20px 20px;
-  
-  /* The "Slow Fall" parameters */
-  transition: 
-    opacity 0.9s ease-out, 
-    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), 
-    filter 0.7s ease-out,
-    max-height 0.6s ease-in-out;
+  opacity: 1; 
+  transform: translateY(0);
+  pointer-events: auto;
+  animation: slowSlideIn 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 .about-section[open] {
   border-color: #2f68ba;
-  box-shadow: 0 12px 35px rgba(14, 90, 149, 0.4);
-  transform: translateY(-4px);
+  box-shadow: 0 12px 35px rgba(14, 90, 149, 0.45);
+  transform: translateY(-4px) scale(1.01);
 }
 
 /* FEEDBACK */
