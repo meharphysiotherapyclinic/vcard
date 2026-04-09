@@ -187,11 +187,11 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
 .about-section {
   width: 100%;
   max-width: 360px;
-  margin: 12px auto;
+  margin: 15px auto;
   text-align: left;
   background: var(--card);
-  /* Thicker, more vibrant blue border */
-  border: 2px solid #0e5a95; 
+  /* Prominent Blue Border - Visible Always */
+  border: 2.5px solid #0e5a95; 
   border-radius: 14px;
   overflow: hidden;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -199,7 +199,7 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
 
 .about-section summary {
   padding: 14px 18px;
-  font-weight: 800; /* Extra bold for visibility */
+  font-weight: 800;
   font-size: 16px;
   color: #0e5a95;
   cursor: pointer;
@@ -211,12 +211,23 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
   -webkit-tap-highlight-color: transparent;
 }
 
-/* Repeatable SLOW Animation */
+/* Custom Arrow */
+.about-section summary::after {
+  content: '▼';
+  font-size: 12px;
+  transition: transform 0.4s;
+}
+
+.about-section[open] summary::after {
+  transform: rotate(180deg);
+}
+
+/* Repeatable slow cinematic animation */
 @keyframes slowSlideIn {
   0% {
     opacity: 0;
-    transform: translateY(-30px) scale(0.95);
-    filter: blur(4px);
+    transform: translateY(-40px) scale(0.92);
+    filter: blur(8px);
   }
   100% {
     opacity: 1;
@@ -225,27 +236,22 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
   }
 }
 
-/* This forces the browser to re-render the animation every time */
+/* Forces re-triggering every time it opens */
 .about-section[open] .about-content {
-  animation: slowSlideIn 0.65s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  animation: slowSlideIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 .about-section[open] {
   border-color: #2f68ba;
-  box-shadow: 0 8px 25px rgba(14, 90, 149, 0.3);
-  transform: translateY(-2px); /* Lifts the card slightly when open */
+  box-shadow: 0 10px 30px rgba(14, 90, 149, 0.4);
+  transform: translateY(-3px);
 }
 
-/* Dark Mode adjustment - Ensures blue remains prominent */
-@media (prefers-color-scheme: dark) {
-  .about-section {
-    border-color: #4da3ff;
-    border-width: 2px;
-    background: #1e1e1e;
-  }
-  .about-section summary {
-    color: #4da3ff;
-  }
+.about-content {
+  padding: 0 18px 18px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text);
 }
 
 /* FEEDBACK */
@@ -286,7 +292,7 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
   z-index: 10000;
 }
 
-/* DARK MODE */
+/* DARK MODE - FINAL CLEAN VERSION */
 @media (prefers-color-scheme: dark) {
   :root {
     --bg: #121212;
@@ -309,15 +315,21 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
   .services-box h4 { color: #ccc; }
   .services-box p { color: #ddd; }
 
+  /* About Section Dark Mode - Keeps the Blue prominent */
+  .about-section { 
+    border-color: #4da3ff; 
+    border-width: 2.5px;
+    background: #1e1e1e;
+  }
+  .about-section summary { color: #4da3ff; }
+  .about-content { color: #ffffff; }
+
   .services-grid span {
     background: #2a3542;
     color: #f0f0f0;
     box-shadow: none;
     border: 1px solid rgba(255,255,255,0.05);
   }
-    /* Inside Dark Mode Media Query */
-  .about-section { border-color: rgba(255,255,255,0.1); }
-  .about-section summary { color: #4da3ff; }
 
   .services-grid span:nth-child(6),
   .services-grid span:nth-child(7),
