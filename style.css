@@ -163,14 +163,14 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
   box-shadow: 0 1px 4px rgba(0,0,0,0.08);
 }
 
-/* Color-coding for Neurological Services */
+/* Color-coding for Neurological Services (Light Mode) */
 .services-grid span:nth-child(6), 
 .services-grid span:nth-child(7), 
 .services-grid span:nth-child(8), 
 .services-grid span:nth-child(9) {
-  background: #d1e9ff; /* Deeper blue for visibility */
+  background: #eef7ff; 
   border: 1px solid #adcffa;
-  color: #0e5a95;
+  color: #0e5a95; /* Keep this darker for readability on light background */
 }
 
 /* Highlight for Home Visit */
@@ -333,14 +333,15 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
     color: #f0f0f0;
   }
    
-  /* Neurological Services in Dark Mode - Deep Blue Fix */
+    /* Neurological Services in Dark Mode - Exact Image Match */
   .services-grid span:nth-child(6), 
   .services-grid span:nth-child(7), 
   .services-grid span:nth-child(8), 
   .services-grid span:nth-child(9) {
-    background: #1e3a8a !important; /* Rich blue for dark mode */
-    border-color: #3b82f6;
-    color: #dbeafe;
+    background: #1a222c !important; /* Deep charcoal-blue background */
+    border: 1px solid #0e5a95 !important; /* Muted blue border */
+    color: #4da3ff !important; /* Vibrant bluish text tone */
+    font-weight: 600; /* Makes the blue text crisp and readable */
   }
   
   .services-grid span:last-child {
