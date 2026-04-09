@@ -230,6 +230,35 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
   margin: 8px 0 0;
 }
 
+/* Animation for the content appearance */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Apply animation when the section is opened */
+.about-section[open] .about-content {
+  animation: slideDown 0.4s ease-out forwards;
+}
+
+/* Optional: Add a subtle glow/scale effect to the box when open */
+.about-section[open] {
+  border-color: var(--site);
+  box-shadow: 0 4px 15px rgba(14, 90, 149, 0.2);
+  transform: scale(1.01);
+}
+
+/* Smooth transition for the container itself */
+.about-section {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 /* Dark Mode adjustment */
 @media (prefers-color-scheme: dark) {
   .about-section {
