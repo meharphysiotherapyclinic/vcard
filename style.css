@@ -190,17 +190,17 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
   margin: 15px auto;
   text-align: left;
   background: var(--card);
-  /* Prominent Blue Border - Visible Always */
-  border: 2.5px solid #0e5a95; 
+  /* Ultra-Prominent Blue Border */
+  border: 3px solid #0e5a95; 
   border-radius: 14px;
   overflow: hidden;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .about-section summary {
-  padding: 14px 18px;
-  font-weight: 800;
-  font-size: 16px;
+  padding: 16px 20px;
+  font-weight: 900; /* Max Bold */
+  font-size: 17px;
   color: #0e5a95;
   cursor: pointer;
   list-style: none;
@@ -209,9 +209,9 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
   align-items: center;
   outline: none;
   -webkit-tap-highlight-color: transparent;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.05); /* Makes text pop */
 }
 
-/* Custom Arrow */
 .about-section summary::after {
   content: '▼';
   font-size: 12px;
@@ -222,12 +222,23 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
   transform: rotate(180deg);
 }
 
+/* THE FIX: Set default state to hidden and up */
+.about-content {
+  padding: 0 20px 20px;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--text);
+  opacity: 0; /* Hidden by default */
+  transform: translateY(-40px); /* Positioned up by default */
+  pointer-events: none; /* Prevents clicks while hidden */
+}
+
 /* Repeatable slow cinematic animation */
 @keyframes slowSlideIn {
   0% {
     opacity: 0;
     transform: translateY(-40px) scale(0.92);
-    filter: blur(8px);
+    filter: blur(10px);
   }
   100% {
     opacity: 1;
@@ -236,22 +247,18 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
   }
 }
 
-/* Forces re-triggering every time it opens */
+/* Apply animation and force it to stay visible at the end */
 .about-section[open] .about-content {
-  animation: slowSlideIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  opacity: 1; 
+  transform: translateY(0);
+  pointer-events: auto;
+  animation: slowSlideIn 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 .about-section[open] {
   border-color: #2f68ba;
-  box-shadow: 0 10px 30px rgba(14, 90, 149, 0.4);
-  transform: translateY(-3px);
-}
-
-.about-content {
-  padding: 0 18px 18px;
-  font-size: 14px;
-  line-height: 1.6;
-  color: var(--text);
+  box-shadow: 0 12px 35px rgba(14, 90, 149, 0.45);
+  transform: translateY(-4px) scale(1.01);
 }
 
 /* FEEDBACK */
@@ -311,33 +318,19 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
     border-left: 5px solid #4da3ff;
   }
 
-  .services-box h3 { color: #4da3ff; }
-  .services-box h4 { color: #ccc; }
-  .services-box p { color: #ddd; }
-
-  /* About Section Dark Mode - Keeps the Blue prominent */
+  /* About Section Dark Mode - Vibrant & Thick */
   .about-section { 
-    border-color: #4da3ff; 
-    border-width: 2.5px;
+    border-color: #4da3ff !important; 
+    border-width: 3px;
     background: #1e1e1e;
   }
   .about-section summary { color: #4da3ff; }
   .about-content { color: #ffffff; }
 
+  /* Ensure services grid spans stay visible */
   .services-grid span {
     background: #2a3542;
     color: #f0f0f0;
-    box-shadow: none;
-    border: 1px solid rgba(255,255,255,0.05);
-  }
-
-  .services-grid span:nth-child(6),
-  .services-grid span:nth-child(7),
-  .services-grid span:nth-child(8),
-  .services-grid span:nth-child(9) {
-    background: #1a2a3a;
-    border-color: #2f68ba;
-    color: #4da3ff;
   }
   
   .services-grid span:last-child {
