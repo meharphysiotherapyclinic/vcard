@@ -168,8 +168,8 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
 .services-grid span:nth-child(7), 
 .services-grid span:nth-child(8), 
 .services-grid span:nth-child(9) {
-  background: #eef7ff; 
-  border: 1px solid #cce5ff;
+  background: #d1e9ff; /* Deeper blue for visibility */
+  border: 1px solid #adcffa;
   color: #0e5a95;
 }
 
@@ -331,6 +331,16 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
   .services-grid span {
     background: #2a3542;
     color: #f0f0f0;
+  }
+   
+  /* Neurological Services in Dark Mode - Deep Blue Fix */
+  .services-grid span:nth-child(6), 
+  .services-grid span:nth-child(7), 
+  .services-grid span:nth-child(8), 
+  .services-grid span:nth-child(9) {
+    background: #1e3a8a !important; /* Rich blue for dark mode */
+    border-color: #3b82f6;
+    color: #dbeafe;
   }
   
   .services-grid span:last-child {
