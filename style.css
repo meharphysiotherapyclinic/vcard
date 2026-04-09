@@ -187,20 +187,21 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
 .about-section {
   width: 100%;
   max-width: 360px;
-  margin: 10px auto;
+  margin: 12px auto;
   text-align: left;
   background: var(--card);
-  border: 1px solid var(--site); /* Permanent Blue Border */
-  border-radius: 12px;
+  /* Thicker, more vibrant blue border */
+  border: 2px solid #0e5a95; 
+  border-radius: 14px;
   overflow: hidden;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .about-section summary {
-  padding: 12px 15px;
-  font-weight: 700;
-  font-size: 15px;
-  color: var(--site);
+  padding: 14px 18px;
+  font-weight: 800; /* Extra bold for visibility */
+  font-size: 16px;
+  color: #0e5a95;
   cursor: pointer;
   list-style: none;
   display: flex;
@@ -210,55 +211,40 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
   -webkit-tap-highlight-color: transparent;
 }
 
-.about-section summary::after {
-  content: '▼';
-  font-size: 10px;
-  transition: transform 0.3s;
-}
-
-.about-section[open] summary::after {
-  transform: rotate(180deg);
-}
-
-/* Repeatable Animation Logic */
-@keyframes slideDown {
-  from {
+/* Repeatable SLOW Animation */
+@keyframes slowSlideIn {
+  0% {
     opacity: 0;
-    transform: translateY(-15px);
+    transform: translateY(-30px) scale(0.95);
+    filter: blur(4px);
   }
-  to {
+  100% {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
+    filter: blur(0);
   }
 }
 
+/* This forces the browser to re-render the animation every time */
 .about-section[open] .about-content {
-  animation: slideDown 0.4s ease-out forwards;
+  animation: slowSlideIn 0.65s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
 
 .about-section[open] {
-  box-shadow: 0 4px 15px rgba(14, 90, 149, 0.2);
-  transform: scale(1.01);
+  border-color: #2f68ba;
+  box-shadow: 0 8px 25px rgba(14, 90, 149, 0.3);
+  transform: translateY(-2px); /* Lifts the card slightly when open */
 }
 
-.about-content {
-  padding: 0 15px 15px;
-  font-size: 13.5px;
-  line-height: 1.5;
-  color: var(--text);
-}
-
-/* Dark Mode adjustment for About Section */
+/* Dark Mode adjustment - Ensures blue remains prominent */
 @media (prefers-color-scheme: dark) {
   .about-section {
-    border-color: #4da3ff; 
+    border-color: #4da3ff;
+    border-width: 2px;
     background: #1e1e1e;
   }
   .about-section summary {
     color: #4da3ff;
-  }
-  .about-content {
-    color: #ffffff;
   }
 }
 
