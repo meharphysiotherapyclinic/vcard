@@ -283,15 +283,6 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
 }
 
 /* CHATBOT FIX */
-.chatbot {
-  position: fixed;
-  bottom: 80px;
-  right: 15px;
-  width: 320px;
-  max-width: 90%;
-  z-index: 9999;
-}
-
 #chat-toggle-btn {
   position: fixed;
   bottom: 20px;
