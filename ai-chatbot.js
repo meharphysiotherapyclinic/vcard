@@ -43,76 +43,73 @@ function addMessage(type, text) {
 function getAIResponse(msg) {
   msg = msg.toLowerCase().trim();
 
-  // Helper Links for cleaner code
-  const callLink = "<a href='tel:+919810359247' style='color:#ab214d; font-weight:bold;'>📞 Call Now</a>";
+  // Action Link Variables
+  const callLink = "<a href='tel:+919810359247' style='color:#ab214d; font-weight:bold;'>📞 Call Now to Book</a>";
   const waLink = "<a href='https://wa.me/919810359247?text=I%20want%20to%20book%20an%20appointment' target='_blank' style='color:#0a7833; font-weight:bold;'>💬 WhatsApp Booking</a>";
-  const mapLink = "<a href='https://www.google.com/maps/search/?api=1&query=Mehar+Physiotherapy+Clinic&query_place_id=ChIJ4_vGaUnvDDkR5vtYeucjsNU' target='_blank' style='color:#0e5a95; font-weight:bold;'>📍 View Clinic Map</a>";
+  const mapLink = "<a href='https://www.google.com/maps/search/?api=1&query=Mehar+Physiotherapy+Clinic&query_place_id=ChIJ4_vGaUnvDDkR5vtYeucjsNU' target='_blank' style='color:#0e5a95; font-weight:bold;'>📍 Get Directions to Clinic</a>";
 
-  // 1. GREETINGS & GENERAL INQUIRY
+  // 1. GREETINGS & GENERAL
   if (/^(hi|hello|hey|hii|physio|doctor|consultation|help)$/.test(msg)) {
-    return "Hello! 👋 Welcome to Mehar Physiotherapy Clinic. Are you looking to visit our clinic or do you need a home visit? <br><br> " + waLink;
+    return "Hello! 👋 Welcome to Mehar Physiotherapy Clinic. How can we help you today? You can inquire about our <strong>Clinic Timings</strong>, <strong>Home Visits</strong>, or <strong>Book an Appointment</strong> directly below: <br><br> " + waLink;
   }
 
-  // 2. THANK YOU
-  if (msg.includes("thank") || msg.includes("thx") || msg.includes("thanks")) {
-    return "You're very welcome! 😊 We are committed to your recovery. Feel free to reach out if you need anything else: " + callLink;
+  // 2. TIMINGS & AVAILABILITY (Fixed: Added "timing" without the 'e')
+  if (msg.includes("timing") || msg.includes("time") || msg.includes("open") || msg.includes("hour") || msg.includes("sunday") || msg.includes("available") || msg.includes("slot") || msg.includes("when")) {
+    return "Mehar Physiotherapy Clinic is open <strong>Monday to Sunday, 8:00 AM to 9:00 PM</strong>. To ensure Dr. Arneja is available and to skip the waiting line, please <strong>call us</strong> to book your slot: <br><br>" + callLink + "<br><br>" + waLink;
   }
 
-  // 3. TIMINGS & DURATION (FAQ 3)
-  if (msg.includes("time") || msg.includes("open") || msg.includes("hours") || msg.includes("sunday") || msg.includes("long") || msg.includes("duration")) {
-    if (msg.includes("long") || msg.includes("duration")) {
-        return "A typical patient session lasts <strong>30 to 45 minutes</strong>. <br><br>Book your slot: " + waLink;
+  // 3. LOCATION (Fixed: Removed "clinic" to prevent overlap, added "direction")
+  if (msg.includes("location") || msg.includes("where") || msg.includes("address") || msg.includes("map") || msg.includes("reach") || msg.includes("direction") || msg.includes("gaur city")) {
+    return "We are located at <strong>F-42, 16th Avenue, Gaur City-2, Greater Noida West</strong>. You can find our exact location on the map here:<br><br>" + mapLink;
+  }
+
+  // 4. HOME VISITS (Fixed: Demands the word "home" or "residence")
+  if (msg.includes("home") || msg.includes("at house") || msg.includes("come to me") || msg.includes("residence")) {
+    return "Yes, we provide specialized <strong>Home Visit Physiotherapy</strong> across Greater Noida West for patients in pain or with limited mobility. Please call us to check our schedule for today: <br><br>" + callLink + "<br>" + waLink;
+  }
+
+  // 5. APPOINTMENT & REFERRAL (Fixed: Added the word "visit" here)
+  if (msg.includes("appointment") || msg.includes("book") || msg.includes("consult") || msg.includes("contact") || msg.includes("referral") || msg.includes("doctor") || msg.includes("visit")) {
+    return "You can book your visit directly—<strong>no doctor's referral is needed</strong>. Simply call or WhatsApp us to confirm your consultation: <br><br>" + callLink + "<br>" + waLink;
+  }
+
+  // 6. FEES, COST & SESSION COUNT
+  if (msg.includes("fee") || msg.includes("charge") || msg.includes("cost") || msg.includes("price") || msg.includes("how many") || msg.includes("sessions") || msg.includes("long") || msg.includes("duration")) {
+    if (msg.includes("how many") || msg.includes("sessions") || msg.includes("long")) {
+        return "A typical session lasts <strong>30-45 minutes</strong>. The total number of sessions depends on your recovery progress. Dr. Arneja will guide you during the first assessment. <br><br>" + callLink;
     }
-    return "We are open <strong>Mon-Sun, 8:00 AM to 9:00 PM</strong>. We recommend booking in advance to avoid waiting. <br><br>" + callLink;
+    return "Our treatment charges are very competitive. For a specific quote for Clinic or Home visits, please contact us: <br><br>" + callLink;
   }
 
-  // 4. HOME VISITS (FAQ 7)
-  if (msg.includes("home") || msg.includes("visit") || msg.includes("at house") || msg.includes("come to me")) {
-    return "Yes, we provide <strong>Home Visit Physiotherapy</strong> in Gaur City and Greater Noida West for patients with limited mobility. <br><br> <a href='https://wa.me/919810359247?text=I%20need%20a%20Home%20Visit' target='_blank' style='color:#0a7833; font-weight:bold;'>💬 Request Home Visit</a>";
-  }
-
-  // 5. APPOINTMENT & REFERRAL (FAQ 2 & 10)
-  if (msg.includes("appointment") || msg.includes("book") || msg.includes("consult") || msg.includes("contact") || msg.includes("referral") || msg.includes("doctor")) {
-    return "You can book appointment directly via:<br><br>" + waLink + "<br>" + callLink;
-  }
-
-  // 6. FEES & SESSIONS (FAQ 4 & 6)
-  if (msg.includes("fee") || msg.includes("charge") || msg.includes("cost") || msg.includes("price") || msg.includes("how many") || msg.includes("sessions")) {
-    if (msg.includes("how many") || msg.includes("sessions")) {
-        return "Recovery varies for every patient. After the first assessment, Dr. Arneja will provide a personalized treatment plan. <br><br>" + callLink;
-    }
-    return "Our charges are competitive for both clinic and home visits. For a precise quote, please call us: " + callLink;
-  }
-
-  // 7. SYMPTOMS & CONDITIONS (FAQ 1, 12, 13)
-  // Expanded keywords: numbness, tingling, stiffness, fracture, paralysis, ACL, stroke, sciatica
+  // 7. SYMPTOMS, PAIN & REHAB
   if (
     msg.includes("back") || msg.includes("neck") || msg.includes("knee") || msg.includes("sciatica") || 
     msg.includes("disc") || msg.includes("shoulder") || msg.includes("frozen") || msg.includes("injury") || 
-    msg.includes("surgery") || msg.includes("sports") || msg.includes("treat") || msg.includes("numb") || 
-    msg.includes("tingl") || msg.includes("stiff") || msg.includes("fracture") || msg.includes("paralysis") ||
-    msg.includes("stroke") || msg.includes("acl") || msg.includes("ligament")
+    msg.includes("surgery") || msg.includes("sports") || msg.includes("numb") || msg.includes("tingl") || 
+    msg.includes("stiff") || msg.includes("fracture") || msg.includes("paralysis") || msg.includes("stroke") || 
+    msg.includes("acl") || msg.includes("ligament") || msg.includes("rehab") || msg.includes("swell") || 
+    msg.includes("inflam") || msg.includes("muscle") || msg.includes("joint") || msg.includes("pain")
   ) {
-    return "Dr. Arneja has extensive experience treating these conditions. Early intervention is key to preventing chronic pain. <br><br><strong>Consult Dr. Arneja now:</strong><br>" + waLink + "<br>" + callLink;
+    return "Dr. Arneja specializes in treating your condition and advanced rehabilitation. We use safe, modern techniques to ensure fast recovery. <br><br><strong>Book your assessment now:</strong><br>" + callLink + "<br>" + waLink;
   }
 
-  // 8. PAIN CONCERNS (FAQ 5)
-  if (msg.includes("painful") || msg.includes("hurt") || msg.includes("scared") || msg.includes("safe")) {
-    return "Don't worry! Physiotherapy is designed to <strong>reduce pain</strong>, not cause it. We use gentle mobilization and safe techniques. <br><br>" + callLink;
+  // 8. PAIN & SAFETY 
+  if (msg.includes("hurt") || msg.includes("scared") || msg.includes("safe") || msg.includes("clean") || msg.includes("hygiene")) {
+    return "Your safety is our priority. We follow strict <strong>sanitization protocols</strong>, and our physiotherapy techniques are designed to <strong>relieve pain</strong>, not cause it. <br><br>" + callLink;
   }
 
-  // 9. LOCATION (FAQ 8)
-  if (msg.includes("location") || msg.includes("where") || msg.includes("address") || msg.includes("map") || msg.includes("reach") || msg.includes("clinic")) {
-    return "<strong>Mehar Physiotherapy:</strong> F-42, 16th Avenue, Gaur City-2, Greater Noida West.<br><br>" + mapLink;
-  }
-
-  // 10. SENIORS & SPECIAL CASES (FAQ 9, 11, 15)
+  // 9. SENIOR CITIZENS & ELDERLY CARE
   if (msg.includes("senior") || msg.includes("old") || msg.includes("elderly") || msg.includes("parent") || msg.includes("balance") || msg.includes("fall")) {
-    return "We specialize in Geriatric Care (Senior Citizens) to improve balance and prevent falls. We can even come to your home. <br><br>" + waLink;
+    return "We offer dedicated care for <strong>Senior Citizens</strong> focusing on balance, mobility, and fall prevention. We recommend a home visit for maximum comfort. <br><br>" + callLink + "<br>" + waLink;
+  }
+
+  // 10. THANK YOU
+  if (msg.includes("thank") || msg.includes("thx") || msg.includes("thanks")) {
+    return "You're very welcome! 😊 We look forward to helping you stay fit and pain-free. <br><br>" + callLink;
   }
 
   // DEFAULT FALLBACK
-  return "I'm here to help! For expert medical guidance regarding your specific condition, please contact Dr. Arneja directly: <br><br>" + callLink + "<br>" + waLink;
+  return "I want to make sure you get the right help! For any medical questions or to book a visit, please contact Dr. Arneja directly: <br><br>" + callLink + "<br>" + waLink;
 }
 
 function sendMessage() {
