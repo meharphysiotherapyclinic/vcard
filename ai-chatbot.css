@@ -161,12 +161,20 @@
 
 /* DARK MODE */
 @media (prefers-color-scheme: dark) {
+  /* Chatbot Window Styles */
   .chatbot { background: #1e1e1e; color: #eee; }
   .chatbox { background: #121212; }
   .msg-ai { background: #2a2a2a; color: #eee; border: 1px solid #333; }
   .msg-ai a { color: #4da3ff; }
   .chat-input { border-top: 1px solid #333; background: #1e1e1e; }
   .chat-input input { color: #fff; }
+
+  /* MATCHES NEUROLOGICAL SERVICES TONE */
+  #chat-toggle-btn {
+    background-color: #1a222c; /* Deep charcoal-blue match */
+    border: 2px solid #4da3ff; /* Vibrant blue border match */
+    box-shadow: 0 0 15px rgba(77, 163, 255, 0.3); /* Soft blue glow */
+  }
 }
 
 /* ANIMATIONS */
@@ -182,5 +190,5 @@
     right: 15px;
     height: 400px;
   }
-  }
+}
   
