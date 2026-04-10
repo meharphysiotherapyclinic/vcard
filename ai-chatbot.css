@@ -1,27 +1,23 @@
 /* FLOAT BUTTON (The trigger) */
 #chat-toggle-btn {
-  position: fixed;
-  bottom: 20px;
-  right: 15px;
-  background: #0e5a95;
-  color: #fff;
-  border: none;
+  background-color: #0e5a95; /* Matches your theme blue */
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
-  width: 55px;
-  height: 55px;
-  font-size: 22px;
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-  z-index: 10000;
-  transition: transform 0.2s ease;
-  animation: pulse 2s infinite;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 0;
+  border: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  cursor: pointer;
+  z-index: 10000;
 }
 
-#chat-toggle-btn:active {
-  transform: scale(0.9);
+#chat-toggle-btn img {
+  width: 40px; /* Gives it a nice "breathing room" inside the circle */
+  height: 40px;
+  display: block;
 }
 
 /* CHAT CONTAINER */
