@@ -297,6 +297,23 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
   bottom: 20px;
   right: 15px;
   z-index: 10000;
+  display: flex; /* Centers the robot */
+  align-items: center;
+  justify-content: center;
+  background-color: #0e5a95; /* Theme blue */
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  animation: pulse-light 2s infinite; /* Restored pulse effect */
+  transition: transform 0.3s ease;
+}
+
+#chat-toggle-btn img {
+  width: 42px; /* Sizing for your robot icon */
+  height: 42px;
 }
 
 /* DARK MODE - FINAL CLEAN VERSION */
@@ -349,6 +366,13 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
     border-color: #2e7d32;
     color: #69ff99;
   }
+    /* Dark Mode Button Update */
+  #chat-toggle-btn {
+    background-color: #1a222c !important; /* Matches Neuro tiles */
+    border: 2px solid #4da3ff !important; /* Vibrant blue border */
+    animation: pulse-dark 2s infinite; /* Blue pulse for dark mode */
+  }
+  
 }
 
 /* MOBILE SAFE */
@@ -357,4 +381,17 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
     bottom: 90px;
     right: 10px;
   }
+  /* PULSE ANIMATIONS */
+@keyframes pulse-light {
+  0% { box-shadow: 0 0 0 0 rgba(14, 90, 149, 0.7); }
+  70% { box-shadow: 0 0 0 15px rgba(14, 90, 149, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(14, 90, 149, 0); }
+}
+
+@keyframes pulse-dark {
+  0% { box-shadow: 0 0 0 0 rgba(77, 163, 255, 0.6); }
+  70% { box-shadow: 0 0 0 15px rgba(77, 163, 255, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(77, 163, 255, 0); }
+}
+  
 }
