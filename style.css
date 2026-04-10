@@ -309,11 +309,14 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
   padding: 0;
   animation: pulse-light 2s infinite; /* Restored pulse effect */
   transition: transform 0.3s ease;
+  overflow: hidden; /* NEW: Hides anything that spills outside the circle */
 }
 
 #chat-toggle-btn img {
-  width: 42px; /* Sizing for your robot icon */
-  height: 42px;
+  width: 100%; /* NEW: Scales the image to fill the container */
+  height: 100%; /* NEW: Scales the image to fill the container */
+  object-fit: cover; /* NEW: Ensures the image doesn't get stretched */
+  border-radius: 50%; /* NEW: Forces the square image itself into a perfect circle */
 }
 
 /* DARK MODE - FINAL CLEAN VERSION */
