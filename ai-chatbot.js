@@ -73,7 +73,7 @@ function getAIResponse(msg) {
 
   // 5. APPOINTMENT & REFERRAL (FAQ 2 & 10)
   if (msg.includes("appointment") || msg.includes("book") || msg.includes("consult") || msg.includes("contact") || msg.includes("referral") || msg.includes("doctor")) {
-    return "You do <strong>not</strong> need a doctor's referral. You can book directly via:<br><br>" + waLink + "<br>" + callLink;
+    return "You can book appointment directly via:<br><br>" + waLink + "<br>" + callLink;
   }
 
   // 6. FEES & SESSIONS (FAQ 4 & 6)
