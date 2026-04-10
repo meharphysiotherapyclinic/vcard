@@ -65,12 +65,12 @@ function getAIResponse(msg) {
 
   // 4. HOME VISITS (Fixed: Demands the word "home" or "residence")
   if (msg.includes("home") || msg.includes("at house") || msg.includes("come to me") || msg.includes("residence")) {
-    return "Yes, we provide specialized <strong>Home Visit Physiotherapy</strong> across Greater Noida West for patients in pain or with limited mobility. Please call us to check our schedule for today: <br><br>" + callLink + "<br>" + waLink;
+    return "Yes, we provide specialized <strong>Home Visit Physiotherapy</strong> for patients in pain or with limited mobility. <br><br>" + callLink + "<br>" + waLink;
   }
 
   // 5. APPOINTMENT & REFERRAL (Fixed: Added the word "visit" here)
   if (msg.includes("appointment") || msg.includes("book") || msg.includes("consult") || msg.includes("contact") || msg.includes("referral") || msg.includes("doctor") || msg.includes("visit")) {
-    return "You can book your visit directly—<strong>no doctor's referral is needed</strong>. Simply call or WhatsApp us to confirm your consultation: <br><br>" + callLink + "<br>" + waLink;
+    return "You can simply call or WhatsApp us to confirm your appointment: <br><br>" + callLink + "<br>" + waLink;
   }
 
   // 6. FEES, COST & SESSION COUNT
@@ -78,7 +78,7 @@ function getAIResponse(msg) {
     if (msg.includes("how many") || msg.includes("sessions") || msg.includes("long")) {
         return "A typical session lasts <strong>30-45 minutes</strong>. The total number of sessions depends on your recovery progress. Dr. Arneja will guide you during the first assessment. <br><br>" + callLink;
     }
-    return "Our treatment charges are very competitive. For a specific quote for Clinic or Home visits, please contact us: <br><br>" + callLink;
+    return "Treatment charges are very competitive. For a specific quote for Clinic or Home visits, please contact us: <br><br>" + callLink;
   }
 
   // 7. SYMPTOMS, PAIN & REHAB
