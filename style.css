@@ -231,6 +231,7 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
   Display: block;
   Margin: 0 auto 15px auto; /* Centers the image and adds space below */
   Box-shadow: 0 4px 10px rgba(0,0,0,0.15); /* Soft shadow like the screenshot */
+  border: 1px solid #adcffa;
 }
 
 /* THE FIX: Set default state to hidden and up */
@@ -368,6 +369,9 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
   }
   .about-section summary { color: #4da3ff; }
   .about-content { color: #ffffff; }
+  .doctor-img {
+    border-color: #0e5a95 !important; /* Matches the dark mode neuro tiles */
+  }
 
   /* Ensure services grid spans stay visible */
   .services-grid span {
