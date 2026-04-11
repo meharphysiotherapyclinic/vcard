@@ -482,8 +482,16 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
   100% { transform: translateX(-50%); }
 }
 
-/* Interaction: Pause on hover (Desktop) and via JS class (Mobile) */
-.review-carousel:hover .review-track,
+/* --- FIXED INTERACTION LOGIC --- */
+
+/* Only trigger hover pause on devices with a mouse (Desktop) */
+@media (hover: hover) {
+  .review-carousel:hover .review-track {
+    animation-play-state: paused;
+  }
+}
+
+/* This class is controlled by JavaScript for mobile touch */
 .review-carousel.paused .review-track {
   animation-play-state: paused;
 }
