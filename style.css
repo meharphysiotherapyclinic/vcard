@@ -224,12 +224,12 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
 
 /* Style for the doctor’s image – Imitating the screenshot’s squircle look */
 .doctor-img {
-  Width: 120px;         /* Size to match vCard proportions */
-  Height: 140px;        /* Slightly taller like the screenshot */
+  Width: 100px;         /* Size to match vCard proportions */
+  Height: 115px;        /* Slightly taller like the screenshot */
   Object-fit: cover;
-  Border-radius: 18px;  /* Squircle/rounded corners instead of a circle */
+  Border-radius: 14px;  /* Squircle/rounded corners instead of a circle */
   Display: block;
-  Margin: 0 auto 20px auto; /* Centers the image and adds space below */
+  Margin: 0 auto 15px auto; /* Centers the image and adds space below */
   Box-shadow: 0 4px 10px rgba(0,0,0,0.15); /* Soft shadow like the screenshot */
 }
 
