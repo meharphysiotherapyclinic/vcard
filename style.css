@@ -482,8 +482,9 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
   100% { transform: translateX(-50%); }
 }
 
-/* Interaction: Pause when someone touches/hovers to read */
-.review-carousel:hover .review-track {
+/* Interaction: Pause on hover (Desktop) and via JS class (Mobile) */
+.review-carousel:hover .review-track,
+.review-carousel.paused .review-track {
   animation-play-state: paused;
 }
 
