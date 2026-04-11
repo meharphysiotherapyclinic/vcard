@@ -258,14 +258,21 @@
       track.appendChild(card);
     });
 
-    // --- TOUCH TO PAUSE / RELEASE TO PLAY LOGIC ---
-    carousel.addEventListener('touchstart', () => {
-      carousel.classList.add('paused');
-    }, { passive: true });
+        // --- IMPROVED TOUCH LOGIC ---
+    const pauseAnimation = () => carousel.classList.add('paused');
+    const resumeAnimation = () => {
+      // Small timeout ensures the "sticky" touch state is cleared by the browser
+      setTimeout(() => carousel.classList.remove('paused'), 50);
+    };
 
-    carousel.addEventListener('touchend', () => {
-      carousel.classList.remove('paused');
-    }, { passive: true });
+    // Pause when finger touches
+    carousel.addEventListener('touchstart', pauseAnimation, { passive: true });
+
+    // Resume when finger lifts
+    carousel.addEventListener('touchend', resumeAnimation, { passive: true });
+
+    // Resume even if the touch is interrupted (like if you scroll the page)
+    carousel.addEventListener('touchcancel', resumeAnimation, { passive: true });
   }
 
   // Run when page is ready
