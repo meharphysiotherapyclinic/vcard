@@ -237,8 +237,9 @@
   ];
 
   function initReviews() {
+    const carousel = document.querySelector('.review-carousel');
     const track = document.getElementById('review-track');
-    if (!track) return;
+    if (!track || !carousel) return;
 
     // Duplicate the list so the scroll never gaps
     const fullList = [...clinicReviews, ...clinicReviews];
@@ -256,9 +257,19 @@
       `;
       track.appendChild(card);
     });
+
+    // --- TOUCH TO PAUSE / RELEASE TO PLAY LOGIC ---
+    carousel.addEventListener('touchstart', () => {
+      carousel.classList.add('paused');
+    }, { passive: true });
+
+    carousel.addEventListener('touchend', () => {
+      carousel.classList.remove('paused');
+    }, { passive: true });
   }
 
+  // Run when page is ready
   document.addEventListener("DOMContentLoaded", initReviews);
-    </script>
+</script>
   </body>
   </html>
