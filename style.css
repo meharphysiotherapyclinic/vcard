@@ -88,6 +88,7 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
 .vcf { background: var(--vcf); }
 .share { background: var(--share); }
 .copy { background: var(--copy); }
+.google-btn { background: #4285F4; }
 
 /* GRID BUTTONS */
 .btn-grid {
