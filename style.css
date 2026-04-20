@@ -1,3 +1,23 @@
+/* ========================================= */
+/* PREVENT ACCIDENTAL TEXT SELECTION (GLOBAL) */
+/* ========================================= */
+
+body {
+  -webkit-user-select: none; 
+  -moz-user-select: none;    
+  -ms-user-select: none;     
+  user-select: none;         
+  -webkit-touch-callout: none; 
+}
+
+/* Allow patients to copy the Address and Phone number */
+.addr, .phone {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+
 :root {
   --bg: #f9f9f9;
   --card: #ffffff;
@@ -556,13 +576,6 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
     background: #1e1e1e;
   }
   .review-author { border-top: 1px solid rgba(255,255,255,0.1); }
-}
-.review-card,
-.review-card * {
-  user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  -webkit-touch-callout: none; /* 🚫 disables long-press menu */
 }
 
 /* Optional: smoother touch behavior */
