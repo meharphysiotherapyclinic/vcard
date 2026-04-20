@@ -227,22 +227,28 @@
 }
 
 /* ========================================= */
-/* CHATBOT BUTTONS (vCard Match)             */
+/* CHATBOT BUTTONS (Aesthetic Compact Mode)  */
 /* ========================================= */
 .chat-btn-group {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin-top: 15px;
+  gap: 8px; /* Tighter spacing between buttons */
+  margin-top: 12px;
+  width: 100%;
 }
 
 .msg-ai .chat-btn-group a.btn {
   color: #fff !important; 
   text-decoration: none !important; 
   font-weight: 700 !important;
-  padding: 12px;
-  font-size: 15px;
-  border-radius: 12px;
+  padding: 8px 12px !important; /* Reduced from 12px to 8px */
+  font-size: 13.5px !important;  /* Matches your chat message font size */
+  border-radius: 8px !important;  /* Slightly sharper corners for small size */
+  width: 100%;
+  max-width: 210px; /* Prevents button from being too wide/bulky */
   margin: 0; 
   border: none !important;
+  gap: 6px !important; /* Tighter gap between icon and text */
+  justify-content: center;
 }
+
