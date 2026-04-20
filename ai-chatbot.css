@@ -225,3 +225,24 @@
     animation: pulse-dark 2s infinite;
   }
 }
+
+/* ========================================= */
+/* CHATBOT BUTTONS (vCard Match)             */
+/* ========================================= */
+.chat-btn-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.msg-ai .chat-btn-group a.btn {
+  color: #fff !important; 
+  text-decoration: none !important; 
+  font-weight: 700 !important;
+  padding: 12px;
+  font-size: 15px;
+  border-radius: 12px;
+  margin: 0; 
+  border: none !important;
+}
