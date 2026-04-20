@@ -186,12 +186,53 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
   padding: 10px;
 }
 
-/* Dark Mode Adjustments */
+/* --- DARK MODE FIX FOR DIM HEADINGS --- */
 @media (prefers-color-scheme: dark) {
-  .services-box { background: #1a222c; }
-  .services-grid span { background: #2a3542 !important; color: #fff !important; border-color: #3d4b5c !important; }
-  .services-grid span.neuro { background: #111b27 !important; color: #4da3ff !important; border-color: #0e5a95 !important; }
-  .services-grid span.home-visit-pill { background: #1b3320 !important; color: #69ff99 !important; border-color: #2e7d32 !important; }
+  .services-box {
+    background: #1a222c !important; /* Dark slate background */
+    border-left-color: #64b5f6 !important;
+  }
+
+  /* Fix for the Main Heading "Physiotherapy Services" */
+  .main-services-heading {
+    color: #90caf9 !important; /* Much brighter light blue */
+    text-shadow: 0 0 10px rgba(144, 202, 249, 0.3); /* Subtle glow to prevent dimming */
+    opacity: 1 !important;
+  }
+
+  /* Fix for Sub-headings like "Orthopaedic Conditions", etc. */
+  .service-category {
+    color: #64b5f6 !important; /* Vibrant sky blue */
+    border-bottom-color: rgba(255, 255, 255, 0.1) !important;
+    opacity: 1 !important;
+    letter-spacing: 0.8px;
+  }
+
+  /* Ensuring Areas Served title is also bright */
+  .services-box h4 {
+    color: #90caf9 !important;
+    opacity: 1 !important;
+  }
+
+  /* Pill adjustments for better dark mode visibility */
+  .services-grid span {
+    background: #2a3542 !important; 
+    color: #ffffff !important; 
+    border-color: #3d4b5c !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  }
+
+  .services-grid span.neuro {
+    background: #111b27 !important;
+    color: #90caf9 !important;
+    border-color: #64b5f6 !important;
+  }
+
+  .services-grid span.home-visit-pill {
+    background: #1b3320 !important;
+    color: #81c784 !important; /* Brighter green for dark mode */
+    border-color: #2e7d32 !important;
+  }
 }
 
 /* ABOUT SECTION STYLES */
