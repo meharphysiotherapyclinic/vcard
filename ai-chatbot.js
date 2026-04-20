@@ -43,11 +43,10 @@ function addMessage(type, text) {
 function getAIResponse(msg) {
   msg = msg.toLowerCase().trim();
 
-  // Action Link Variables with the exact classes and icons from your main page
-  const callLink = "<a href='tel:+919810359247' class='btn call'><img width='18' src='https://cdn-icons-png.flaticon.com/512/3059/3059498.png'> Call Now to Book</a>";
-  const waLink = "<a href='https://wa.me/919810359247?text=I%20want%20to%20book%20an%20appointment' target='_blank' class='btn whatsapp'><img width='18' src='https://cdn-icons-png.flaticon.com/512/733/733585.png'> WhatsApp Booking</a>";
-  const mapLink = "<a href='https://www.google.com/maps/search/?api=1&query=Mehar+Physiotherapy+Clinic&query_place_id=ChIJ4_vGaUnvDDkR5vtYeucjsNU' target='_blank' class='btn location'><img width='18' src='https://cdn-icons-png.flaticon.com/512/684/684908.png'> Get Directions to Clinic</a>";
-
+    // Updated with width='16' for better proportion
+  const callLink = "<a href='tel:+919810359247' class='btn call'><img width='16' src='https://cdn-icons-png.flaticon.com/512/3059/3059498.png'> Call Now to Book</a>";
+  const waLink = "<a href='https://wa.me/919810359247?text=I%20want%20to%20book%20an%20appointment' target='_blank' class='btn whatsapp'><img width='16' src='https://cdn-icons-png.flaticon.com/512/733/733585.png'> WhatsApp Booking</a>";
+  const mapLink = "<a href='https://www.google.com/maps/search/?api=1&query=Mehar+Physiotherapy+Clinic&query_place_id=ChIJ4_vGaUnvDDkR5vtYeucjsNU' target='_blank' class='btn location'><img width='16' src='https://cdn-icons-png.flaticon.com/512/684/684908.png'> Get Directions to Clinic</a>";
   // Helper function to stack the buttons neatly without messy <br> tags
   const wrap = (...links) => `<div class='chat-btn-group'>${links.join('')}</div>`;
 
