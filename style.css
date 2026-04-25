@@ -140,13 +140,14 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
   padding: 12px;
 }
 
-/* Adds a white circle behind the colored Google icon */
+/* Updated Google icon background to light grey */
 .google-btn img {
-  background-color: #ffffff;
+  background-color: #3c4043; /* Light grey background as requested */
   border-radius: 50%;
-  padding: 2px;
-  width: 26px;  /* Increases the size (default was 20) */
-  height: 26px; /* Keeps the white background perfectly round */
+  padding: 3px; /* Slightly increased padding to show more of the grey */
+  width: 28px;  /* Slightly larger for better visibility */
+  height: 28px;
+  object-fit: contain;
 }
 
 /* --- Services Box Container --- */
