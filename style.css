@@ -539,3 +539,22 @@ iframe {
     box-shadow: 0 4px 12px rgba(0,0,0,0.6);
   }
 }
+
+/* QR Code - High visibility 4px border */
+.qr img {
+  width: 130px; /* Slightly increased to account for thicker border */
+  border: 4px solid #0e5a95; /* Same Professional Clinic Blue */
+  border-radius: 14px;
+  padding: 8px; /* Adds space between QR and border */
+  background: #ffffff; /* Ensures QR is always on white for scanning */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+/* Dark Mode - QR Code Border */
+@media (prefers-color-scheme: dark) {
+  .qr img {
+    border: 4px solid #4da3ff !important; /* Same Vibrant Blue */
+    background: #ffffff; /* Keeps background white for scanner compatibility */
+  }
+}
