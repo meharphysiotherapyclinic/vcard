@@ -446,6 +446,7 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
   animation: scrollReviews 40s linear infinite; /* Slowed down for readability */
 }
 
+/* Updated Review Cards to match About and Map sections */
 .review-card {
   background: var(--card);
   width: 280px;
@@ -455,7 +456,8 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   text-align: left;
   flex-shrink: 0;
-  border: 3px solid #adcffa;
+  /* UPDATED: Matches About/Map Border */
+  border: 3px solid #0e5a95; 
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -502,11 +504,11 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
   animation-play-state: paused;
 }
 
-/* Dark Mode Support */
+/* Dark Mode - Updated Review Card Border */
 @media (prefers-color-scheme: dark) {
   .review-card {
-    /* Updated to match doctor-img dark mode border */
-    border: 2px solid #0e5a95; 
+    /* UPDATED: Matches About/Map Dark Mode Border */
+    border: 3px solid #4da3ff !important; 
     background: #1e1e1e;
   }
   .review-author { border-top: 1px solid rgba(255,255,255,0.1); }
