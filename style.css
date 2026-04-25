@@ -219,7 +219,7 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
 @media (prefers-color-scheme: dark) {
   .services-box {
     background: #1a222c !important; /* Dark slate background */
-    border-left-color: #64b5f6 !important;
+    border-left-color: #4da3ff !important;
   }
 
   /* Fix for the Main Heading "Physiotherapy Services" */
@@ -231,7 +231,7 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
 
   /* Fix for Sub-headings like "Orthopaedic Conditions", etc. */
   .service-category {
-    color: #64b5f6 !important; /* Vibrant sky blue */
+    color: #4da3ff !important; /* Vibrant sky blue */
     border-bottom-color: rgba(255, 255, 255, 0.1) !important;
     opacity: 1 !important;
     letter-spacing: 0.8px;
