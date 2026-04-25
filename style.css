@@ -516,3 +516,19 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
 .review-swiper {
   touch-action: pan-y;
 }
+
+/* Styling for the Map to match Review Cards */
+iframe {
+  border: 3px solid #adcffa !important; /* The same light blue border */
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  margin-top: 15px !important;
+}
+
+/* Dark Mode adjustment for the Map border */
+@media (prefers-color-scheme: dark) {
+  iframe {
+    border: 2px solid #0e5a95 !important; /* The darker blue used in review cards */
+  }
+}
+
