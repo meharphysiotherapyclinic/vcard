@@ -517,18 +517,20 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
   touch-action: pan-y;
 }
 
-/* Styling for the Map to match Review Cards */
+/* Enhanced Map Border for high visibility */
 iframe {
-  border: 3px solid #adcffa !important; /* The same light blue border */
+  border: 3px solid #90caf9 !important; /* A slightly more saturated "Sky Blue" */
   border-radius: 14px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  /* This adds a soft blue glow to make the edge clear */
+  box-shadow: 0 0 10px rgba(144, 202, 249, 0.4); 
   margin-top: 15px !important;
 }
 
-/* Dark Mode adjustment for the Map border */
+/* Dark Mode - Extra Visibility */
 @media (prefers-color-scheme: dark) {
   iframe {
-    border: 2px solid #0e5a95 !important; /* The darker blue used in review cards */
+    /* Using a vibrant blue for dark backgrounds */
+    border: 3px solid #4da3ff !important; 
+    box-shadow: 0 0 15px rgba(77, 163, 255, 0.3);
   }
 }
-
