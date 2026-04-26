@@ -161,15 +161,17 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
-/* FIX: Dim Heading - Bright and Bold */
+/* MATCHED TO ABOUT SECTION HEADING (Light Mode) */
 .main-services-heading {
   color: #0e5a95 !important;
   font-size: 18px !important;
-  font-weight: 800 !important;
+  font-weight: 900 !important; /* Matched to About summary */
   margin-bottom: 12px !important;
   display: block;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.05); /* Matched to About summary */
 }
 
+/* MATCHED TO ABOUT SECTION HEADING (Light Mode) */
 .service-category {
   font-size: 14px;
   color: #0e5a95;
@@ -186,7 +188,6 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
 }
 
 /* 1. Reset ALL pills to default (Grey/White) */
-/* This stops the random green pills from appearing */
 .services-grid span {
   background: #f1f3f5 !important; 
   border: 1px solid #dee2e6 !important;
@@ -208,7 +209,7 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
 
 /* 3. Style ONLY Home Visit pill (Green) */
 .services-grid span.home-visit-pill {
-  grid-column: 1 / -1; /* Full width */
+  grid-column: 1 / -1; 
   background: #e8f5e9 !important;
   border: 1px solid #2e7d32 !important;
   color: #2e7d32 !important;
@@ -216,31 +217,31 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
   padding: 10px;
 }
 
-/* --- DARK MODE FIX FOR DIM HEADINGS --- */
+/* --- DARK MODE FIXES --- */
 @media (prefers-color-scheme: dark) {
   .services-box {
-    background: #1a222c !important; /* Dark slate background */
+    background: #1a222c !important; 
     border-left-color: #4da3ff !important;
   }
 
-  /* Fix for the Main Heading "Physiotherapy Services" */
+  /* MATCHED TO ABOUT SECTION HEADING (Dark Mode) */
   .main-services-heading {
-    color: #90caf9 !important; /* Much brighter light blue */
-    text-shadow: 0 0 10px rgba(144, 202, 249, 0.3); /* Subtle glow to prevent dimming */
+    color: #4da3ff !important; /* Exact match to About section dark color */
+    text-shadow: 0 0 10px rgba(77, 163, 255, 0.3); 
     opacity: 1 !important;
   }
 
-  /* Fix for Sub-headings like "Orthopaedic Conditions", etc. */
+  /* MATCHED TO ABOUT SECTION HEADING (Dark Mode) */
   .service-category {
-    color: #4da3ff !important; /* Vibrant sky blue */
+    color: #4da3ff !important; /* Exact match to About section dark color */
     border-bottom-color: rgba(255, 255, 255, 0.1) !important;
     opacity: 1 !important;
     letter-spacing: 0.8px;
   }
 
-  /* Ensuring Areas Served title is also bright */
+  /* Ensuring Areas Served title is also consistent */
   .services-box h4 {
-    color: #90caf9 !important;
+    color: #4da3ff !important;
     opacity: 1 !important;
   }
 
@@ -260,7 +261,7 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
 
   .services-grid span.home-visit-pill {
     background: #1b3320 !important;
-    color: #81c784 !important; /* Brighter green for dark mode */
+    color: #81c784 !important; 
     border-color: #2e7d32 !important;
   }
 }
