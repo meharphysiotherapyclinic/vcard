@@ -509,13 +509,6 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
   100% { transform: translateX(-50%); }
 }
 
-/* --- FIXED INTERACTION LOGIC --- */
-
-/* Ensures manual drag movement is instant and doesn't "fight" the animation */
-.review-carousel.dragging .review-track {
-  animation: none !important;
-}
-
 /* Dark Mode - Updated Review Card Border */
 @media (prefers-color-scheme: dark) {
   .review-card {
@@ -528,6 +521,19 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
 /* Optional: smoother touch behavior */
 .review-swiper {
   touch-action: pan-y;
+}
+
+/* --- FINAL DRAG REPAIR --- */
+/* This allows the JS to move the track while the animation is paused */
+.review-carousel.dragging .review-track {
+  animation-play-state: paused !important;
+  cursor: grabbing;
+  transition: none !important; /* Prevents lag during manual drag */
+}
+
+/* Prevents images/text inside cards from being "ghost dragged" by the browser */
+.review-card img, .review-card strong, .review-card p {
+  pointer-events: none;
 }
 
 /* Map Border - Exact match to About Section */
