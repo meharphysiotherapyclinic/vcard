@@ -274,46 +274,72 @@
   ];
 
   function initReviews() {
-    const carousel = document.querySelector('.review-carousel');
-    const track = document.getElementById('review-track');
-    if (!track || !carousel) return;
+  const carousel = document.querySelector('.review-carousel');
+  const track = document.getElementById('review-track');
+  if (!track || !carousel) return;
 
-    // Duplicate the list so the scroll never gaps
-    const fullList = [...clinicReviews, ...clinicReviews];
+  // 1. Clear and Build the track
+  const fullList = [...clinicReviews, ...clinicReviews];
+  track.innerHTML = ""; 
+  fullList.forEach(rev => {
+    const card = document.createElement('div');
+    card.className = 'review-card';
+    card.innerHTML = `
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"${rev.text}"</p>
+      <div class="review-author">
+        <strong>${rev.name}</strong>
+        <span>${rev.service}</span>
+      </div>
+    `;
+    track.appendChild(card);
+  });
 
-    fullList.forEach(rev => {
-      const card = document.createElement('div');
-      card.className = 'review-card';
-      card.innerHTML = `
-        <div class="review-stars">★★★★★</div>
-        <p class="review-text">"${rev.text}"</p>
-        <div class="review-author">
-          <strong>${rev.name}</strong>
-          <span>${rev.service}</span>
-        </div>
-      `;
-      track.appendChild(card);
-    });
+  // 2. Manual Drag Logic
+  let isDown = false;
+  let startX;
+  let scrollLeft;
 
-        // --- IMPROVED TOUCH LOGIC ---
-    const pauseAnimation = () => carousel.classList.add('paused');
-    const resumeAnimation = () => {
-      // Small timeout ensures the "sticky" touch state is cleared by the browser
-      setTimeout(() => carousel.classList.remove('paused'), 50);
-    };
+  const startDragging = (e) => {
+    isDown = true;
+    carousel.classList.add('dragging');
+    
+    // This "captures" the reviews exactly where they are in the animation
+    const style = window.getComputedStyle(track);
+    const matrix = new WebKitCSSMatrix(style.transform);
+    scrollLeft = matrix.m41; 
+    
+    startX = (e.pageX || e.touches[0].pageX);
+    track.style.transition = 'none'; // Disable any transitions while dragging
+  };
 
-    // Pause when finger touches
-    carousel.addEventListener('touchstart', pauseAnimation, { passive: true });
+  const stopDragging = () => {
+    isDown = false;
+    carousel.classList.remove('dragging');
+  };
 
-    // Resume when finger lifts
-    carousel.addEventListener('touchend', resumeAnimation, { passive: true });
+  const move = (e) => {
+    if (!isDown) return;
+    const x = (e.pageX || e.touches[0].pageX);
+    const walk = (x - startX); 
+    
+    // Apply the movement manually
+    track.style.transform = `translateX(${scrollLeft + walk}px)`;
+  };
 
-    // Resume even if the touch is interrupted (like if you scroll the page)
-    carousel.addEventListener('touchcancel', resumeAnimation, { passive: true });
-  }
+  // Mouse Listeners
+  carousel.addEventListener('mousedown', startDragging);
+  window.addEventListener('mouseup', stopDragging);
+  carousel.addEventListener('mousemove', move);
 
-  // Run when page is ready
-  document.addEventListener("DOMContentLoaded", initReviews);
+  // Touch Listeners
+  carousel.addEventListener('touchstart', startDragging, { passive: true });
+  window.addEventListener('touchend', stopDragging);
+  carousel.addEventListener('touchmove', move, { passive: true });
+}
+
+// Initialize
+document.addEventListener("DOMContentLoaded", initReviews);
 </script>
   </body>
   </html>
