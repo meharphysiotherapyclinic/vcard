@@ -338,8 +338,12 @@
   // Touch Events (Mobile)
   carousel.addEventListener('touchstart', startDragging, { passive: false });
   window.addEventListener('touchend', stopDragging);
-  carousel.addEventListener('touchmove', move, { passive: false });
+    carousel.addEventListener('touchmove', move, { passive: false });
   }
+
+  // --- THE MISSING CALL ---
+  // This tells the browser to actually start the reviews
+  document.addEventListener("DOMContentLoaded", initReviews);
 </script>
   </body>
   </html>
