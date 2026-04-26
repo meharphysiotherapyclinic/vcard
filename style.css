@@ -53,11 +53,11 @@ body {
   min-height: 100vh;
 }
 
-/* CARD */
+//* CARD - Fixed centering and width */
 .card {
   background: var(--card);
   max-width: 440px;
-  width: 100%;
+  width: calc(100% - 24px); /* Accounts for body padding */
   margin: 10px auto;
   padding: 14px 20px;
   border-radius: 16px;
@@ -65,6 +65,14 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow: hidden; /* Prevents children from breaking the card shape */
+}
+
+/* Ensure all header text elements take full width for proper centering */
+.card h1, .card h2, .card p, .card address {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* HEADER */
@@ -380,12 +388,17 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
 /* DARK MODE - FINAL CLEAN VERSION */
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #121212;
-    --card: #1e1e1e;
+    --bg: #000000;      /* Pure black for the body */
+    --card: #1c1c1e;   /* Dark grey for the card to make it "pop" */
     --text: #f0f0f0;
-    --shadow: 0 4px 12px rgba(0,0,0,0.6);
+    --shadow: 0 0 20px rgba(0,0,0,0.8);
     --success-bg: #193c1f;
     --success-color: #69ff99;
+  }
+  
+  /* Adds a subtle border in dark mode so the card shape is visible */
+  .card {
+    border: 1px solid rgba(255,255,255,0.05);
   }
 
   h1 { color: #4da3ff; }
@@ -435,7 +448,7 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
 /* Reviews Section Styling */
 .review-carousel {
   overflow: hidden;
-  width: 100%;
+  width: calc(100% + 40px); /* Extends carousel to card edges for a "full bleed" look */
   max-width: 400px;
   margin: 15px auto;
   padding: 10px 0;
