@@ -278,7 +278,7 @@
   const track = document.getElementById('review-track');
   if (!track || !carousel) return;
 
-  // 1. Clear and Build the track
+  // 1. Build the infinite track
   const fullList = [...clinicReviews, ...clinicReviews];
   track.innerHTML = ""; 
   fullList.forEach(rev => {
@@ -295,7 +295,7 @@
     track.appendChild(card);
   });
 
-  // 2. Manual Drag Logic
+  // 2. Advanced Manual Drag Logic
   let isDown = false;
   let startX;
   let scrollLeft;
@@ -304,13 +304,12 @@
     isDown = true;
     carousel.classList.add('dragging');
     
-    // This "captures" the reviews exactly where they are in the animation
+    // Capture current position from the animation matrix
     const style = window.getComputedStyle(track);
     const matrix = new WebKitCSSMatrix(style.transform);
     scrollLeft = matrix.m41; 
     
     startX = (e.pageX || e.touches[0].pageX);
-    track.style.transition = 'none'; // Disable any transitions while dragging
   };
 
   const stopDragging = () => {
@@ -320,26 +319,27 @@
 
   const move = (e) => {
     if (!isDown) return;
-    const x = (e.pageX || e.touches[0].pageX);
+
+    // CRITICAL: Stops the browser from scrolling the page so we can drag horizontally
+    if (e.cancelable) e.preventDefault();
+
+    const x = (e.pageX || (e.touches ? e.touches[0].pageX : 0));
     const walk = (x - startX); 
     
-    // Apply the movement manually
+    // Apply the movement manually over the paused animation
     track.style.transform = `translateX(${scrollLeft + walk}px)`;
   };
 
-  // Mouse Listeners
+  // Mouse Events
   carousel.addEventListener('mousedown', startDragging);
   window.addEventListener('mouseup', stopDragging);
-  carousel.addEventListener('mousemove', move);
+  window.addEventListener('mousemove', move);
 
-  // Touch Listeners
-  carousel.addEventListener('touchstart', startDragging, { passive: true });
+  // Touch Events (Mobile)
+  carousel.addEventListener('touchstart', startDragging, { passive: false });
   window.addEventListener('touchend', stopDragging);
-  carousel.addEventListener('touchmove', move, { passive: true });
-}
-
-// Initialize
-document.addEventListener("DOMContentLoaded", initReviews);
+  carousel.addEventListener('touchmove', move, { passive: false });
+  }
 </script>
   </body>
   </html>
