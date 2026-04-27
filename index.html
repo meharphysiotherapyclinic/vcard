@@ -354,17 +354,23 @@ function initReviews() {
     carousel.addEventListener("mouseleave", resumeScroll);
 
     /* Mobile */
-    carousel.addEventListener("touchstart", pauseScroll, {
-      passive: true
-    });
+carousel.addEventListener("touchstart", () => {
+  pauseScroll();
+}, {
+  passive: true
+});
 
-    carousel.addEventListener("touchend", resumeScroll, {
-      passive: true
-    });
+carousel.addEventListener("touchend", () => {
+  resumeScroll();
+}, {
+  passive: true
+});
 
-    carousel.addEventListener("touchcancel", resumeScroll, {
-      passive: true
-    });
+carousel.addEventListener("touchcancel", () => {
+  resumeScroll();
+}, {
+  passive: true
+});
 
     autoScroll();
   });
