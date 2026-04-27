@@ -341,23 +341,38 @@
     carousel.scrollLeft = scrollLeft - walk;
   });
 
-  /* Touch drag (mobile) */
-  carousel.addEventListener("touchstart", (e) => {
-    pauseAnimation();
-    startX = e.touches[0].pageX - carousel.offsetLeft;
-    scrollLeft = carousel.scrollLeft;
-  }, { passive: true });
+  /* Touch drag (mobile) — SMOOTHER VERSION */
 
-  carousel.addEventListener("touchmove", (e) => {
-    const x = e.touches[0].pageX - carousel.offsetLeft;
-    const walk = (x - startX) * 1.5;
+let isTouching = false;
+let currentX = 0;
+let startScrollLeft = 0;
 
-    carousel.scrollLeft = scrollLeft - walk;
-  }, { passive: true });
+carousel.addEventListener("touchstart", (e) => {
+  pauseAnimation();
 
-  carousel.addEventListener("touchend", resumeAnimation, { passive: true });
-  carousel.addEventListener("touchcancel", resumeAnimation, { passive: true });
-}
+  isTouching = true;
+  startX = e.touches[0].pageX;
+  startScrollLeft = carousel.scrollLeft;
+}, { passive: true });
+
+carousel.addEventListener("touchmove", (e) => {
+  if (!isTouching) return;
+
+  currentX = e.touches[0].pageX;
+  const distance = (currentX - startX) * 1.2;
+
+  carousel.scrollLeft = startScrollLeft - distance;
+}, { passive: true });
+
+carousel.addEventListener("touchend", () => {
+  isTouching = false;
+  resumeAnimation();
+}, { passive: true });
+
+carousel.addEventListener("touchcancel", () => {
+  isTouching = false;
+  resumeAnimation();
+}, { passive: true });
 
 document.addEventListener("DOMContentLoaded", initReviews);
 </script>
