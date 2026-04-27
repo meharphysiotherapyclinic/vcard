@@ -282,59 +282,56 @@ function initReviews() {
   /* Prevent duplicate init */
   if (track.children.length > 0) return;
 
-  /* Create ONE original set */
-  clinicReviews.forEach((rev) => {
-    const card = document.createElement("div");
-    card.className = "review-card";
+  /* ===================================== */
+  /* CREATE 3 SETS → LEFT + CENTER + RIGHT */
+  /* ===================================== */
 
-    card.innerHTML = `
-      <div class="review-stars">★★★★★</div>
-      <p class="review-text">"${rev.text}"</p>
-      <div class="review-author">
-        <strong>${rev.name}</strong>
-        <span>${rev.service}</span>
-      </div>
-    `;
+  for (let i = 0; i < 3; i++) {
+    clinicReviews.forEach((rev) => {
+      const card = document.createElement("div");
+      card.className = "review-card";
 
-    track.appendChild(card);
-  });
+      card.innerHTML = `
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"${rev.text}"</p>
+        <div class="review-author">
+          <strong>${rev.name}</strong>
+          <span>${rev.service}</span>
+        </div>
+      `;
 
-  /* Duplicate EXACT SAME set for seamless loop */
-  clinicReviews.forEach((rev) => {
-    const clone = document.createElement("div");
-    clone.className = "review-card";
+      track.appendChild(card);
+    });
+  }
 
-    clone.innerHTML = `
-      <div class="review-stars">★★★★★</div>
-      <p class="review-text">"${rev.text}"</p>
-      <div class="review-author">
-        <strong>${rev.name}</strong>
-        <span>${rev.service}</span>
-      </div>
-    `;
-
-    track.appendChild(clone);
-  });
-
-  /* Wait for layout to calculate exact width */
   requestAnimationFrame(() => {
     const totalWidth = track.scrollWidth;
-    const singleSetWidth = totalWidth / 2;
+    const singleSetWidth = totalWidth / 3;
+
+    /* START FROM CENTER SET */
+    carousel.scrollLeft = singleSetWidth;
 
     let isPaused = false;
-    let animationFrame;
+
+    function maintainInfiniteLoop() {
+      /* if too far right → move back */
+      if (carousel.scrollLeft >= singleSetWidth * 2) {
+        carousel.scrollLeft -= singleSetWidth;
+      }
+
+      /* if too far left → move forward */
+      if (carousel.scrollLeft <= 0) {
+        carousel.scrollLeft += singleSetWidth;
+      }
+    }
 
     function autoScroll() {
       if (!isPaused) {
         carousel.scrollLeft += 0.6;
-
-        /* PERFECT seamless reset */
-        if (carousel.scrollLeft >= singleSetWidth) {
-          carousel.scrollLeft -= singleSetWidth;
-        }
+        maintainInfiniteLoop();
       }
 
-      animationFrame = requestAnimationFrame(autoScroll);
+      requestAnimationFrame(autoScroll);
     }
 
     function pauseScroll() {
@@ -348,6 +345,9 @@ function initReviews() {
         carousel.classList.remove("paused");
       }, 400);
     }
+
+    /* Manual drag support */
+    carousel.addEventListener("scroll", maintainInfiniteLoop);
 
     /* Desktop */
     carousel.addEventListener("mouseenter", pauseScroll);
@@ -371,6 +371,6 @@ function initReviews() {
 }
 
 document.addEventListener("DOMContentLoaded", initReviews);
-    </script>
+      </script>
   </body>
 </html>
