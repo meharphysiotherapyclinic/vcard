@@ -318,7 +318,7 @@
         carousel.scrollLeft >=
         (track.scrollWidth - carousel.clientWidth) / 2
       ) {
-        carousel.scrollLeft = 0;
+        carousel.scrollLeft -= singleSetWidth;
       }
     }, 20);
   }
