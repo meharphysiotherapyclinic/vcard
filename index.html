@@ -274,46 +274,92 @@
   ];
 
   function initReviews() {
-    const carousel = document.querySelector('.review-carousel');
-    const track = document.getElementById('review-track');
-    if (!track || !carousel) return;
+  const carousel = document.querySelector('.review-carousel');
+  const track = document.getElementById('review-track');
 
-    // Duplicate the list so the scroll never gaps
-    const fullList = [...clinicReviews, ...clinicReviews];
+  if (!track || !carousel) return;
 
-    fullList.forEach(rev => {
-      const card = document.createElement('div');
-      card.className = 'review-card';
-      card.innerHTML = `
-        <div class="review-stars">★★★★★</div>
-        <p class="review-text">"${rev.text}"</p>
-        <div class="review-author">
-          <strong>${rev.name}</strong>
-          <span>${rev.service}</span>
-        </div>
-      `;
-      track.appendChild(card);
-    });
+  const fullList = [...clinicReviews, ...clinicReviews];
 
-        // --- IMPROVED TOUCH LOGIC ---
-    const pauseAnimation = () => carousel.classList.add('paused');
-    const resumeAnimation = () => {
-      // Small timeout ensures the "sticky" touch state is cleared by the browser
-      setTimeout(() => carousel.classList.remove('paused'), 50);
-    };
+  fullList.forEach(rev => {
+    const card = document.createElement('div');
+    card.className = 'review-card';
 
-    // Pause when finger touches
-    carousel.addEventListener('touchstart', pauseAnimation, { passive: true });
+    card.innerHTML = `
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"${rev.text}"</p>
+      <div class="review-author">
+        <strong>${rev.name}</strong>
+        <span>${rev.service}</span>
+      </div>
+    `;
 
-    // Resume when finger lifts
-    carousel.addEventListener('touchend', resumeAnimation, { passive: true });
+    track.appendChild(card);
+  });
 
-    // Resume even if the touch is interrupted (like if you scroll the page)
-    carousel.addEventListener('touchcancel', resumeAnimation, { passive: true });
-  }
+  /* ---------- TOUCH + DRAG SUPPORT ---------- */
 
-  // Run when page is ready
-  document.addEventListener("DOMContentLoaded", initReviews);
+  let isDown = false;
+  let startX;
+  let scrollLeft;
+
+  const pauseAnimation = () => {
+    carousel.classList.add("paused");
+  };
+
+  const resumeAnimation = () => {
+    setTimeout(() => {
+      carousel.classList.remove("paused");
+    }, 300);
+  };
+
+  /* Mouse drag (desktop) */
+  carousel.addEventListener("mousedown", (e) => {
+    isDown = true;
+    pauseAnimation();
+    startX = e.pageX - carousel.offsetLeft;
+    scrollLeft = carousel.scrollLeft;
+  });
+
+  carousel.addEventListener("mouseleave", () => {
+    isDown = false;
+    resumeAnimation();
+  });
+
+  carousel.addEventListener("mouseup", () => {
+    isDown = false;
+    resumeAnimation();
+  });
+
+  carousel.addEventListener("mousemove", (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+
+    const x = e.pageX - carousel.offsetLeft;
+    const walk = (x - startX) * 1.5;
+
+    carousel.scrollLeft = scrollLeft - walk;
+  });
+
+  /* Touch drag (mobile) */
+  carousel.addEventListener("touchstart", (e) => {
+    pauseAnimation();
+    startX = e.touches[0].pageX - carousel.offsetLeft;
+    scrollLeft = carousel.scrollLeft;
+  }, { passive: true });
+
+  carousel.addEventListener("touchmove", (e) => {
+    const x = e.touches[0].pageX - carousel.offsetLeft;
+    const walk = (x - startX) * 1.5;
+
+    carousel.scrollLeft = scrollLeft - walk;
+  }, { passive: true });
+
+  carousel.addEventListener("touchend", resumeAnimation, { passive: true });
+  carousel.addEventListener("touchcancel", resumeAnimation, { passive: true });
+}
+
+document.addEventListener("DOMContentLoaded", initReviews);
 </script>
   </body>
 </html>
