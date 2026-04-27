@@ -462,6 +462,7 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
   display: flex;
   width: max-content;
   gap: 0;
+  flex-wrap: nowrap;
 }
 
 /* Review Card */
