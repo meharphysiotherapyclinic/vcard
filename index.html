@@ -274,16 +274,17 @@
   ];
 
   function initReviews() {
-  const carousel = document.querySelector('.review-carousel');
-  const track = document.getElementById('review-track');
+  const carousel = document.querySelector(".review-carousel");
+  const track = document.getElementById("review-track");
 
-  if (!track || !carousel) return;
+  if (!carousel || !track) return;
 
+  /* Duplicate reviews for seamless loop */
   const fullList = [...clinicReviews, ...clinicReviews];
 
-  fullList.forEach(rev => {
-    const card = document.createElement('div');
-    card.className = 'review-card';
+  fullList.forEach((rev) => {
+    const card = document.createElement("div");
+    card.className = "review-card";
 
     card.innerHTML = `
       <div class="review-stars">★★★★★</div>
@@ -297,82 +298,66 @@
     track.appendChild(card);
   });
 
-  /* ---------- TOUCH + DRAG SUPPORT ---------- */
+  /* ================================= */
+  /* TRUE SMOOTH INFINITE AUTO SCROLL */
+  /* ================================= */
 
-  let isDown = false;
-  let startX;
-  let scrollLeft;
+  let autoScroll;
+  let isInteracting = false;
 
-  const pauseAnimation = () => {
+  function startAutoScroll() {
+    stopAutoScroll();
+
+    autoScroll = setInterval(() => {
+      if (isInteracting) return;
+
+      carousel.scrollLeft += 1;
+
+      /* seamless reset */
+      if (
+        carousel.scrollLeft >=
+        (track.scrollWidth - carousel.clientWidth) / 2
+      ) {
+        carousel.scrollLeft = 0;
+      }
+    }, 20);
+  }
+
+  function stopAutoScroll() {
+    clearInterval(autoScroll);
+  }
+
+  /* Pause on touch/mouse */
+  function pauseScroll() {
+    isInteracting = true;
     carousel.classList.add("paused");
-  };
+  }
 
-  const resumeAnimation = () => {
+  function resumeScroll() {
     setTimeout(() => {
+      isInteracting = false;
       carousel.classList.remove("paused");
-    }, 300);
-  };
+    }, 500);
+  }
 
-  /* Mouse drag (desktop) */
-  carousel.addEventListener("mousedown", (e) => {
-    isDown = true;
-    pauseAnimation();
-    startX = e.pageX - carousel.offsetLeft;
-    scrollLeft = carousel.scrollLeft;
+  /* Desktop */
+  carousel.addEventListener("mouseenter", pauseScroll);
+  carousel.addEventListener("mouseleave", resumeScroll);
+
+  /* Mobile */
+  carousel.addEventListener("touchstart", pauseScroll, {
+    passive: true,
   });
 
-  carousel.addEventListener("mouseleave", () => {
-    isDown = false;
-    resumeAnimation();
+  carousel.addEventListener("touchend", resumeScroll, {
+    passive: true,
   });
 
-  carousel.addEventListener("mouseup", () => {
-    isDown = false;
-    resumeAnimation();
+  carousel.addEventListener("touchcancel", resumeScroll, {
+    passive: true,
   });
 
-  carousel.addEventListener("mousemove", (e) => {
-    if (!isDown) return;
-    e.preventDefault();
-
-    const x = e.pageX - carousel.offsetLeft;
-    const walk = (x - startX) * 1.5;
-
-    carousel.scrollLeft = scrollLeft - walk;
-  });
-
-  /* Touch drag (mobile) — SMOOTHER VERSION */
-
-let isTouching = false;
-let currentX = 0;
-let startScrollLeft = 0;
-
-carousel.addEventListener("touchstart", (e) => {
-  pauseAnimation();
-
-  isTouching = true;
-  startX = e.touches[0].pageX;
-  startScrollLeft = carousel.scrollLeft;
-}, { passive: true });
-
-carousel.addEventListener("touchmove", (e) => {
-  if (!isTouching) return;
-
-  currentX = e.touches[0].pageX;
-  const distance = (currentX - startX) * 1.2;
-
-  carousel.scrollLeft = startScrollLeft - distance;
-}, { passive: true });
-
-carousel.addEventListener("touchend", () => {
-  isTouching = false;
-  resumeAnimation();
-}, { passive: true });
-
-carousel.addEventListener("touchcancel", () => {
-  isTouching = false;
-  resumeAnimation();
-}, { passive: true });
+  startAutoScroll();
 }
 
 document.addEventListener("DOMContentLoaded", initReviews);
