@@ -442,7 +442,8 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
   padding: 10px 0;
 
   -webkit-overflow-scrolling: touch;
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
+  overscroll-behavior-x: contain;
   scrollbar-width: none;
   cursor: grab;
 
