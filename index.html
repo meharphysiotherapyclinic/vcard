@@ -250,39 +250,40 @@
 </button>
     <script src="ai-chatbot.js"></script>
     <script>
-  const clinicReviews = [
-    {
-      name: "Debangshi Chaterjee",
-      text: "Dr. Govind Ji is extraordinary. He treated my mother-in-law for knee replacement. She started walking without support in 25 days and was perfectly fine in 45 days. Truly grateful.",
-      service: "Knee Replacement Rehab"
-    },
-    {
-      name: "Ankit Kumar Nayak",
-      text: "Highly recommended for honest recommendations and effective treatment. I've been taking sessions for 5 months post-accident. Experienced doctor and high-end equipment.",
-      service: "Post-Accident Recovery"
-    },
-    {
-      name: "Mridula Tyagi",
-      text: "Massive thanks to Dr. Arneja for his amazing work. After my slip disc, I didn't think I could live a normal life without surgery. He is the best physiotherapist.",
-      service: "Slip Disc Treatment"
-    },
-    {
-      name: "Nirupa Chaurasia",
-      text: "After knee replacement, I tried two other professionals but wasn't satisfied. After two months with Govind ji, I am finally happy with my leg movement.",
-      service: "Knee Rehab"
-    }
-  ];
+const clinicReviews = [
+  {
+    name: "Debangshi Chaterjee",
+    text: "Dr. Govind Ji is extraordinary. He treated my mother-in-law for knee replacement. She started walking without support in 25 days and was perfectly fine in 45 days. Truly grateful.",
+    service: "Knee Replacement Rehab"
+  },
+  {
+    name: "Ankit Kumar Nayak",
+    text: "Highly recommended for honest recommendations and effective treatment. I've been taking sessions for 5 months post-accident. Experienced doctor and high-end equipment.",
+    service: "Post-Accident Recovery"
+  },
+  {
+    name: "Mridula Tyagi",
+    text: "Massive thanks to Dr. Arneja for his amazing work. After my slip disc, I didn't think I could live a normal life without surgery. He is the best physiotherapist.",
+    service: "Slip Disc Treatment"
+  },
+  {
+    name: "Nirupa Chaurasia",
+    text: "After knee replacement, I tried two other professionals but wasn't satisfied. After two months with Govind ji, I am finally happy with my leg movement.",
+    service: "Knee Rehab"
+  }
+];
 
-  function initReviews() {
+function initReviews() {
   const carousel = document.querySelector(".review-carousel");
   const track = document.getElementById("review-track");
 
   if (!carousel || !track) return;
 
-  /* Duplicate reviews for seamless loop */
-  const fullList = [...clinicReviews, ...clinicReviews];
+  /* Prevent duplicate init */
+  if (track.children.length > 0) return;
 
-  fullList.forEach((rev) => {
+  /* Create ONE original set */
+  clinicReviews.forEach((rev) => {
     const card = document.createElement("div");
     card.className = "review-card";
 
@@ -298,69 +299,78 @@
     track.appendChild(card);
   });
 
-  /* ================================= */
-  /* TRUE SMOOTH INFINITE AUTO SCROLL */
-  /* ================================= */
+  /* Duplicate EXACT SAME set for seamless loop */
+  clinicReviews.forEach((rev) => {
+    const clone = document.createElement("div");
+    clone.className = "review-card";
 
-  let autoScroll;
-  let isInteracting = false;
+    clone.innerHTML = `
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"${rev.text}"</p>
+      <div class="review-author">
+        <strong>${rev.name}</strong>
+        <span>${rev.service}</span>
+      </div>
+    `;
 
-  function startAutoScroll() {
-    stopAutoScroll();
+    track.appendChild(clone);
+  });
 
-    autoScroll = setInterval(() => {
-      if (isInteracting) return;
+  /* Wait for layout to calculate exact width */
+  requestAnimationFrame(() => {
+    const totalWidth = track.scrollWidth;
+    const singleSetWidth = totalWidth / 2;
 
-      carousel.scrollLeft += 1;
+    let isPaused = false;
+    let animationFrame;
 
-      /* seamless reset */
-      if (
-        carousel.scrollLeft >=
-        (track.scrollWidth - carousel.clientWidth) / 2
-      ) {
-        carousel.scrollLeft -= singleSetWidth;
+    function autoScroll() {
+      if (!isPaused) {
+        carousel.scrollLeft += 0.6;
+
+        /* PERFECT seamless reset */
+        if (carousel.scrollLeft >= singleSetWidth) {
+          carousel.scrollLeft -= singleSetWidth;
+        }
       }
-    }, 20);
-  }
 
-  function stopAutoScroll() {
-    clearInterval(autoScroll);
-  }
+      animationFrame = requestAnimationFrame(autoScroll);
+    }
 
-  /* Pause on touch/mouse */
-  function pauseScroll() {
-    isInteracting = true;
-    carousel.classList.add("paused");
-  }
+    function pauseScroll() {
+      isPaused = true;
+      carousel.classList.add("paused");
+    }
 
-  function resumeScroll() {
-    setTimeout(() => {
-      isInteracting = false;
-      carousel.classList.remove("paused");
-    }, 500);
-  }
+    function resumeScroll() {
+      setTimeout(() => {
+        isPaused = false;
+        carousel.classList.remove("paused");
+      }, 400);
+    }
 
-  /* Desktop */
-  carousel.addEventListener("mouseenter", pauseScroll);
-  carousel.addEventListener("mouseleave", resumeScroll);
+    /* Desktop */
+    carousel.addEventListener("mouseenter", pauseScroll);
+    carousel.addEventListener("mouseleave", resumeScroll);
 
-  /* Mobile */
-  carousel.addEventListener("touchstart", pauseScroll, {
-    passive: true,
+    /* Mobile */
+    carousel.addEventListener("touchstart", pauseScroll, {
+      passive: true
+    });
+
+    carousel.addEventListener("touchend", resumeScroll, {
+      passive: true
+    });
+
+    carousel.addEventListener("touchcancel", resumeScroll, {
+      passive: true
+    });
+
+    autoScroll();
   });
-
-  carousel.addEventListener("touchend", resumeScroll, {
-    passive: true,
-  });
-
-  carousel.addEventListener("touchcancel", resumeScroll, {
-    passive: true,
-  });
-
-  startAutoScroll();
 }
 
 document.addEventListener("DOMContentLoaded", initReviews);
-</script>
+    </script>
   </body>
 </html>
