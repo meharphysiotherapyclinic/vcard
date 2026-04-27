@@ -432,22 +432,26 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
   }
 }
 
-/* Reviews Section Styling */
+/* ========================================= */
+/* REVIEWS — SMOOTH INFINITE SCROLL FIXED */
+/* ========================================= */
+
 .review-carousel {
-  overflow-x: auto;
-  overflow-y: hidden;
   width: 100%;
   max-width: 400px;
   margin: 15px auto;
+  overflow-x: auto;
+  overflow-y: hidden;
   padding: 10px 0;
 
   -webkit-overflow-scrolling: touch;
   scroll-behavior: auto;
-  overscroll-behavior-x: contain;
   scrollbar-width: none;
-  cursor: grab;
+  -ms-overflow-style: none;
 
+  cursor: grab;
   touch-action: pan-x;
+  overscroll-behavior-x: contain;
 }
 
 .review-carousel::-webkit-scrollbar {
@@ -457,23 +461,25 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
 .review-track {
   display: flex;
   width: max-content;
-  animation: scrollReviews 40s linear infinite;
+  gap: 0;
 }
 
-/* Updated Review Cards */
+/* Review Card */
 .review-card {
-  background: var(--card);
   width: 280px;
+  min-width: 280px;
   margin: 0 10px;
   padding: 16px;
   border-radius: 14px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  text-align: left;
-  flex-shrink: 0;
+  background: var(--card);
   border: 3px solid #0e5a95;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  flex-shrink: 0;
+  text-align: left;
 }
 
 .review-stars {
@@ -485,17 +491,16 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
 .review-text {
   font-size: 13px;
   line-height: 1.5;
-  color: var(--text);
   margin: 0;
+  color: var(--text);
   font-style: italic;
-  white-space: normal;
 }
 
 .review-author {
   margin-top: 12px;
-  font-size: 12px;
-  border-top: 1px solid rgba(0,0,0,0.05);
   padding-top: 8px;
+  border-top: 1px solid rgba(0,0,0,0.05);
+  font-size: 12px;
 }
 
 .review-author strong {
@@ -504,47 +509,25 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
 }
 
 .review-author span {
-  color: var(--muted);
   font-size: 11px;
+  color: var(--muted);
 }
 
-/* Auto Scroll Animation */
-@keyframes scrollReviews {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
-
-/* Desktop Hover Pause */
-@media (hover: hover) {
-  .review-carousel:hover .review-track {
-    animation-play-state: paused;
-  }
-}
-
-/* Mobile Touch Pause */
-.review-carousel.paused .review-track {
-  animation-play-state: paused;
+/* Pause helper */
+.review-carousel.paused {
+  cursor: grabbing;
 }
 
 /* Dark Mode */
 @media (prefers-color-scheme: dark) {
   .review-card {
-    border: 3px solid #4da3ff !important;
     background: #1e1e1e;
+    border: 3px solid #4da3ff;
   }
 
   .review-author {
     border-top: 1px solid rgba(255,255,255,0.1);
   }
-}
-
-/* Optional: smoother touch behavior */
-.review-swiper {
-  touch-action: pan-y;
 }
 
 /* Map Border - Exact match to About Section */
