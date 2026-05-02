@@ -325,6 +325,48 @@ function initReviews() {
       }
     }
 
+    /* ================================= */
+    /* DESKTOP DRAG SUPPORT (LIKE MOBILE) */
+    /* ================================= */
+
+    let isDown = false;
+    let startX;
+    let scrollLeftStart;
+
+    carousel.addEventListener("mousedown", (e) => {
+      isDown = true;
+      pauseScroll();
+      carousel.classList.add("paused");
+
+      startX = e.pageX - carousel.offsetLeft;
+      scrollLeftStart = carousel.scrollLeft;
+    });
+
+    carousel.addEventListener("mouseleave", () => {
+      if (!isDown) return;
+      isDown = false;
+      resumeScroll();
+      carousel.classList.remove("paused");
+    });
+
+    carousel.addEventListener("mouseup", () => {
+      isDown = false;
+      resumeScroll();
+      carousel.classList.remove("paused");
+    });
+
+    carousel.addEventListener("mousemove", (e) => {
+      if (!isDown) return;
+
+      e.preventDefault();
+
+      const x = e.pageX - carousel.offsetLeft;
+      const walk = (x - startX) * 1.5;
+
+      carousel.scrollLeft = scrollLeftStart - walk;
+      maintainInfiniteLoop();
+    });
+
     function autoScroll() {
       if (!isPaused) {
         carousel.scrollLeft += 0.6;
