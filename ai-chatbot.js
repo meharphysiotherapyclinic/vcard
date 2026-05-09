@@ -66,8 +66,15 @@ function getAIResponse(msg) {
   }
 
   // 4. HOME VISITS
-  if (msg.includes("home") || msg.includes("at house") || msg.includes("come to me") || msg.includes("residence")) {
-    return "Yes, we provide specialized <strong>Home Visit Physiotherapy</strong> for patients in pain or with limited mobility." + wrap(callLink, waLink);
+  if (
+  msg.includes("home") ||
+  msg.includes("home visit") ||
+  msg.includes("visit at home") ||
+  msg.includes("at house") ||
+  msg.includes("come to me") ||
+  msg.includes("residence")
+) {
+  return "Yes, we provide <strong>Home Visit Physiotherapy</strong> in Gaur City and nearby areas for patients with pain, mobility issues, post-surgery recovery, paralysis care, stroke rehab, and elderly care.<br><br><strong>Contact us to check availability and book a home session:</strong>" + wrap(callLink, waLink);
   }
 
   // 5. APPOINTMENT & REFERRAL
