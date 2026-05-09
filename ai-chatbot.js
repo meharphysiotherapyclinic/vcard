@@ -56,7 +56,7 @@ function getAIResponse(msg) {
   }
 
   // 2. TIMINGS & AVAILABILITY
-  if (msg.includes("timing") || msg.includes("time") || msg.includes("open") || msg.includes("hour") || msg.includes("sunday") || msg.includes("available") || msg.includes("slot") || msg.includes("when")) {
+  if (msg.includes("timing") || msg.includes("time") || msg.includes("open") || msg.includes("hour") || msg.includes("sunday") || msg.includes("slot") || msg.includes("when")) {
     return "Mehar Physiotherapy Clinic is open <strong>Monday to Sunday, 8:00 AM to 9:00 PM</strong>. To ensure Dr. Arneja is available and to skip the waiting line, please <strong>call us</strong> to book your slot:" + wrap(callLink, waLink);
   }
 
