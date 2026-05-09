@@ -112,39 +112,123 @@
 /* INPUT AREA */
 .chat-input {
   display: flex;
-  border-top: 1px solid #eee;
-  background: #fff;
-  padding: 5px;
+  align-items: center;
+  gap: 8px;
+
+  padding: 10px;
+  background: #ffffff;
+  border-top: 1px solid #e5e5e5;
 }
 
+/* INPUT FIELD */
 .chat-input input {
   flex: 1;
-  border: none;
-  padding: 12px;
-  outline: none;
+
+  height: 44px;
+  padding: 0 14px;
+
   font-size: 14px;
-  background: transparent;
+
+  background: #2a2a2a;
+  color: #ffffff;
+
+  border: 2px solid #4da3ff; /* Permanent blue border */
+  border-radius: 12px;
+
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+
+  box-shadow: 0 0 0 1px rgba(77,163,255,0.15);
+
+  transition: none;
 }
 
+/* REMOVE BLUE MOBILE HIGHLIGHT */
+.chat-input input:focus,
+.chat-input input:active {
+  outline: none !important;
+  border-color: #0e5a95;
+  background: #ffffff;
+  box-shadow: none;
+}
+
+/* PLACEHOLDER */
+.chat-input input::placeholder {
+  color: #777;
+}
+
+/* BUTTON */
 .chat-input button {
+  height: 44px;
+  min-width: 52px;
+
   background: #0e5a95;
   color: #fff;
+
   border: none;
-  padding: 0 15px;
-  border-radius: 8px;
-  margin-left: 5px;
+  border-radius: 12px;
+
   cursor: pointer;
   font-weight: 600;
 }
 
 /* DARK MODE FOR CHAT WINDOW */
 @media (prefers-color-scheme: dark) {
-  .chatbot { background: #1e1e1e; color: #eee; }
-  .chatbox { background: #121212; }
-  .msg-ai { background: #2a2a2a; color: #eee; border: 1px solid #333; }
-  .msg-ai a { color: #4da3ff; }
-  .chat-input { border-top: 1px solid #333; background: #1e1e1e; }
-  .chat-input input { color: #fff; }
+
+  .chatbot {
+    background: #1e1e1e;
+    color: #eee;
+  }
+
+  .chatbox {
+    background: #121212;
+  }
+
+  .msg-ai {
+    background: #2a2a2a;
+    color: #eee;
+    border: 1px solid #333;
+  }
+
+  .msg-ai a {
+    color: #4da3ff;
+  }
+
+  /* INPUT BAR */
+  .chat-input {
+    background: #1b1b1b;
+    border-top: 1px solid #2f2f2f;
+  }
+
+  /* INPUT FIELD */
+.chat-input input {
+  background: #2a2a2a;
+  color: #ffffff;
+
+  border: 2px solid #4da3ff !important;
+  border-radius: 12px;
+
+  box-shadow: 0 0 0 1px rgba(77,163,255,0.15);
+
+  transition: none;
+}
+
+  .chat-input input::placeholder {
+    color: #9a9a9a;
+  }
+
+  /* KEEP SAME BLUE BORDER ALWAYS */
+.chat-input input:focus,
+.chat-input input:active {
+  background: #2a2a2a !important;
+
+  border: 2px solid #4da3ff !important;
+
+  box-shadow: 0 0 0 1px rgba(77,163,255,0.15) !important;
+
+  outline: none;
+}
 }
 
 /* MOBILE SAFE */
@@ -252,3 +336,4 @@
   justify-content: center;
 }
 
+  
