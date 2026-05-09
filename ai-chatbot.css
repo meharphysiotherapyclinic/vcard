@@ -72,7 +72,7 @@
   flex-direction: column;
   padding: 15px;
   overflow-y: auto;
-  background: #fdfdfd;
+  background: #eaf4ff;
   font-size: 13.5px;
   line-height: 1.5;
   scroll-behavior: smooth;
@@ -182,7 +182,7 @@
   }
 
   .chatbox {
-    background: #121212;
+    background: #102033;
   }
 
   .msg-ai {
