@@ -6,8 +6,14 @@
   width: 320px;
   height: 450px;
   background: #ffffff;
-  border-radius: 16px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+
+border: 2px solid #4da3ff;
+
+border-radius: 16px;
+
+box-shadow:
+  0 10px 25px rgba(0,0,0,0.3),
+  0 0 0 1px rgba(77,163,255,0.15);
   z-index: 9999;
   display: flex;
   flex-direction: column;
@@ -177,8 +183,14 @@
 @media (prefers-color-scheme: dark) {
 
   .chatbot {
-    background: #1e1e1e;
-    color: #eee;
+  background: #1b1f27;
+  color: #eee;
+
+  border: 2px solid #4da3ff;
+
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.55),
+    0 0 0 1px rgba(77,163,255,0.18);
   }
 
   .chatbox {
