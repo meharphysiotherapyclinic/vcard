@@ -78,7 +78,12 @@ box-shadow:
   flex-direction: column;
   padding: 15px;
   overflow-y: auto;
-  background: #a6d0ff;
+  background: linear-gradient(
+  180deg,
+  #e7f3ff 0%,
+  #c7e3ff 45%,
+  #a6d0ff 100%
+);
   font-size: 13.5px;
   line-height: 1.5;
   scroll-behavior: smooth;
@@ -194,7 +199,12 @@ box-shadow:
   }
 
   .chatbox {
-    background: #a6d0ff;
+    background: linear-gradient(
+  180deg,
+  #e7f3ff 0%,
+  #c7e3ff 45%,
+  #a6d0ff 100%
+);
   }
 
   .msg-ai {
