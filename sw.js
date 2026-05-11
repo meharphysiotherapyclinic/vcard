@@ -2,7 +2,7 @@ const CACHE_NAME = "mehar-vcard-v2";
 const urlsToCache = [
   "/vcard/",
   "/vcard/index.html",
-  "/vcard/logo.png",
+  "/vcard/logo.webp",
   "/vcard/qr_vcard.png"
 ];
 
