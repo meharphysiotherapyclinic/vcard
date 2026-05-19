@@ -448,7 +448,7 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
   cursor: grab;
   user-select: none;
   -webkit-user-select: none;
-  touch-action: pan-x;
+  touch-action: pan-x pan-y pinch-zoom;
   overscroll-behavior-x: contain;
   /* ↑ NO -webkit-overflow-scrolling: touch — that was breaking iOS auto-scroll */
 }
