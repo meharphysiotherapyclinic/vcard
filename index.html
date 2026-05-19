@@ -275,150 +275,86 @@ const clinicReviews = [
 
 function initReviews() {
   const carousel = document.querySelector(".review-carousel");
-  const track = document.getElementById("review-track");
+  const track    = document.getElementById("review-track");
+  if (!carousel || !track || track.children.length > 0) return;
 
-  if (!carousel || !track) return;
-
-  /* Prevent duplicate init */
-  if (track.children.length > 0) return;
-
-  /* ===================================== */
-  /* CREATE 3 SETS → LEFT + CENTER + RIGHT */
-  /* ===================================== */
-
+  /* Build 3 identical sets for seamless looping */
   for (let i = 0; i < 3; i++) {
-    clinicReviews.forEach((rev) => {
+    clinicReviews.forEach(rev => {
       const card = document.createElement("div");
       card.className = "review-card";
-
       card.innerHTML = `
         <div class="review-stars">★★★★★</div>
         <p class="review-text">"${rev.text}"</p>
         <div class="review-author">
           <strong>${rev.name}</strong>
           <span>${rev.service}</span>
-        </div>
-      `;
-
+        </div>`;
       track.appendChild(card);
     });
   }
 
-  requestAnimationFrame(() => {
-    const totalWidth = track.scrollWidth;
-    const singleSetWidth = totalWidth / 3;
+  function tryInit(attempts) {
+    const singleSetWidth = track.scrollWidth / 3;
+    if (!singleSetWidth) {
+      if (attempts > 0) setTimeout(() => tryInit(attempts - 1), 100);
+      return;
+    }
 
-    /* START FROM CENTER SET */
+    /* Start at the middle set */
     carousel.scrollLeft = singleSetWidth;
 
     let isPaused = false;
 
-    function maintainInfiniteLoop() {
-      /* if too far right → move back */
-      if (carousel.scrollLeft >= singleSetWidth * 2) {
-        carousel.scrollLeft -= singleSetWidth;
-      }
-
-      /* if too far left → move forward */
-      if (carousel.scrollLeft <= 0) {
-        carousel.scrollLeft += singleSetWidth;
-      }
+    /* Keep scroll position within the middle set (invisible loop) */
+    function maintainLoop() {
+      if (carousel.scrollLeft >= singleSetWidth * 2) carousel.scrollLeft -= singleSetWidth;
+      if (carousel.scrollLeft <= 0)                  carousel.scrollLeft += singleSetWidth;
     }
 
-    /* ================================= */
-    /* DESKTOP DRAG SUPPORT (LIKE MOBILE) */
-    /* ================================= */
+    /* Native scroll during drag also needs loop maintenance */
+    carousel.addEventListener("scroll", maintainLoop, { passive: true });
 
-    let isDown = false;
-    let startX;
-    let scrollLeftStart;
-
-    carousel.addEventListener("mousedown", (e) => {
-      isDown = true;
-      pauseScroll();
-      carousel.classList.add("paused");
-
-      startX = e.pageX - carousel.offsetLeft;
-      scrollLeftStart = carousel.scrollLeft;
-    });
-
-    carousel.addEventListener("mouseleave", () => {
-      if (!isDown) return;
-      isDown = false;
-      resumeScroll();
-      carousel.classList.remove("paused");
-    });
-
-    carousel.addEventListener("mouseup", () => {
-      isDown = false;
-      resumeScroll();
-      carousel.classList.remove("paused");
-    });
-
-    carousel.addEventListener("mousemove", (e) => {
-      if (!isDown) return;
-
-      e.preventDefault();
-
-      const x = e.pageX - carousel.offsetLeft;
-      const walk = (x - startX) * 1.5;
-
-      carousel.scrollLeft = scrollLeftStart - walk;
-      maintainInfiniteLoop();
-    });
-
+    /* Auto-scroll via rAF — works on iOS 13+ without -webkit-overflow-scrolling:touch */
     function autoScroll() {
       if (!isPaused) {
         carousel.scrollLeft += 0.6;
-        maintainInfiniteLoop();
+        maintainLoop();
       }
-
       requestAnimationFrame(autoScroll);
     }
 
-    function pauseScroll() {
-      isPaused = true;
-      carousel.classList.add("paused");
-    }
+    /* Touch: pause auto-scroll, let browser handle drag natively */
+    carousel.addEventListener("touchstart",  () => { isPaused = true; },                              { passive: true });
+    carousel.addEventListener("touchend",    () => { setTimeout(() => { isPaused = false; }, 600); }, { passive: true });
+    carousel.addEventListener("touchcancel", () => { setTimeout(() => { isPaused = false; }, 600); }, { passive: true });
 
-    function resumeScroll() {
-      setTimeout(() => {
-        isPaused = false;
-        carousel.classList.remove("paused");
-      }, 400);
-    }
+    /* Mouse: pause on hover, drag support for desktop */
+    let isDown = false, startX, startScrollLeft;
 
-    /* Manual drag support */
-    carousel.addEventListener("scroll", maintainInfiniteLoop);
+    carousel.addEventListener("mouseenter", () => { isPaused = true; });
+    carousel.addEventListener("mouseleave", () => { isPaused = false; isDown = false; });
 
-    /* Desktop */
-    carousel.addEventListener("mouseenter", pauseScroll);
-    carousel.addEventListener("mouseleave", resumeScroll);
-
-    /* Mobile */
-carousel.addEventListener("touchstart", () => {
-  pauseScroll();
-}, {
-  passive: true
-});
-
-carousel.addEventListener("touchend", () => {
-  resumeScroll();
-}, {
-  passive: true
-});
-
-carousel.addEventListener("touchcancel", () => {
-  resumeScroll();
-}, {
-  passive: true
-});
+    carousel.addEventListener("mousedown", e => {
+      isDown = true;
+      startX          = e.pageX - carousel.offsetLeft;
+      startScrollLeft = carousel.scrollLeft;
+    });
+    carousel.addEventListener("mouseup",   () => { isDown = false; });
+    carousel.addEventListener("mousemove", e => {
+      if (!isDown) return;
+      e.preventDefault();
+      carousel.scrollLeft = startScrollLeft - (e.pageX - carousel.offsetLeft - startX) * 1.5;
+      maintainLoop();
+    });
 
     autoScroll();
-  });
+  }
+
+  tryInit(10);
 }
 
 document.addEventListener("DOMContentLoaded", initReviews);
-      </script>
+</script>
   </body>
 </html>
