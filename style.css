@@ -433,46 +433,34 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
 }
 
 /* ========================================= */
-/* REVIEWS — SMOOTH INFINITE SCROLL FIXED */
+/* REVIEWS                                   */
 /* ========================================= */
 
 .review-carousel {
   width: 100%;
   max-width: 400px;
   margin: 15px auto;
-  overflow-x: auto;
+  overflow-x: scroll;
   overflow-y: hidden;
   padding: 10px 0;
-
-  -webkit-overflow-scrolling: touch;
-  scroll-behavior: auto;
-
   scrollbar-width: none;
   -ms-overflow-style: none;
-
   cursor: grab;
   user-select: none;
   -webkit-user-select: none;
-
-  touch-action: pan-x pan-y pinch-zoom;
+  touch-action: pan-x;
   overscroll-behavior-x: contain;
-
-  scroll-snap-type: none;
+  /* ↑ NO -webkit-overflow-scrolling: touch — that was breaking iOS auto-scroll */
 }
 
-.review-carousel::-webkit-scrollbar {
-  display: none;
-}
-
-.review-carousel:active {
-  cursor: grabbing;
-}
+.review-carousel::-webkit-scrollbar { display: none; }
+.review-carousel:active { cursor: grabbing; }
 
 .review-track {
   display: flex;
   width: max-content;
-  gap: 0;
   flex-wrap: nowrap;
+  gap: 0;
 }
 
 /* Review Card */
