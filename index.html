@@ -358,7 +358,7 @@ function initReviews() {
         nextPos             -= singleSetWidth;
       }
 
-      smoothScrollTo(nextPos, 900, () => {
+      smoothScrollTo(nextPos, 1200, () => {
         stepTimer = setTimeout(() => {
           if (!isPaused) scrollToNext();
         }, 3000); /* 3 s pause at each card */
