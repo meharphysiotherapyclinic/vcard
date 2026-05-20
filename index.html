@@ -301,22 +301,28 @@ function initReviews() {
       return;
     }
 
-    carousel.scrollLeft = singleSetWidth;
-    let isPaused = false;
-
     /* Card width: element width + left/right margins */
-    const cardEl    = track.querySelector(".review-card");
-    const cardWidth = cardEl.offsetWidth
+    const cardEl      = track.querySelector(".review-card");
+    const cardWidth   = cardEl.offsetWidth
       + parseInt(getComputedStyle(cardEl).marginLeft)
       + parseInt(getComputedStyle(cardEl).marginRight);
 
+    /* Center offset: shifts stop point to middle of carousel */
+    const centerOffset = Math.max(0, (carousel.offsetWidth - cardWidth) / 2);
+
+    /* Start centered on first card of middle set */
+    carousel.scrollLeft = singleSetWidth - centerOffset;
+
+    let isPaused = false;
+
+    /* Keep scroll within middle set (invisible loop) */
     function maintainLoop() {
-      if (carousel.scrollLeft >= singleSetWidth * 2) carousel.scrollLeft -= singleSetWidth;
-      if (carousel.scrollLeft <= 0)                  carousel.scrollLeft += singleSetWidth;
+      if (carousel.scrollLeft + centerOffset >= singleSetWidth * 2) carousel.scrollLeft -= singleSetWidth;
+      if (carousel.scrollLeft + centerOffset <= 0)                   carousel.scrollLeft += singleSetWidth;
     }
     carousel.addEventListener("scroll", maintainLoop, { passive: true });
 
-    /* Smooth-scroll to an exact pixel target over `duration` ms */
+    /* Smooth-scroll to exact pixel target over `duration` ms */
     let scrollRaf = null;
     function smoothScrollTo(target, duration, onDone) {
       cancelAnimationFrame(scrollRaf);
@@ -343,12 +349,11 @@ function initReviews() {
     function scrollToNext() {
       if (isPaused) return;
 
-      /* Snap to nearest card then target the one after */
-      const currentSnap = Math.round(carousel.scrollLeft / cardWidth) * cardWidth;
-      let   nextPos     = currentSnap + cardWidth;
+      const currentCard = Math.round((carousel.scrollLeft + centerOffset) / cardWidth);
+      let   nextPos     = (currentCard + 1) * cardWidth - centerOffset;
 
-      /* Seamless loop: jump scroll back before crossing boundary */
-      if (nextPos >= singleSetWidth * 2) {
+      /* Seamless loop: jump back before crossing boundary */
+      if (nextPos + centerOffset >= singleSetWidth * 2) {
         carousel.scrollLeft -= singleSetWidth;
         nextPos             -= singleSetWidth;
       }
