@@ -324,10 +324,46 @@ function initReviews() {
       requestAnimationFrame(autoScroll);
     }
 
-    /* Touch: pause auto-scroll, let browser handle drag natively */
-    carousel.addEventListener("touchstart",  () => { isPaused = true; },                              { passive: true });
-    carousel.addEventListener("touchend",    () => { setTimeout(() => { isPaused = false; }, 600); }, { passive: true });
-    carousel.addEventListener("touchcancel", () => { setTimeout(() => { isPaused = false; }, 600); }, { passive: true });
+    /* Touch: long-press to freeze, swipe to resume */
+    let longPressTimer = null;
+    let isLongPaused   = false;
+    let hasMoved       = false;
+
+    carousel.addEventListener("touchstart", () => {
+      isPaused = true;
+      hasMoved = false;
+      longPressTimer = setTimeout(() => {
+        isLongPaused   = true;
+        longPressTimer = null;
+      }, 500);
+    }, { passive: true });
+
+    carousel.addEventListener("touchmove", () => {
+      hasMoved = true;
+      clearTimeout(longPressTimer);
+      longPressTimer = null;
+    }, { passive: true });
+
+    carousel.addEventListener("touchend", () => {
+      clearTimeout(longPressTimer);
+      longPressTimer = null;
+      if (isLongPaused) {
+        if (hasMoved) {
+          isLongPaused = false;
+          setTimeout(() => { isPaused = false; }, 600);
+        }
+        /* lifted without swiping → stay frozen */
+      } else {
+        setTimeout(() => { isPaused = false; }, 600);
+      }
+    }, { passive: true });
+
+    carousel.addEventListener("touchcancel", () => {
+      clearTimeout(longPressTimer);
+      longPressTimer = null;
+      isLongPaused = false;
+      setTimeout(() => { isPaused = false; }, 600);
+    }, { passive: true });
 
     /* Mouse: pause on hover, drag support for desktop */
     let isDown = false, startX, startScrollLeft;
