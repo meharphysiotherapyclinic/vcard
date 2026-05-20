@@ -337,7 +337,7 @@ function initReviews() {
       scrollRaf = requestAnimationFrame(step);
     }
 
-    /* Step scroll: animate to next card → wait 3.5 s → repeat */
+    /* Step scroll: animate to next card → wait 3 s → repeat */
     let stepTimer = null;
 
     function scrollToNext() {
@@ -356,7 +356,7 @@ function initReviews() {
       smoothScrollTo(nextPos, 600, () => {
         stepTimer = setTimeout(() => {
           if (!isPaused) scrollToNext();
-        }, 3500); /* 3.5 s pause at each card */
+        }, 3000); /* 3 s pause at each card */
       });
     }
 
