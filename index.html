@@ -325,9 +325,10 @@ function initReviews() {
     }
 
     /* Touch: long-press to freeze, swipe to resume */
-    let longPressTimer = null;
-    let isLongPaused   = false;
-    let hasMoved       = false;
+    let longPressTimer  = null;
+    let autoResumeTimer = null;   /* ← new */
+    let isLongPaused    = false;
+    let hasMoved        = false;
 
     carousel.addEventListener("touchstart", () => {
       isPaused = true;
@@ -335,6 +336,11 @@ function initReviews() {
       longPressTimer = setTimeout(() => {
         isLongPaused   = true;
         longPressTimer = null;
+        /* Auto-resume after 10 s if user doesn't swipe */
+        autoResumeTimer = setTimeout(() => {
+          isLongPaused = false;
+          isPaused     = false;
+        }, 12000);
       }, 500);
     }, { passive: true });
 
@@ -349,10 +355,12 @@ function initReviews() {
       longPressTimer = null;
       if (isLongPaused) {
         if (hasMoved) {
+          clearTimeout(autoResumeTimer);   /* user swiped — cancel the 10 s timer */
+          autoResumeTimer = null;
           isLongPaused = false;
           setTimeout(() => { isPaused = false; }, 600);
         }
-        /* lifted without swiping → stay frozen */
+        /* lifted without swiping → stay frozen, 10 s timer still running */
       } else {
         setTimeout(() => { isPaused = false; }, 600);
       }
@@ -360,8 +368,10 @@ function initReviews() {
 
     carousel.addEventListener("touchcancel", () => {
       clearTimeout(longPressTimer);
-      longPressTimer = null;
-      isLongPaused = false;
+      clearTimeout(autoResumeTimer);
+      longPressTimer  = null;
+      autoResumeTimer = null;
+      isLongPaused    = false;
       setTimeout(() => { isPaused = false; }, 600);
     }, { passive: true });
 
