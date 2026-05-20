@@ -301,45 +301,94 @@ function initReviews() {
       return;
     }
 
-    /* Start at the middle set */
     carousel.scrollLeft = singleSetWidth;
-
     let isPaused = false;
 
-    /* Keep scroll position within the middle set (invisible loop) */
+    /* Card width: element width + left/right margins */
+    const cardEl    = track.querySelector(".review-card");
+    const cardWidth = cardEl.offsetWidth
+      + parseInt(getComputedStyle(cardEl).marginLeft)
+      + parseInt(getComputedStyle(cardEl).marginRight);
+
     function maintainLoop() {
       if (carousel.scrollLeft >= singleSetWidth * 2) carousel.scrollLeft -= singleSetWidth;
       if (carousel.scrollLeft <= 0)                  carousel.scrollLeft += singleSetWidth;
     }
-
-    /* Native scroll during drag also needs loop maintenance */
     carousel.addEventListener("scroll", maintainLoop, { passive: true });
 
-    /* Auto-scroll via rAF — works on iOS 13+ without -webkit-overflow-scrolling:touch */
-    function autoScroll() {
-      if (!isPaused) {
-        carousel.scrollLeft += 0.6;
-        maintainLoop();
+    /* Smooth-scroll to an exact pixel target over `duration` ms */
+    let scrollRaf = null;
+    function smoothScrollTo(target, duration, onDone) {
+      cancelAnimationFrame(scrollRaf);
+      const start    = carousel.scrollLeft;
+      const distance = target - start;
+      const t0       = performance.now();
+
+      function step(now) {
+        const t    = Math.min((now - t0) / duration, 1);
+        const ease = t < 0.5 ? 2*t*t : -1 + (4 - 2*t) * t; /* ease-in-out */
+        carousel.scrollLeft = start + distance * ease;
+        if (t < 1) {
+          scrollRaf = requestAnimationFrame(step);
+        } else {
+          if (onDone) onDone();
+        }
       }
-      requestAnimationFrame(autoScroll);
+      scrollRaf = requestAnimationFrame(step);
     }
 
-    /* Touch: long-press to freeze, swipe to resume */
+    /* Step scroll: animate to next card → wait 3.5 s → repeat */
+    let stepTimer = null;
+
+    function scrollToNext() {
+      if (isPaused) return;
+
+      /* Snap to nearest card then target the one after */
+      const currentSnap = Math.round(carousel.scrollLeft / cardWidth) * cardWidth;
+      let   nextPos     = currentSnap + cardWidth;
+
+      /* Seamless loop: jump scroll back before crossing boundary */
+      if (nextPos >= singleSetWidth * 2) {
+        carousel.scrollLeft -= singleSetWidth;
+        nextPos             -= singleSetWidth;
+      }
+
+      smoothScrollTo(nextPos, 600, () => {
+        stepTimer = setTimeout(() => {
+          if (!isPaused) scrollToNext();
+        }, 3500); /* 3.5 s pause at each card */
+      });
+    }
+
+    function pauseAll() {
+      isPaused = true;
+      cancelAnimationFrame(scrollRaf);
+      clearTimeout(stepTimer);
+    }
+
+    function resumeAll() {
+      isPaused = false;
+      scrollToNext();
+    }
+
+    scrollToNext(); /* kick off */
+
+    /* ── Touch: long-press to freeze, swipe to resume ── */
     let longPressTimer  = null;
-    let autoResumeTimer = null;   /* ← new */
+    let autoResumeTimer = null;
     let isLongPaused    = false;
     let hasMoved        = false;
 
     carousel.addEventListener("touchstart", () => {
-      isPaused = true;
-      hasMoved = false;
+      pauseAll();
+      hasMoved       = false;
       longPressTimer = setTimeout(() => {
-        isLongPaused   = true;
-        longPressTimer = null;
-        /* Auto-resume after 10 s if user doesn't swipe */
+        isLongPaused    = true;
+        longPressTimer  = null;
+        /* Auto-resume after 12 s if user doesn't swipe */
         autoResumeTimer = setTimeout(() => {
           isLongPaused = false;
-          isPaused     = false;
+          resumeAll();
         }, 12000);
       }, 500);
     }, { passive: true });
@@ -355,14 +404,14 @@ function initReviews() {
       longPressTimer = null;
       if (isLongPaused) {
         if (hasMoved) {
-          clearTimeout(autoResumeTimer);   /* user swiped — cancel the 10 s timer */
+          clearTimeout(autoResumeTimer);
           autoResumeTimer = null;
-          isLongPaused = false;
-          setTimeout(() => { isPaused = false; }, 600);
+          isLongPaused    = false;
+          setTimeout(() => resumeAll(), 600);
         }
-        /* lifted without swiping → stay frozen, 10 s timer still running */
+        /* lifted without swiping → stay frozen, 12 s timer still running */
       } else {
-        setTimeout(() => { isPaused = false; }, 600);
+        setTimeout(() => resumeAll(), 600);
       }
     }, { passive: true });
 
@@ -372,17 +421,17 @@ function initReviews() {
       longPressTimer  = null;
       autoResumeTimer = null;
       isLongPaused    = false;
-      setTimeout(() => { isPaused = false; }, 600);
+      setTimeout(() => resumeAll(), 600);
     }, { passive: true });
 
-    /* Mouse: pause on hover, drag support for desktop */
+    /* ── Mouse: pause on hover, drag on desktop ── */
     let isDown = false, startX, startScrollLeft;
 
-    carousel.addEventListener("mouseenter", () => { isPaused = true; });
-    carousel.addEventListener("mouseleave", () => { isPaused = false; isDown = false; });
+    carousel.addEventListener("mouseenter", () => pauseAll());
+    carousel.addEventListener("mouseleave", () => { isDown = false; resumeAll(); });
 
     carousel.addEventListener("mousedown", e => {
-      isDown = true;
+      isDown          = true;
       startX          = e.pageX - carousel.offsetLeft;
       startScrollLeft = carousel.scrollLeft;
     });
@@ -393,8 +442,6 @@ function initReviews() {
       carousel.scrollLeft = startScrollLeft - (e.pageX - carousel.offsetLeft - startX) * 1.5;
       maintainLoop();
     });
-
-    autoScroll();
   }
 
   tryInit(10);
