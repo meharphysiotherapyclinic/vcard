@@ -278,7 +278,6 @@ function initReviews() {
   const track    = document.getElementById("review-track");
   if (!carousel || !track || track.children.length > 0) return;
 
-  /* Build 3 identical sets for seamless looping */
   for (let i = 0; i < 3; i++) {
     clinicReviews.forEach(rev => {
       const card = document.createElement("div");
@@ -301,28 +300,32 @@ function initReviews() {
       return;
     }
 
-    /* Card width: element width + left/right margins */
-    const cardEl      = track.querySelector(".review-card");
-    const cardWidth   = cardEl.offsetWidth
+    const cardEl    = track.querySelector(".review-card");
+    const cardWidth = cardEl.offsetWidth
       + parseInt(getComputedStyle(cardEl).marginLeft)
       + parseInt(getComputedStyle(cardEl).marginRight);
 
-    /* Center offset: shifts stop point to middle of carousel */
     const centerOffset = Math.max(0, (carousel.offsetWidth - cardWidth) / 2);
-
-    /* Start centered on first card of middle set */
     carousel.scrollLeft = singleSetWidth - centerOffset;
 
     let isPaused = false;
 
-    /* Keep scroll within middle set (invisible loop) */
+    /* ── Loop correction ─────────────────────────────────────────────────── */
     function maintainLoop() {
       if (carousel.scrollLeft + centerOffset >= singleSetWidth * 2) carousel.scrollLeft -= singleSetWidth;
-      if (carousel.scrollLeft + centerOffset <= 0)                   carousel.scrollLeft += singleSetWidth;
+      if (carousel.scrollLeft + centerOffset <  singleSetWidth)     carousel.scrollLeft += singleSetWidth;
     }
-    carousel.addEventListener("scroll", maintainLoop, { passive: true });
 
-    /* Smooth-scroll to exact pixel target over `duration` ms */
+    /* FIX 1: debounced scroll listener — only fires when isPaused (user scrolling).
+       Never interrupts auto-scroll animation or live momentum → no more bumps. */
+    let scrollTimer = null;
+    carousel.addEventListener("scroll", () => {
+      if (!isPaused) return;          // auto-scroll manages its own loop
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(maintainLoop, 80); // correct only after momentum stops
+    }, { passive: true });
+
+    /* ── Auto-scroll animation ───────────────────────────────────────────── */
     let scrollRaf = null;
     function smoothScrollTo(target, duration, onDone) {
       cancelAnimationFrame(scrollRaf);
@@ -332,7 +335,7 @@ function initReviews() {
 
       function step(now) {
         const t    = Math.min((now - t0) / duration, 1);
-        const ease = t < 0.5 ? 2*t*t : -1 + (4 - 2*t) * t; /* ease-in-out */
+        const ease = t < 0.5 ? 2*t*t : -1+(4-2*t)*t;
         carousel.scrollLeft = start + distance * ease;
         if (t < 1) {
           scrollRaf = requestAnimationFrame(step);
@@ -343,16 +346,16 @@ function initReviews() {
       scrollRaf = requestAnimationFrame(step);
     }
 
-    /* Step scroll: animate to next card → wait 3 s → repeat */
     let stepTimer = null;
 
     function scrollToNext() {
       if (isPaused) return;
 
+      maintainLoop(); // ensure clean position before calculating next card
+
       const currentCard = Math.round((carousel.scrollLeft + centerOffset) / cardWidth);
       let   nextPos     = (currentCard + 1) * cardWidth - centerOffset;
 
-      /* Seamless loop: jump back before crossing boundary */
       if (nextPos + centerOffset >= singleSetWidth * 2) {
         carousel.scrollLeft -= singleSetWidth;
         nextPos             -= singleSetWidth;
@@ -361,7 +364,7 @@ function initReviews() {
       smoothScrollTo(nextPos, 1500, () => {
         stepTimer = setTimeout(() => {
           if (!isPaused) scrollToNext();
-        }, 1000); /* 1 s pause at each card */
+        }, 1000);
       });
     }
 
@@ -369,6 +372,7 @@ function initReviews() {
       isPaused = true;
       cancelAnimationFrame(scrollRaf);
       clearTimeout(stepTimer);
+      clearTimeout(scrollTimer);
     }
 
     function resumeAll() {
@@ -376,77 +380,89 @@ function initReviews() {
       scrollToNext();
     }
 
-    scrollToNext(); /* kick off */
+    scrollToNext();
 
-    /* ── Touch: long-press to freeze, swipe to resume ── */
-    let longPressTimer  = null;
-    let autoResumeTimer = null;
-    let isLongPaused    = false;
-    let hasMoved        = false;
+    /* ── Touch events ────────────────────────────────────────────────────── */
+let longPressTimer  = null;
+let autoResumeTimer = null;
+let isLongPaused    = false;
+let hasMoved        = false;
+let isTouching      = false; // FIX: guards against premature resume
 
-    carousel.addEventListener("touchstart", () => {
-      pauseAll();
-      hasMoved       = false;
-      longPressTimer = setTimeout(() => {
-        isLongPaused    = true;
-        longPressTimer  = null;
-        /* Auto-resume after 12 s if user doesn't swipe */
-        autoResumeTimer = setTimeout(() => {
-          isLongPaused = false;
-          resumeAll();
-        }, 12000);
-      }, 500);
-    }, { passive: true });
+carousel.addEventListener("touchstart", () => {
+  isTouching = true;          // FIX
+  pauseAll();
+  hasMoved       = false;
+  longPressTimer = setTimeout(() => {
+    isLongPaused    = true;
+    longPressTimer  = null;
+    autoResumeTimer = setTimeout(() => {
+      isLongPaused = false;
+      resumeAll();
+    }, 12000);
+  }, 500);
+}, { passive: true });
 
-    carousel.addEventListener("touchmove", () => {
-      hasMoved = true;
-      clearTimeout(longPressTimer);
-      longPressTimer = null;
-    }, { passive: true });
+carousel.addEventListener("touchmove", () => {
+  hasMoved = true;
+  clearTimeout(longPressTimer);
+  longPressTimer = null;
+}, { passive: true });
 
-    carousel.addEventListener("touchend", () => {
-      clearTimeout(longPressTimer);
-      longPressTimer = null;
-      if (isLongPaused) {
-        if (hasMoved) {
-          clearTimeout(autoResumeTimer);
-          autoResumeTimer = null;
-          isLongPaused    = false;
-          setTimeout(() => resumeAll(), 600);
-        }
-        /* lifted without swiping → stay frozen, 12 s timer still running */
-      } else {
-        setTimeout(() => resumeAll(), 600);
-      }
-    }, { passive: true });
-
-    carousel.addEventListener("touchcancel", () => {
-      clearTimeout(longPressTimer);
+carousel.addEventListener("touchend", () => {
+  isTouching = false;         // FIX
+  clearTimeout(longPressTimer);
+  longPressTimer = null;
+  if (isLongPaused) {
+    if (hasMoved) {
       clearTimeout(autoResumeTimer);
-      longPressTimer  = null;
       autoResumeTimer = null;
       isLongPaused    = false;
-      setTimeout(() => resumeAll(), 600);
-    }, { passive: true });
+      setTimeout(() => { if (!isTouching) resumeAll(); }, 900); // FIX
+    }
+  } else {
+    setTimeout(() => { if (!isTouching) resumeAll(); }, 900);   // FIX
+  }
+}, { passive: true });
 
-    /* ── Mouse: pause on hover, drag on desktop ── */
-    let isDown = false, startX, startScrollLeft;
+carousel.addEventListener("touchcancel", () => {
+  isTouching = false;         // FIX
+  clearTimeout(longPressTimer);
+  clearTimeout(autoResumeTimer);
+  longPressTimer  = null;
+  autoResumeTimer = null;
+  isLongPaused    = false;
+  setTimeout(() => { if (!isTouching) resumeAll(); }, 900);     // FIX
+}, { passive: true });
 
-    carousel.addEventListener("mouseenter", () => pauseAll());
-    carousel.addEventListener("mouseleave", () => { isDown = false; resumeAll(); });
+/* ── Mouse events ────────────────────────────────────────────────────── */
+let isDown = false, startX, startScrollLeft;
 
-    carousel.addEventListener("mousedown", e => {
-      isDown          = true;
-      startX          = e.pageX - carousel.offsetLeft;
-      startScrollLeft = carousel.scrollLeft;
-    });
-    carousel.addEventListener("mouseup",   () => { isDown = false; });
-    carousel.addEventListener("mousemove", e => {
-      if (!isDown) return;
-      e.preventDefault();
-      carousel.scrollLeft = startScrollLeft - (e.pageX - carousel.offsetLeft - startX) * 1.5;
-      maintainLoop();
-    });
+carousel.addEventListener("mouseenter", () => pauseAll());
+
+carousel.addEventListener("mouseleave", () => {
+  if (!isDown) resumeAll(); // FIX: don't resume if still dragging
+});
+
+carousel.addEventListener("mousedown", e => {
+  isDown          = true;
+  startX          = e.pageX - carousel.offsetLeft;
+  startScrollLeft = carousel.scrollLeft;
+});
+
+/* FIX: moved to document so releasing outside carousel still ends drag */
+document.addEventListener("mouseup", () => {
+  if (isDown) {
+    isDown = false;
+    resumeAll();
+  }
+});
+
+carousel.addEventListener("mousemove", e => {
+  if (!isDown) return;
+  e.preventDefault();
+  carousel.scrollLeft = startScrollLeft - (e.pageX - carousel.offsetLeft - startX) * 1.5;
+});
   }
 
   tryInit(10);
