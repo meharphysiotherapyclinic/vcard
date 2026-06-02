@@ -274,201 +274,519 @@ const clinicReviews = [
 ];
 
 function initReviews() {
+
   const carousel = document.querySelector(".review-carousel");
-  const track    = document.getElementById("review-track");
+  const track = document.getElementById("review-track");
+
   if (!carousel || !track || track.children.length > 0) return;
 
+  /* ───────────────── CONFIG ───────────────── */
+
+  const TOUCH_THRESHOLD   = 8;
+  const MOUSE_THRESHOLD   = 4;
+  const GHOST_CLICK_DELAY = 600;
+  const RESUME_DELAY      = 900;
+  const SCROLL_DELAY      = 80;
+  const SCROLL_DURATION   = 1500;
+  const STEP_DELAY        = 1000;
+
+  /* ───────────── Build cards ───────────── */
+
   for (let i = 0; i < 3; i++) {
+
     clinicReviews.forEach(rev => {
+
       const card = document.createElement("div");
+
       card.className = "review-card";
+
       card.innerHTML = `
         <div class="review-stars">★★★★★</div>
         <p class="review-text">"${rev.text}"</p>
         <div class="review-author">
           <strong>${rev.name}</strong>
           <span>${rev.service}</span>
-        </div>`;
+        </div>
+      `;
+
       track.appendChild(card);
+
     });
   }
 
   function tryInit(attempts) {
+
     const singleSetWidth = track.scrollWidth / 3;
+
     if (!singleSetWidth) {
-      if (attempts > 0) setTimeout(() => tryInit(attempts - 1), 100);
+
+      if (attempts > 0) {
+        setTimeout(() => tryInit(attempts - 1), 100);
+      }
+
       return;
     }
 
-    const cardEl    = track.querySelector(".review-card");
-    const cardWidth = cardEl.offsetWidth
-      + parseInt(getComputedStyle(cardEl).marginLeft)
-      + parseInt(getComputedStyle(cardEl).marginRight);
+    const cardEl = track.querySelector(".review-card");
 
-    const centerOffset = Math.max(0, (carousel.offsetWidth - cardWidth) / 2);
-    carousel.scrollLeft = singleSetWidth - centerOffset;
+    const style = getComputedStyle(cardEl);
+
+    const cardWidth =
+      cardEl.offsetWidth +
+      parseFloat(style.marginLeft) +
+      parseFloat(style.marginRight);
+
+    const centerOffset =
+      Math.max(
+        0,
+        (carousel.offsetWidth - cardWidth) / 2
+      );
+
+    carousel.scrollLeft =
+      singleSetWidth - centerOffset;
+
+    /* ───────────── State ───────────── */
 
     let isPaused = false;
+    let isTapPaused = false;
+    let isTouching = false;
+    let hasMoved = false;
+    let lastTouchTime = 0;
 
-    /* ── Loop correction ─────────────────────────────────────────────────── */
-    function maintainLoop() {
-      if (carousel.scrollLeft + centerOffset >= singleSetWidth * 2) carousel.scrollLeft -= singleSetWidth;
-      if (carousel.scrollLeft + centerOffset <  singleSetWidth)     carousel.scrollLeft += singleSetWidth;
-    }
-
-    /* FIX 1: debounced scroll listener — only fires when isPaused (user scrolling).
-       Never interrupts auto-scroll animation or live momentum → no more bumps. */
-    let scrollTimer = null;
-    carousel.addEventListener("scroll", () => {
-      if (!isPaused) return;          // auto-scroll manages its own loop
-      clearTimeout(scrollTimer);
-      scrollTimer = setTimeout(maintainLoop, 80); // correct only after momentum stops
-    }, { passive: true });
-
-    /* ── Auto-scroll animation ───────────────────────────────────────────── */
     let scrollRaf = null;
-    function smoothScrollTo(target, duration, onDone) {
-      cancelAnimationFrame(scrollRaf);
-      const start    = carousel.scrollLeft;
-      const distance = target - start;
-      const t0       = performance.now();
-
-      function step(now) {
-        const t    = Math.min((now - t0) / duration, 1);
-        const ease = t < 0.5 ? 2*t*t : -1+(4-2*t)*t;
-        carousel.scrollLeft = start + distance * ease;
-        if (t < 1) {
-          scrollRaf = requestAnimationFrame(step);
-        } else {
-          if (onDone) onDone();
-        }
-      }
-      scrollRaf = requestAnimationFrame(step);
-    }
-
     let stepTimer = null;
+    let scrollTimer = null;
 
-    function scrollToNext() {
-      if (isPaused) return;
+    /* ───────────── Helpers ───────────── */
 
-      maintainLoop(); // ensure clean position before calculating next card
+    function maintainLoop() {
 
-      const currentCard = Math.round((carousel.scrollLeft + centerOffset) / cardWidth);
-      let   nextPos     = (currentCard + 1) * cardWidth - centerOffset;
-
-      if (nextPos + centerOffset >= singleSetWidth * 2) {
+      if (
+        carousel.scrollLeft + centerOffset >= singleSetWidth * 2
+      ) {
         carousel.scrollLeft -= singleSetWidth;
-        nextPos             -= singleSetWidth;
       }
 
-      smoothScrollTo(nextPos, 1500, () => {
-        stepTimer = setTimeout(() => {
-          if (!isPaused) scrollToNext();
-        }, 1000);
-      });
+      if (
+        carousel.scrollLeft + centerOffset < singleSetWidth
+      ) {
+        carousel.scrollLeft += singleSetWidth;
+      }
     }
 
     function pauseAll() {
+
       isPaused = true;
+
       cancelAnimationFrame(scrollRaf);
+
       clearTimeout(stepTimer);
       clearTimeout(scrollTimer);
     }
 
     function resumeAll() {
+
+      if (isTapPaused) return;
+
       isPaused = false;
+
       scrollToNext();
+    }
+
+    function delayedResume(delay = RESUME_DELAY) {
+
+      setTimeout(() => {
+
+        if (!isTouching) {
+
+          maintainLoop();
+
+          resumeAll();
+
+        }
+
+      }, delay);
+    }
+
+    /* ───────── Scroll correction ───────── */
+
+    carousel.addEventListener(
+      "scroll",
+      () => {
+
+        if (!isPaused) return;
+
+        clearTimeout(scrollTimer);
+
+        scrollTimer = setTimeout(
+          maintainLoop,
+          SCROLL_DELAY
+        );
+
+      },
+      { passive: true }
+    );
+
+    /* ───────── Animation ───────── */
+
+    function smoothScrollTo(
+      target,
+      duration,
+      onDone
+    ) {
+
+      cancelAnimationFrame(scrollRaf);
+
+      const start = carousel.scrollLeft;
+      const distance = target - start;
+      const t0 = performance.now();
+
+      function step(now) {
+
+        const t =
+          Math.min(
+            (now - t0) / duration,
+            1
+          );
+
+        const ease =
+          t < 0.5
+            ? 2 * t * t
+            : -1 + (4 - 2 * t) * t;
+
+        carousel.scrollLeft =
+          start + distance * ease;
+
+        if (t < 1) {
+
+          scrollRaf =
+            requestAnimationFrame(step);
+
+        } else {
+
+          onDone?.();
+
+        }
+      }
+
+      scrollRaf =
+        requestAnimationFrame(step);
+    }
+
+    function scrollToNext() {
+
+      if (
+        isPaused ||
+        isTapPaused
+      ) {
+        return;
+      }
+
+      maintainLoop();
+
+      const currentCard =
+        Math.round(
+          (
+            carousel.scrollLeft +
+            centerOffset
+          ) / cardWidth
+        );
+
+      let nextPos =
+        (currentCard + 1) *
+          cardWidth -
+        centerOffset;
+
+      if (
+        nextPos + centerOffset >=
+        singleSetWidth * 2
+      ) {
+
+        carousel.scrollLeft -=
+          singleSetWidth;
+
+        nextPos -=
+          singleSetWidth;
+      }
+
+      smoothScrollTo(
+        nextPos,
+        SCROLL_DURATION,
+        () => {
+
+          stepTimer =
+            setTimeout(
+              () => {
+
+                if (
+                  !isPaused &&
+                  !isTapPaused
+                ) {
+                  scrollToNext();
+                }
+
+              },
+              STEP_DELAY
+            );
+
+        }
+      );
     }
 
     scrollToNext();
 
-    /* ── Touch events ────────────────────────────────────────────────────── */
-let longPressTimer  = null;
-let autoResumeTimer = null;
-let isLongPaused    = false;
-let hasMoved        = false;
-let isTouching      = false; // FIX: guards against premature resume
+    /* ───────── Touch ───────── */
 
-carousel.addEventListener("touchstart", () => {
-  isTouching = true;          // FIX
-  pauseAll();
-  hasMoved       = false;
-  longPressTimer = setTimeout(() => {
-    isLongPaused    = true;
-    longPressTimer  = null;
-    autoResumeTimer = setTimeout(() => {
-      isLongPaused = false;
-      resumeAll();
-    }, 12000);
-  }, 500);
-}, { passive: true });
+    let touchStartX = 0;
+    let touchStartY = 0;
 
-carousel.addEventListener("touchmove", () => {
-  hasMoved = true;
-  clearTimeout(longPressTimer);
-  longPressTimer = null;
-}, { passive: true });
+    carousel.addEventListener(
+      "touchstart",
+      e => {
 
-carousel.addEventListener("touchend", () => {
-  isTouching = false;         // FIX
-  clearTimeout(longPressTimer);
-  longPressTimer = null;
-  if (isLongPaused) {
-    if (hasMoved) {
-      clearTimeout(autoResumeTimer);
-      autoResumeTimer = null;
-      isLongPaused    = false;
-      setTimeout(() => { if (!isTouching) resumeAll(); }, 900); // FIX
-    }
-  } else {
-    setTimeout(() => { if (!isTouching) resumeAll(); }, 900);   // FIX
-  }
-}, { passive: true });
+        const touch =
+          e.touches?.[0];
 
-carousel.addEventListener("touchcancel", () => {
-  isTouching = false;         // FIX
-  clearTimeout(longPressTimer);
-  clearTimeout(autoResumeTimer);
-  longPressTimer  = null;
-  autoResumeTimer = null;
-  isLongPaused    = false;
-  setTimeout(() => { if (!isTouching) resumeAll(); }, 900);     // FIX
-}, { passive: true });
+        if (!touch) return;
 
-/* ── Mouse events ────────────────────────────────────────────────────── */
-let isDown = false, startX, startScrollLeft;
+        isTouching = true;
 
-carousel.addEventListener("mouseenter", () => pauseAll());
+        pauseAll();
 
-carousel.addEventListener("mouseleave", () => {
-  if (!isDown) resumeAll(); // FIX: don't resume if still dragging
-});
+        hasMoved = false;
 
-carousel.addEventListener("mousedown", e => {
-  isDown          = true;
-  startX          = e.pageX - carousel.offsetLeft;
-  startScrollLeft = carousel.scrollLeft;
-});
+        touchStartX =
+          touch.clientX;
 
-/* FIX: moved to document so releasing outside carousel still ends drag */
-document.addEventListener("mouseup", () => {
-  if (isDown) {
-    isDown = false;
-    resumeAll();
-  }
-});
+        touchStartY =
+          touch.clientY;
 
-carousel.addEventListener("mousemove", e => {
-  if (!isDown) return;
-  e.preventDefault();
-  carousel.scrollLeft = startScrollLeft - (e.pageX - carousel.offsetLeft - startX) * 1.5;
-});
+      },
+      { passive: true }
+    );
+
+    carousel.addEventListener(
+      "touchmove",
+      e => {
+
+        const touch =
+          e.touches?.[0];
+
+        if (
+          !touch ||
+          !isTouching
+        ) {
+          return;
+        }
+
+        if (
+
+          Math.abs(
+            touch.clientX -
+            touchStartX
+          ) > TOUCH_THRESHOLD ||
+
+          Math.abs(
+            touch.clientY -
+            touchStartY
+          ) > TOUCH_THRESHOLD
+
+        ) {
+
+          hasMoved = true;
+
+          isTapPaused = false;
+        }
+
+      },
+      { passive: true }
+    );
+
+    carousel.addEventListener(
+      "touchend",
+      () => {
+
+        isTouching = false;
+
+        lastTouchTime =
+          Date.now();
+
+        if (!hasMoved) {
+
+          isTapPaused =
+            !isTapPaused;
+
+          if (!isTapPaused) {
+            resumeAll();
+          }
+
+        } else {
+
+          delayedResume();
+        }
+
+      },
+      { passive: true }
+    );
+
+    carousel.addEventListener(
+      "touchcancel",
+      () => {
+
+        isTouching = false;
+
+        lastTouchTime =
+          Date.now();
+
+        delayedResume();
+
+      },
+      { passive: true }
+    );
+
+    /* ───────── Mouse ───────── */
+
+    let isDown = false;
+    let startX = 0;
+    let startScrollLeft = 0;
+    let mouseStartX = 0;
+
+    carousel.addEventListener(
+      "mouseenter",
+      () => {
+
+        if (
+          Date.now() -
+            lastTouchTime <
+          GHOST_CLICK_DELAY
+        ) {
+          return;
+        }
+
+        if (!isTapPaused) {
+          pauseAll();
+        }
+
+      }
+    );
+
+    carousel.addEventListener(
+      "mouseleave",
+      () => {
+
+        if (
+          Date.now() -
+            lastTouchTime <
+          GHOST_CLICK_DELAY
+        ) {
+          return;
+        }
+
+        isDown = false;
+
+        if (!isTapPaused) {
+          resumeAll();
+        }
+
+      }
+    );
+
+    carousel.addEventListener(
+      "mousedown",
+      e => {
+
+        if (
+          Date.now() -
+            lastTouchTime <
+          GHOST_CLICK_DELAY
+        ) {
+          return;
+        }
+
+        pauseAll();
+
+        isDown = true;
+
+        hasMoved = false;
+
+        mouseStartX =
+          e.pageX;
+
+        startX =
+          e.pageX -
+          carousel.offsetLeft;
+
+        startScrollLeft =
+          carousel.scrollLeft;
+
+      }
+    );
+
+    document.addEventListener(
+      "mouseup",
+      () => {
+
+        if (!isDown) return;
+
+        isDown = false;
+
+        if (!hasMoved) {
+
+          isTapPaused =
+            !isTapPaused;
+
+          if (!isTapPaused) {
+            resumeAll();
+          }
+
+        } else {
+
+          delayedResume(700);
+        }
+
+      }
+    );
+
+    carousel.addEventListener(
+      "mousemove",
+      e => {
+
+        if (!isDown) return;
+
+        if (
+
+          Math.abs(
+            e.pageX -
+            mouseStartX
+          ) > MOUSE_THRESHOLD
+
+        ) {
+
+          hasMoved = true;
+
+          isTapPaused = false;
+        }
+
+        carousel.scrollLeft =
+          startScrollLeft -
+
+          (
+            e.pageX -
+            carousel.offsetLeft -
+            startX
+          ) * 1.5;
+
+      }
+    );
   }
 
   tryInit(10);
 }
 
-document.addEventListener("DOMContentLoaded", initReviews);
+document.addEventListener(
+  "DOMContentLoaded",
+  initReviews
+);
 </script>
   </body>
 </html>
