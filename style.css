@@ -67,7 +67,7 @@ body {
   border: 2px solid #0e5a95;
 }
 
-.logo { max-width: 100px; margin-bottom: 10px; border-radius:5px; border: 3px solid #0e5a95; }
+.logo { max-width: 100px; margin-bottom: 10px; border-radius:5px; border: 2px solid #0e5a95; }
 h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
 .name { font-size: 16px; font-weight: 700; }
 .title { font-size: 14px; font-weight: 600; }
@@ -388,7 +388,7 @@ iframe {
 
   /* Core Layout */
   .card { border: 2px solid #4da3ff; }
-  .logo { border: 3px solid #4da3ff; }
+  .logo { border: 2.5px solid #4da3ff; }
   h1 { color: #4da3ff; }
   .title, .addr, .phone { color: #e0e0e0; }
 
