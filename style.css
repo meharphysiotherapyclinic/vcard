@@ -370,14 +370,6 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
 }
 .feedback.show { opacity: 1; }
 
-/* QR */
-.qr img {
-  width: 120px;
-  border-radius: 8px;
-  padding: 6px;
-  margin-bottom: 20px;
-}
-
 /* DARK MODE - FINAL CLEAN VERSION */
 @media (prefers-color-scheme: dark) {
   :root {
@@ -536,7 +528,7 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
 
 /* Map Border - Exact match to About Section */
 iframe {
-  border: 4px solid #0e5a95 !important; /* Professional Clinic Blue */
+  border: 3px solid #0e5a95 !important; /* Professional Clinic Blue */
   border-radius: 14px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Matches standard card shadow */
   margin-top: 20px !important;
@@ -550,7 +542,7 @@ iframe {
 /* Dark Mode - Exact match to About Section Dark Mode */
 @media (prefers-color-scheme: dark) {
   iframe {
-    border: 4px solid #4da3ff !important; /* Vibrant Blue */
+    border: 3px solid #4da3ff !important; /* Vibrant Blue */
     box-shadow: 0 4px 12px rgba(0,0,0,0.6);
   }
 }
@@ -558,7 +550,7 @@ iframe {
 /* QR Code - High visibility 4px border */
 .qr img {
   width: 130px; /* Slightly increased to account for thicker border */
-  border: 4px solid #0e5a95; /* Same Professional Clinic Blue */
+  border: 3px solid #0e5a95; /* Same Professional Clinic Blue */
   border-radius: 14px;
   padding: 8px; /* Adds space between QR and border */
   background: #ffffff; /* Ensures QR is always on white for scanning */
@@ -569,7 +561,7 @@ iframe {
 /* Dark Mode - QR Code Border */
 @media (prefers-color-scheme: dark) {
   .qr img {
-    border: 4px solid #4da3ff !important; /* Same Vibrant Blue */
+    border: 3px solid #4da3ff !important; /* Same Vibrant Blue */
     background: #ffffff; /* Keeps background white for scanner compatibility */
   }
     }
