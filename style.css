@@ -67,7 +67,7 @@ body {
   border: 2px solid #0e5a95;
 }
 
-.logo { max-width: 100px; margin-bottom: 10px; }
+.logo { max-width: 100px; margin-bottom: 10px; border-radius:5px }
 h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
 .name { font-size: 16px; font-weight: 700; }
 .title { font-size: 14px; font-weight: 600; }
