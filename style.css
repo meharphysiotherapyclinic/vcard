@@ -1,30 +1,12 @@
 /* ========================================= */
-/* PREVENT ACCIDENTAL TEXT SELECTION (GLOBAL) */
+/* GLOBAL STYLES & VARIABLES                 */
 /* ========================================= */
-
-body {
-  -webkit-user-select: none; 
-  -moz-user-select: none;    
-  -ms-user-select: none;     
-  user-select: none;         
-  -webkit-touch-callout: none; 
-}
-
-/* Allow patients to copy the Address and Phone number */
-.addr, .phone {
-  -webkit-user-select: text;
-  -moz-user-select: text;
-  -ms-user-select: text;
-  user-select: text;
-}
-
 :root {
   --bg: #f9f9f9;
   --card: #ffffff;
   --text: #161617;
   --muted: #555555;
   --btn-radius: 12px;
-  --btn-w: 100%;
   --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 
   --call: #ab214d;
@@ -35,7 +17,6 @@ body {
   --share: #036a60;
   --copy: #a15a25;
 
-  --focus: 3px solid rgba(14, 90, 149, 0.15);
   --success-bg: #e8f5e9;
   --success-color: #2e7d32;
 }
@@ -43,6 +24,14 @@ body {
 * { box-sizing: border-box; }
 
 body {
+  /* Prevent Text Selection */
+  -webkit-user-select: none; 
+  -moz-user-select: none;    
+  -ms-user-select: none;     
+  user-select: none;         
+  -webkit-touch-callout: none;
+  
+  /* Styling */
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   background: var(--bg);
   margin: 0;
@@ -53,7 +42,17 @@ body {
   min-height: 100vh;
 }
 
-/* CARD */
+/* Allow patients to copy Address and Phone */
+.addr, .phone {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+
+/* ========================================= */
+/* MAIN CARD & HEADER                        */
+/* ========================================= */
 .card {
   background: var(--card);
   max-width: 440px;
@@ -68,18 +67,15 @@ body {
   border: 2px solid #0e5a95;
 }
 
-/* HEADER */
 .logo { max-width: 100px; margin-bottom: 10px; }
 h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
 .name { font-size: 16px; font-weight: 700; }
 .title { font-size: 14px; font-weight: 600; }
-.addr, .phone {
-  font-size: 14px;
-  font-weight: 700;
-  line-height: 1.4;
-}
+.addr, .phone { font-size: 14px; font-weight: 700; line-height: 1.4; }
 
-/* BUTTON BASE */
+/* ========================================= */
+/* BUTTONS                                   */
+/* ========================================= */
 .btn {
   display: flex;
   align-items: center;
@@ -101,7 +97,7 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
 .btn:hover { transform: translateY(-2px); }
 .btn:active { transform: scale(0.96); }
 
-/* BUTTON COLORS */
+/* Colors */
 .call { background: var(--call); }
 .website { background: var(--site); }
 .location { background: var(--loc); }
@@ -111,7 +107,7 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
 .copy { background: var(--copy); }
 .google-btn { background: #4285F4; }
 
-/* GRID BUTTONS */
+/* Grid Layouts */
 .btn-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -120,14 +116,8 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
   max-width: 360px;
   margin: 10px auto;
 }
+.btn-grid .btn { width: 100%; padding: 16px; border-radius: 16px; }
 
-.btn-grid .btn {
-  width: 100%;
-  padding: 16px;
-  border-radius: 16px;
-}
-
-/* SECONDARY BUTTONS */
 .btn-row {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -135,23 +125,21 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
   max-width: 360px;
   margin: 10px auto;
 }
+.btn.small { font-size: 14px; padding: 12px; }
 
-.btn.small {
-  font-size: 14px;
-  padding: 12px;
-}
-
-/* Updated Google icon background to light grey */
+/* Google Button Icon */
 .google-btn img {
-  background-color: #3c4043; /* Light grey background as requested */
+  background-color: #3c4043;
   border-radius: 50%;
-  padding: 3px; /* Slightly increased padding to show more of the grey */
-  width: 28px;  /* Slightly larger for better visibility */
+  padding: 3px;
+  width: 28px;
   height: 28px;
   object-fit: contain;
 }
 
-/* --- Services Box Container --- */
+/* ========================================= */
+/* SERVICES SECTION                          */
+/* ========================================= */
 .services-box {
   background: #ffffff;
   border-left: 5px solid #0e5a95;
@@ -162,17 +150,15 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
-/* MATCHED TO ABOUT SECTION HEADING (Light Mode) */
 .main-services-heading {
   color: #0e5a95 !important;
   font-size: 18px !important;
-  font-weight: 900 !important; /* Matched to About summary */
+  font-weight: 900 !important;
   margin-bottom: 12px !important;
   display: block;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.05); /* Matched to About summary */
+  text-shadow: 0 1px 2px rgba(0,0,0,0.05);
 }
 
-/* MATCHED TO ABOUT SECTION HEADING (Light Mode) */
 .service-category {
   font-size: 14px;
   color: #0e5a95;
@@ -188,7 +174,7 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
   gap: 8px;
 }
 
-/* 1. Reset ALL pills to default (Grey/White) */
+/* Standard Pills */
 .services-grid span {
   background: #f1f3f5 !important; 
   border: 1px solid #dee2e6 !important;
@@ -200,7 +186,7 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
   font-weight: 500;
 }
 
-/* 2. Style Neurological pills (Blue) */
+/* Neurological Pills */
 .services-grid span.neuro {
   background: #eef7ff !important;
   border: 1px solid #adcffa !important;
@@ -208,7 +194,7 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
   font-weight: 600;
 }
 
-/* 3. Style ONLY Home Visit pill (Green) */
+/* Home Visit Pill */
 .services-grid span.home-visit-pill {
   grid-column: 1 / -1; 
   background: #e8f5e9 !important;
@@ -218,63 +204,15 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
   padding: 10px;
 }
 
-/* --- DARK MODE FIXES --- */
-@media (prefers-color-scheme: dark) {
-  .services-box {
-    background: #1a222c !important; 
-    border-left-color: #4da3ff !important;
-  }
-
-  /* MATCHED TO ABOUT SECTION HEADING (Dark Mode) */
-  .main-services-heading {
-    color: #4da3ff !important; /* Exact match to About section dark color */
-    text-shadow: 0 0 10px rgba(77, 163, 255, 0.3); 
-    opacity: 1 !important;
-  }
-
-  /* MATCHED TO ABOUT SECTION HEADING (Dark Mode) */
-  .service-category {
-    color: #4da3ff !important; /* Exact match to About section dark color */
-    border-bottom-color: rgba(255, 255, 255, 0.1) !important;
-    opacity: 1 !important;
-    letter-spacing: 0.8px;
-  }
-
-  /* Ensuring Areas Served title is also consistent */
-  .services-box h4 {
-    color: #4da3ff !important;
-    opacity: 1 !important;
-  }
-
-  /* Pill adjustments for better dark mode visibility */
-  .services-grid span {
-    background: #2a3542 !important; 
-    color: #ffffff !important; 
-    border-color: #3d4b5c !important;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-  }
-
-  .services-grid span.neuro {
-    background: #111b27 !important;
-    color: #90caf9 !important;
-    border-color: #64b5f6 !important;
-  }
-
-  .services-grid span.home-visit-pill {
-    background: #1b3320 !important;
-    color: #81c784 !important; 
-    border-color: #2e7d32 !important;
-  }
-}
-
-/* ABOUT SECTION STYLES */
+/* ========================================= */
+/* ABOUT SECTION                             */
+/* ========================================= */
 .about-section {
   width: 100%;
   max-width: 360px;
   margin: 15px auto;
   text-align: left;
   background: var(--card);
-  /* Ultra-Prominent Blue Border */
   border: 3px solid #0e5a95; 
   border-radius: 14px;
   overflow: hidden;
@@ -283,7 +221,7 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
 
 .about-section summary {
   padding: 16px 20px;
-  font-weight: 900; /* Max Bold */
+  font-weight: 900;
   font-size: 17px;
   color: #0e5a95;
   cursor: pointer;
@@ -293,7 +231,7 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
   align-items: center;
   outline: none;
   -webkit-tap-highlight-color: transparent;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.05); /* Makes text pop */
+  text-shadow: 0 1px 2px rgba(0,0,0,0.05);
 }
 
 .about-section summary::after {
@@ -302,11 +240,8 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
   transition: transform 0.4s;
 }
 
-.about-section[open] summary::after {
-  transform: rotate(180deg);
-}
+.about-section[open] summary::after { transform: rotate(180deg); }
 
-/* Style for the doctor’s image – Imitating the screenshot’s squircle look */
 .doctor-img {
   width: 100px;
   height: 115px;
@@ -318,32 +253,21 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
   border: 2px solid #adcffa;
 }
 
-/* THE FIX: Set default state to hidden and up */
 .about-content {
   padding: 0 20px 20px;
   font-size: 14.5px;
   line-height: 1.6;
   color: var(--text);
-  opacity: 0; /* Hidden by default */
-  transform: translateY(-40px); /* Positioned up by default */
-  pointer-events: none; /* Prevents clicks while hidden */
+  opacity: 0;
+  transform: translateY(-40px);
+  pointer-events: none;
 }
 
-/* Repeatable slow cinematic animation */
 @keyframes slowSlideIn {
-  0% {
-    opacity: 0;
-    transform: translateY(-40px) scale(0.92);
-    filter: blur(10px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    filter: blur(0);
-  }
+  0% { opacity: 0; transform: translateY(-40px) scale(0.92); filter: blur(10px); }
+  100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
 }
 
-/* Apply animation and force it to stay visible at the end */
 .about-section[open] .about-content {
   opacity: 1; 
   transform: translateY(0);
@@ -357,7 +281,9 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
   transform: translateY(-4px) scale(1.01);
 }
 
-/* FEEDBACK */
+/* ========================================= */
+/* FEEDBACK NOTIFICATION                     */
+/* ========================================= */
 .feedback {
   opacity: 0;
   transition: 0.3s;
@@ -370,69 +296,9 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
 }
 .feedback.show { opacity: 1; }
 
-/* DARK MODE - FINAL CLEAN VERSION */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #121212;
-    --card: #1e1e1e;
-    --text: #f0f0f0;
-    --shadow: 0 4px 12px rgba(0,0,0,0.6);
-    --success-bg: #193c1f;
-    --success-color: #69ff99;
-  }
-
-  .card {
-    border-color: 2px solid #4da3ff;
-  }
-
-  h1 { color: #4da3ff; }
-  .title, .addr, .phone { color: #e0e0e0; }
-
-  .services-box {
-    background: linear-gradient(135deg, #1f2a36, #18222c);
-    border-left: 5px solid #4da3ff;
-  }
-
-  /* About Section Dark Mode - Vibrant & Thick */
-  .about-section { 
-    border-color: #4da3ff !important; 
-    border-width: 3px;
-    background: #1e1e1e;
-  }
-  .about-section summary { color: #4da3ff; }
-  .about-content { color: #ffffff; }
-  .doctor-img {
-    border-color: #0e5a95 !important; /* Matches the dark mode neuro tiles */
-  }
-
-  /* Ensure services grid spans stay visible */
-  .services-grid span {
-    background: #2a3542;
-    color: #f0f0f0;
-  }
-   
-    /* Neurological Services in Dark Mode - Exact Image Match */
-  .services-grid span:nth-child(6), 
-  .services-grid span:nth-child(7), 
-  .services-grid span:nth-child(8), 
-  .services-grid span:nth-child(9) {
-    background: #1a222c !important; /* Deep charcoal-blue background */
-    border: 1px solid #0e5a95 !important; /* Muted blue border */
-    color: #4da3ff !important; /* Vibrant bluish text tone */
-    font-weight: 600; /* Makes the blue text crisp and readable */
-  }
-  
-  .services-grid span:last-child {
-    background: #1b3320;
-    border-color: #2e7d32;
-    color: #69ff99;
-  }
-}
-
 /* ========================================= */
 /* REVIEWS                                   */
 /* ========================================= */
-
 .review-carousel {
   width: 100%;
   max-width: 400px;
@@ -447,11 +313,11 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
   -webkit-user-select: none;
   touch-action: pan-x pan-y pinch-zoom;
   overscroll-behavior-x: contain;
-  /* ↑ NO -webkit-overflow-scrolling: touch — that was breaking iOS auto-scroll */
 }
 
 .review-carousel::-webkit-scrollbar { display: none; }
 .review-carousel:active { cursor: grabbing; }
+.review-carousel.paused { cursor: grabbing; }
 
 .review-track {
   display: flex;
@@ -460,7 +326,6 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
   gap: 0;
 }
 
-/* Review Card */
 .review-card {
   width: 280px;
   min-width: 280px;
@@ -470,7 +335,6 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
   background: var(--card);
   border: 3px solid #0e5a95;
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -478,90 +342,110 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
   text-align: left;
 }
 
-.review-stars {
-  color: #fbbc04;
-  font-size: 14px;
-  margin-bottom: 8px;
-}
+.review-stars { color: #fbbc04; font-size: 14px; margin-bottom: 8px; }
+.review-text { font-size: 13px; line-height: 1.5; margin: 0; color: var(--text); font-style: italic; }
+.review-author { margin-top: 12px; padding-top: 8px; border-top: 1px solid rgba(0,0,0,0.05); font-size: 12px; }
+.review-author strong { display: block; color: var(--text); }
+.review-author span { font-size: 11px; color: var(--muted); }
 
-.review-text {
-  font-size: 13px;
-  line-height: 1.5;
-  margin: 0;
-  color: var(--text);
-  font-style: italic;
-}
-
-.review-author {
-  margin-top: 12px;
-  padding-top: 8px;
-  border-top: 1px solid rgba(0,0,0,0.05);
-  font-size: 12px;
-}
-
-.review-author strong {
-  display: block;
-  color: var(--text);
-}
-
-.review-author span {
-  font-size: 11px;
-  color: var(--muted);
-}
-
-/* Pause helper */
-.review-carousel.paused {
-  cursor: grabbing;
-}
-
-/* Dark Mode */
-@media (prefers-color-scheme: dark) {
-  .review-card {
-    background: #1e1e1e;
-    border: 3px solid #4da3ff;
-  }
-
-  .review-author {
-    border-top: 1px solid rgba(255,255,255,0.1);
-  }
-}
-
-/* Map Border - Exact match to About Section */
+/* ========================================= */
+/* MAP (IFRAME) & QR CODE                    */
+/* ========================================= */
 iframe {
-  border: 3px solid #0e5a95 !important; /* Professional Clinic Blue */
+  border: 3px solid #0e5a95 !important; 
   border-radius: 14px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Matches standard card shadow */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 
   margin-top: 20px !important;
   width: 100%;
-  max-width: 360px; /* Aligns width with About and Review sections */
+  max-width: 360px; 
   display: block;
   margin-left: auto;
   margin-right: auto;
 }
 
-/* Dark Mode - Exact match to About Section Dark Mode */
-@media (prefers-color-scheme: dark) {
-  iframe {
-    border: 3px solid #4da3ff !important; /* Vibrant Blue */
-    box-shadow: 0 4px 12px rgba(0,0,0,0.6);
-  }
-}
-
-/* QR Code - High visibility 4px border */
 .qr img {
-  width: 130px; /* Slightly increased to account for thicker border */
-  border: 3px solid #0e5a95; /* Same Professional Clinic Blue */
+  width: 130px; 
+  border: 3px solid #0e5a95; 
   border-radius: 14px;
-  padding: 8px; /* Adds space between QR and border */
-  background: #ffffff; /* Ensures QR is always on white for scanning */
+  padding: 8px; 
+  background: #ffffff; 
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
 }
 
-/* Dark Mode - QR Code Border */
+/* ========================================= */
+/* SINGLE CONSOLIDATED DARK MODE             */
+/* ========================================= */
 @media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #121212;
+    --card: #1e1e1e;
+    --text: #f0f0f0;
+    --shadow: 0 4px 12px rgba(0,0,0,0.6);
+    --success-bg: #193c1f;
+    --success-color: #69ff99;
+  }
+
+  /* Core Layout */
+  .card { border: 2px solid #4da3ff; }
+  h1 { color: #4da3ff; }
+  .title, .addr, .phone { color: #e0e0e0; }
+
+  /* Services */
+  .services-box {
+    background: linear-gradient(135deg, #1f2a36, #18222c) !important;
+    border-left: 5px solid #4da3ff !important;
+  }
+  .main-services-heading, .service-category, .services-box h4 {
+    color: #4da3ff !important;
+    text-shadow: 0 0 10px rgba(77, 163, 255, 0.3);
+    opacity: 1 !important;
+  }
+  .service-category { border-bottom-color: rgba(255, 255, 255, 0.1) !important; }
+  
+  /* Service Pills */
+  .services-grid span {
+    background: #2a3542 !important;
+    color: #f0f0f0 !important;
+    border-color: #3d4b5c !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  }
+  .services-grid span.neuro {
+    background: #1a222c !important;
+    border: 1px solid #0e5a95 !important;
+    color: #4da3ff !important;
+    font-weight: 600;
+  }
+  .services-grid span.home-visit-pill {
+    background: #1b3320 !important;
+    border-color: #2e7d32 !important;
+    color: #69ff99 !important;
+  }
+
+  /* About */
+  .about-section { 
+    border-color: #4da3ff !important; 
+    border-width: 3px;
+    background: #1e1e1e;
+  }
+  .about-section summary { color: #4da3ff; }
+  .about-content { color: #ffffff; }
+  .doctor-img { border-color: #0e5a95 !important; }
+
+  /* Reviews */
+  .review-card {
+    background: #1e1e1e;
+    border: 3px solid #4da3ff;
+  }
+  .review-author { border-top: 1px solid rgba(255,255,255,0.1); }
+
+  /* Map & QR */
+  iframe {
+    border: 3px solid #4da3ff !important; 
+    box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+  }
   .qr img {
-    border: 3px solid #4da3ff !important; /* Same Vibrant Blue */
-    background: #ffffff; /* Keeps background white for scanner compatibility */
+    border: 3px solid #4da3ff !important; 
+    background: #ffffff; 
   }
     }
