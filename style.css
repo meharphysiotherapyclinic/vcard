@@ -148,8 +148,8 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
 .services-box {
   background: #ffffff;
   background: linear-gradient(135deg, rgba(240, 247, 255, 0.95), rgba(255, 255, 255, 1));
-  border-left: 5px solid #0e5a95; /* Matched to vCard brand blue */
   border: 1px solid #0e5a95;
+  border-left: 5px solid #0e5a95; /* Matched to vCard brand blue */
   padding: 20px;
   border-radius: 12px;
   margin: 15px auto;
