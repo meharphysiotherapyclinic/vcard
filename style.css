@@ -141,26 +141,27 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
 
 /* ==========================================================================
    SERVICES BLOCK - MASTER STYLESHEET
-   Layout: 2-Column Grid (Ref: 55848.jpg) | Theme: High-Contrast Blue
+   Layout: 2-Column Grid (Ref: 55848.jpg) | Theme: Clean Website-Matched Light Mode
    ========================================================================== */
 
-/* Main Section Wrapper */
+/* Main Section Wrapper (Light Mode Default) */
 .services-box {
-  background: #121824; /* Deep dark blue background */
-  border-left: 5px solid #2196f3; /* Accent blue side indicator bar */
+  background: #ffffff;
+  background: linear-gradient(135deg, rgba(240, 247, 255, 0.95), rgba(255, 255, 255, 1));
+  border-left: 5px solid #00796b; /* Matched to website master teal */
   padding: 20px;
   border-radius: 12px;
   margin: 15px auto;
   text-align: left;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   box-sizing: border-box;
-  width: 100%; /* Ensures services container conforms to card container width */
+  width: 100%;
 }
 
 /* Typography & Headings */
 .main-services-heading {
   font-size: 1.5rem;
-  color: #2196f3; /* Rich brand blue */
+  color: #00796b;
   margin: 0 0 20px 0;
   display: flex;
   flex-direction: column;
@@ -170,16 +171,16 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
 .tap-note {
   display: block;
   font-size: 0.8rem;
-  color: #8da2bb;
+  color: #555555;
   font-weight: normal;
   opacity: 0.85;
 }
 
 .service-category {
   font-size: 14.5px;
-  color: #4dabf7; /* High-visibility light blue text */
+  color: #00796b !important;
   margin: 22px 0 10px;
-  border-bottom: 1px solid rgba(77, 171, 247, 0.2);
+  border-bottom: 1px solid rgba(0, 121, 107, 0.15);
   padding-bottom: 6px;
   font-weight: 700;
   text-transform: uppercase;
@@ -189,7 +190,7 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
 /* Symmetrical 2-Column Layout Engine */
 .services-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* Strict split columns */
+  grid-template-columns: 1fr 1fr;
   gap: 10px;
   margin-bottom: 4px;
 }
@@ -201,7 +202,7 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
   display: block;
   width: 100%;
   outline: none;
-  -webkit-tap-highlight-color: transparent; /* Removes default mobile tap overlays */
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* Full-Width Enforcer for Highlight Row (Home Visit) */
@@ -209,7 +210,7 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
   grid-column: 1 / -1; 
 }
 
-/* Base Pill Structure with Corner Flash Bug-Fixes */
+/* Base Pill Structure (Light Mode Default) */
 .services-grid .service-pill {
   display: flex;
   align-items: center;
@@ -218,22 +219,21 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
   box-sizing: border-box;
   padding: 11px 8px;
   border-radius: 6px;
-  background: #1e293b; /* Slate grey component base color */
-  color: #f1f5f9; /* High-legibility off-white text */
+  background: #ffffff !important;
+  color: #333333 !important;
   font-size: 13px;
   font-weight: 500;
   line-height: 1.3;
   text-align: center;
-  border: 1px solid #334155;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(0, 0, 0, 0.14);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   cursor: pointer;
 
-  /* 👇 CRITICAL RENDERING BUG FIXES FOR WEBKIT CORNER FLASH 👇 */
-  background-clip: padding-box;        /* Stops background bleeding past border edge */
-  -webkit-backface-visibility: hidden; /* Forces layer hardware acceleration */
+  /* RENDERING BUG FIXES FOR WEBKIT CORNER FLASH */
+  background-clip: padding-box;
+  -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  transform: translateZ(0);            /* Stabilizes border-radius during animations */
-  /* 👆 END BUG FIXES 👆 */
+  transform: translateZ(0);
 
   transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), 
               box-shadow 0.2s ease, 
@@ -242,49 +242,49 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
               color 0.2s ease;
 }
 
-/* Global Hover & Active States */
+/* Global Hover & Active States (Light Mode) */
 .services-grid a:hover .service-pill {
-  background: #2563eb; /* Transforms to active brand blue on hover */
-  border-color: #3b82f6;
-  color: #ffffff;
-  transform: translateY(-2px) translateZ(0); /* Keeps bug fix active through movement */
-  box-shadow: 0 6px 15px rgba(37, 99, 235, 0.35);
+  background: #dcefe2 !important;
+  border-color: #00796b;
+  color: #00796b !important;
+  transform: translateY(-2px) translateZ(0);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
 }
 
 .services-grid a:active .service-pill {
   transform: scale(0.97) translateZ(0);
 }
 
-/* --- Variant Theme: Neurological Conditions (Teal/Cyan Contrast) --- */
+/* Variant Theme: Neurological Conditions (Light Mode) */
 .services-grid .service-pill.neuro {
-  background: #112240; /* Translucent deep cyan tint */
-  border: 1px solid #00796b; /* Muted theme teal edge */
-  color: #4da3ff; /* Vivid light blue text */
+  background: #eef7ff !important;
+  border: 1px solid #adcffa;
+  color: #0e5a95 !important;
   font-weight: 600;
 }
 
 .services-grid a:hover .service-pill.neuro {
-  background: #00796b; /* Solid classic teal on hover */
-  border-color: #4db6ac;
-  color: #ffffff;
-  box-shadow: 0 6px 15px rgba(0, 121, 107, 0.4);
+  background: #dcecff !important;
+  border-color: #8ebeea;
+  color: #0e5a95 !important;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
 }
 
-/* --- Variant Theme: Highlighted Home Visit (Action Green Accent) --- */
+/* Variant Theme: Highlighted Home Visit (Light Mode) */
 .services-grid .service-pill.highlight {
-  background: #143521; /* Subdued deep evergreen tint */
-  border: 1px solid #2e7d32; /* Mid-tone green border */
-  color: #69ff99; /* Bright neon green focus text */
+  background: #e8f5e9 !important;
+  border: 1px solid #c8e6c9;
+  color: #2e7d32 !important;
   font-weight: 700;
   padding: 13px 8px;
   letter-spacing: 0.5px;
 }
 
 .services-grid a:hover .service-pill.highlight {
-  background: #2e7d32; /* Vivid action green on hover */
-  border-color: #69ff99;
-  color: #ffffff;
-  box-shadow: 0 6px 15px rgba(46, 125, 50, 0.4);
+  background: #dff3e2 !important;
+  border-color: #9fd3a5;
+  color: #2e7d32 !important;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
 }
 
 /* ========================================= */
@@ -292,7 +292,7 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
 /* ========================================= */
 .about-section {
   width: 100%;
-  max-width: 100%; /* Constrains block width to 100% of card space */
+  max-width: 100%;
   margin: 15px auto;
   text-align: left;
   background: var(--card);
@@ -385,11 +385,11 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
 /* ========================================= */
 .review-carousel {
   width: 100%;
-  max-width: 100%; /* Prevents carousel box from bleeding outside card border edge */
+  max-width: 100%;
   margin: 15px auto;
-  overflow-x: auto; /* Uses absolute native scroll safely */
+  overflow-x: auto;
   overflow-y: hidden;
-  padding: 10px 4px; /* Space padding inside the overflow zone */
+  padding: 10px 4px;
   scrollbar-width: none;
   -ms-overflow-style: none;
   cursor: grab;
@@ -406,11 +406,11 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
   display: flex;
   width: max-content;
   flex-wrap: nowrap;
-  padding-right: 15px; /* Cushion layout gap at the end of tracking trail */
+  padding-right: 15px;
 }
 
 .review-card {
-  width: 260px; /* Scaled cleanly so reviews hint screen overflow without breaking boundaries */
+  width: 260px;
   min-width: 260px;
   margin: 0 8px;
   padding: 16px;
@@ -439,7 +439,7 @@ iframe {
   border-radius: 14px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 
   margin-top: 20px !important;
-  width: 100% !important; /* Locks width inside the layout wrapper natively */
+  width: 100% !important;
   max-width: 100% !important; 
   display: block;
   margin-left: auto;
@@ -492,9 +492,12 @@ iframe {
     text-shadow: 0 0 10px rgba(77, 163, 255, 0.3);
     opacity: 1 !important;
   }
+  .tap-note {
+    color: #8da2bb;
+  }
   .service-category { border-bottom-color: rgba(77, 171, 247, 0.25) !important; }
   
-  /* Adjusted Dark Mode Targets for HTML Link Architecture */
+  /* High-Contrast Blue Theme Overrides for Dark Mode pills */
   .services-grid .service-pill {
     background: #1e293b !important;
     color: #f1f5f9 !important;
@@ -504,6 +507,7 @@ iframe {
     background: #2563eb !important;
     border-color: #3b82f6 !important;
     color: #ffffff !important;
+    box-shadow: 0 6px 15px rgba(37, 99, 235, 0.35);
   }
   .services-grid .service-pill.neuro {
     background: #112240 !important;
@@ -514,6 +518,7 @@ iframe {
     background: #00796b !important;
     border-color: #4db6ac !important;
     color: #ffffff !important;
+    box-shadow: 0 6px 15px rgba(0, 121, 107, 0.4);
   }
   .services-grid .service-pill.highlight {
     background: #143521 !important;
@@ -524,6 +529,7 @@ iframe {
     background: #2e7d32 !important;
     border-color: #69ff99 !important;
     color: #ffffff !important;
+    box-shadow: 0 6px 15px rgba(46, 125, 50, 0.4);
   }
 
   /* About */
@@ -552,4 +558,4 @@ iframe {
     border: 3px solid #4da3ff !important; 
     background: #ffffff; 
   }
-}
+  }
