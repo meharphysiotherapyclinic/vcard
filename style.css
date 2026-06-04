@@ -141,14 +141,14 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
 
 /* ==========================================================================
    SERVICES BLOCK - MASTER STYLESHEET
-   Layout: 2-Column Grid (Ref: 55848.jpg) | Theme: Clean Website-Matched Light Mode
+   Layout: 2-Column Grid (Ref: 55848.jpg) | Theme: Clean Blue vCard Light Mode
    ========================================================================== */
 
 /* Main Section Wrapper (Light Mode Default) */
 .services-box {
   background: #ffffff;
   background: linear-gradient(135deg, rgba(240, 247, 255, 0.95), rgba(255, 255, 255, 1));
-  border-left: 5px solid #00796b; /* Matched to website master teal */
+  border-left: 5px solid #0e5a95; /* Matched to vCard brand blue */
   padding: 20px;
   border-radius: 12px;
   margin: 15px auto;
@@ -161,7 +161,7 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
 /* Typography & Headings */
 .main-services-heading {
   font-size: 1.5rem;
-  color: #00796b;
+  color: #0e5a95; /* Rich vCard brand blue */
   margin: 0 0 20px 0;
   display: flex;
   flex-direction: column;
@@ -178,9 +178,9 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
 
 .service-category {
   font-size: 14.5px;
-  color: #00796b !important;
+  color: #0e5a95 !important; /* High-contrast blue header */
   margin: 22px 0 10px;
-  border-bottom: 1px solid rgba(0, 121, 107, 0.15);
+  border-bottom: 1px solid rgba(14, 90, 149, 0.15);
   padding-bottom: 6px;
   font-weight: 700;
   text-transform: uppercase;
@@ -244,9 +244,9 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
 
 /* Global Hover & Active States (Light Mode) */
 .services-grid a:hover .service-pill {
-  background: #dcefe2 !important;
-  border-color: #00796b;
-  color: #00796b !important;
+  background: #eef7ff !important; /* Soft blue hover background tint */
+  border-color: #0e5a95;
+  color: #0e5a95 !important;
   transform: translateY(-2px) translateZ(0);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
 }
@@ -558,4 +558,4 @@ iframe {
     border: 3px solid #4da3ff !important; 
     background: #ffffff; 
   }
-  }
+}
