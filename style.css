@@ -65,6 +65,7 @@ body {
   flex-direction: column;
   align-items: center;
   border: 2px solid #0e5a95;
+  overflow: hidden; /* Enforces components to clip cleanly to the parent card border radius */
 }
 
 .logo { max-width: 100px; margin-bottom: 10px; border-radius:5px; border: 2px solid #0e5a95; }
@@ -107,13 +108,13 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
 .copy { background: var(--copy); }
 .google-btn { background: #4285F4; }
 
-/* Grid Layouts */
+/* Grid Layouts - Fixed to fit completely within 440px card limits */
 .btn-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
   width: 100%;
-  max-width: 360px;
+  max-width: 100%; /* Keeps item tracking aligned with parent flex box */
   margin: 10px auto;
 }
 .btn-grid .btn { width: 100%; padding: 16px; border-radius: 16px; }
@@ -122,7 +123,8 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
-  max-width: 360px;
+  width: 100%;
+  max-width: 100%; /* Scales dynamically inside card */
   margin: 10px auto;
 }
 .btn.small { font-size: 14px; padding: 12px; }
@@ -137,71 +139,152 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
   object-fit: contain;
 }
 
-/* ========================================= */
-/* SERVICES SECTION                          */
-/* ========================================= */
+/* ==========================================================================
+   SERVICES BLOCK - MASTER STYLESHEET
+   Layout: 2-Column Grid (Ref: 55848.jpg) | Theme: High-Contrast Blue
+   ========================================================================== */
+
+/* Main Section Wrapper */
 .services-box {
-  background: #ffffff;
-  border-left: 5px solid #0e5a95;
-  padding: 15px;
+  background: #121824; /* Deep dark blue background */
+  border-left: 5px solid #2196f3; /* Accent blue side indicator bar */
+  padding: 20px;
   border-radius: 12px;
   margin: 15px auto;
   text-align: left;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  box-sizing: border-box;
+  width: 100%; /* Ensures services container conforms to card container width */
 }
 
+/* Typography & Headings */
 .main-services-heading {
-  color: #0e5a95 !important;
-  font-size: 18px !important;
-  font-weight: 900 !important;
-  margin-bottom: 12px !important;
+  font-size: 1.5rem;
+  color: #2196f3; /* Rich brand blue */
+  margin: 0 0 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.tap-note {
   display: block;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  font-size: 0.8rem;
+  color: #8da2bb;
+  font-weight: normal;
+  opacity: 0.85;
 }
 
 .service-category {
-  font-size: 14px;
-  color: #0e5a95;
-  margin: 15px 0 8px 0;
-  border-bottom: 1px solid #eee;
-  padding-bottom: 4px;
+  font-size: 14.5px;
+  color: #4dabf7; /* High-visibility light blue text */
+  margin: 22px 0 10px;
+  border-bottom: 1px solid rgba(77, 171, 247, 0.2);
+  padding-bottom: 6px;
   font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
+/* Symmetrical 2-Column Layout Engine */
 .services-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
+  grid-template-columns: 1fr 1fr; /* Strict split columns */
+  gap: 10px;
+  margin-bottom: 4px;
 }
 
-/* Standard Pills */
-.services-grid span {
-  background: #f1f3f5 !important; 
-  border: 1px solid #dee2e6 !important;
-  color: #333 !important;
-  padding: 8px 4px;
+/* Link Wrapper Optimization */
+.services-grid a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  width: 100%;
+  outline: none;
+  -webkit-tap-highlight-color: transparent; /* Removes default mobile tap overlays */
+}
+
+/* Full-Width Enforcer for Highlight Row (Home Visit) */
+.services-grid.highlight-row a {
+  grid-column: 1 / -1; 
+}
+
+/* Base Pill Structure with Corner Flash Bug-Fixes */
+.services-grid .service-pill {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 11px 8px;
   border-radius: 6px;
-  font-size: 12.5px;
-  text-align: center;
+  background: #1e293b; /* Slate grey component base color */
+  color: #f1f5f9; /* High-legibility off-white text */
+  font-size: 13px;
   font-weight: 500;
+  line-height: 1.3;
+  text-align: center;
+  border: 1px solid #334155;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+
+  /* 👇 CRITICAL RENDERING BUG FIXES FOR WEBKIT CORNER FLASH 👇 */
+  background-clip: padding-box;        /* Stops background bleeding past border edge */
+  -webkit-backface-visibility: hidden; /* Forces layer hardware acceleration */
+  backface-visibility: hidden;
+  transform: translateZ(0);            /* Stabilizes border-radius during animations */
+  /* 👆 END BUG FIXES 👆 */
+
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.2s ease, 
+              background 0.2s ease, 
+              border-color 0.2s ease,
+              color 0.2s ease;
 }
 
-/* Neurological Pills */
-.services-grid span.neuro {
-  background: #eef7ff !important;
-  border: 1px solid #adcffa !important;
-  color: #0e5a95 !important;
+/* Global Hover & Active States */
+.services-grid a:hover .service-pill {
+  background: #2563eb; /* Transforms to active brand blue on hover */
+  border-color: #3b82f6;
+  color: #ffffff;
+  transform: translateY(-2px) translateZ(0); /* Keeps bug fix active through movement */
+  box-shadow: 0 6px 15px rgba(37, 99, 235, 0.35);
+}
+
+.services-grid a:active .service-pill {
+  transform: scale(0.97) translateZ(0);
+}
+
+/* --- Variant Theme: Neurological Conditions (Teal/Cyan Contrast) --- */
+.services-grid .service-pill.neuro {
+  background: #112240; /* Translucent deep cyan tint */
+  border: 1px solid #00796b; /* Muted theme teal edge */
+  color: #4da3ff; /* Vivid light blue text */
   font-weight: 600;
 }
 
-/* Home Visit Pill */
-.services-grid span.home-visit-pill {
-  grid-column: 1 / -1; 
-  background: #e8f5e9 !important;
-  border: 1px solid #2e7d32 !important;
-  color: #2e7d32 !important;
-  font-weight: 800;
-  padding: 10px;
+.services-grid a:hover .service-pill.neuro {
+  background: #00796b; /* Solid classic teal on hover */
+  border-color: #4db6ac;
+  color: #ffffff;
+  box-shadow: 0 6px 15px rgba(0, 121, 107, 0.4);
+}
+
+/* --- Variant Theme: Highlighted Home Visit (Action Green Accent) --- */
+.services-grid .service-pill.highlight {
+  background: #143521; /* Subdued deep evergreen tint */
+  border: 1px solid #2e7d32; /* Mid-tone green border */
+  color: #69ff99; /* Bright neon green focus text */
+  font-weight: 700;
+  padding: 13px 8px;
+  letter-spacing: 0.5px;
+}
+
+.services-grid a:hover .service-pill.highlight {
+  background: #2e7d32; /* Vivid action green on hover */
+  border-color: #69ff99;
+  color: #ffffff;
+  box-shadow: 0 6px 15px rgba(46, 125, 50, 0.4);
 }
 
 /* ========================================= */
@@ -209,7 +292,7 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
 /* ========================================= */
 .about-section {
   width: 100%;
-  max-width: 360px;
+  max-width: 100%; /* Constrains block width to 100% of card space */
   margin: 15px auto;
   text-align: left;
   background: var(--card);
@@ -293,43 +376,43 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
   padding: 7px;
   background: var(--success-bg);
   color: var(--success-color);
+  width: 100%;
 }
 .feedback.show { opacity: 1; }
 
 /* ========================================= */
-/* REVIEWS                                   */
+/* REVIEWS (FIXED FOR OVERFLOW COMPLIANCE)   */
 /* ========================================= */
 .review-carousel {
   width: 100%;
-  max-width: 400px;
+  max-width: 100%; /* Prevents carousel box from bleeding outside card border edge */
   margin: 15px auto;
-  overflow-x: scroll;
+  overflow-x: auto; /* Uses absolute native scroll safely */
   overflow-y: hidden;
-  padding: 10px 0;
+  padding: 10px 4px; /* Space padding inside the overflow zone */
   scrollbar-width: none;
   -ms-overflow-style: none;
   cursor: grab;
   user-select: none;
   -webkit-user-select: none;
-  touch-action: pan-x pan-y pinch-zoom;
+  touch-action: pan-x pan-y;
   overscroll-behavior-x: contain;
 }
 
 .review-carousel::-webkit-scrollbar { display: none; }
 .review-carousel:active { cursor: grabbing; }
-.review-carousel.paused { cursor: grabbing; }
 
 .review-track {
   display: flex;
   width: max-content;
   flex-wrap: nowrap;
-  gap: 0;
+  padding-right: 15px; /* Cushion layout gap at the end of tracking trail */
 }
 
 .review-card {
-  width: 280px;
-  min-width: 280px;
-  margin: 0 10px;
+  width: 260px; /* Scaled cleanly so reviews hint screen overflow without breaking boundaries */
+  min-width: 260px;
+  margin: 0 8px;
   padding: 16px;
   border-radius: 14px;
   background: var(--card);
@@ -349,18 +432,25 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
 .review-author span { font-size: 11px; color: var(--muted); }
 
 /* ========================================= */
-/* MAP (IFRAME) & QR CODE                    */
+/* MAP (IFRAME) & QR CODE - COMPLIANT RESIZING */
 /* ========================================= */
 iframe {
   border: 3px solid #0e5a95 !important; 
   border-radius: 14px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 
   margin-top: 20px !important;
-  width: 100%;
-  max-width: 360px; 
+  width: 100% !important; /* Locks width inside the layout wrapper natively */
+  max-width: 100% !important; 
   display: block;
   margin-left: auto;
   margin-right: auto;
+}
+
+.qr {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .qr img {
@@ -370,7 +460,7 @@ iframe {
   padding: 8px; 
   background: #ffffff; 
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
+  margin: 0 auto 20px auto;
 }
 
 /* ========================================= */
@@ -392,35 +482,48 @@ iframe {
   h1 { color: #4da3ff; }
   .title, .addr, .phone { color: #e0e0e0; }
 
-  /* Services */
+  /* Upgraded Services Block Dark Mode Configuration */
   .services-box {
-    background: linear-gradient(135deg, #1f2a36, #18222c) !important;
+    background: linear-gradient(135deg, #121824, #0b0f17) !important;
     border-left: 5px solid #4da3ff !important;
   }
-  .main-services-heading, .service-category, .services-box h4 {
+  .main-services-heading, .service-category {
     color: #4da3ff !important;
     text-shadow: 0 0 10px rgba(77, 163, 255, 0.3);
     opacity: 1 !important;
   }
-  .service-category { border-bottom-color: rgba(255, 255, 255, 0.1) !important; }
+  .service-category { border-bottom-color: rgba(77, 171, 247, 0.25) !important; }
   
-  /* Service Pills */
-  .services-grid span {
-    background: #2a3542 !important;
-    color: #f0f0f0 !important;
-    border-color: #3d4b5c !important;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  /* Adjusted Dark Mode Targets for HTML Link Architecture */
+  .services-grid .service-pill {
+    background: #1e293b !important;
+    color: #f1f5f9 !important;
+    border-color: #334155 !important;
   }
-  .services-grid span.neuro {
-    background: #1a222c !important;
-    border: 1px solid #0e5a95 !important;
+  .services-grid a:hover .service-pill {
+    background: #2563eb !important;
+    border-color: #3b82f6 !important;
+    color: #ffffff !important;
+  }
+  .services-grid .service-pill.neuro {
+    background: #112240 !important;
+    border: 1px solid #00796b !important;
     color: #4da3ff !important;
-    font-weight: 600;
   }
-  .services-grid span.home-visit-pill {
-    background: #1b3320 !important;
+  .services-grid a:hover .service-pill.neuro {
+    background: #00796b !important;
+    border-color: #4db6ac !important;
+    color: #ffffff !important;
+  }
+  .services-grid .service-pill.highlight {
+    background: #143521 !important;
     border-color: #2e7d32 !important;
     color: #69ff99 !important;
+  }
+  .services-grid a:hover .service-pill.highlight {
+    background: #2e7d32 !important;
+    border-color: #69ff99 !important;
+    color: #ffffff !important;
   }
 
   /* About */
@@ -433,7 +536,7 @@ iframe {
   .about-content { color: #ffffff; }
   .doctor-img { border-color: #0e5a95 !important; }
 
-  /* Reviews */
+  /* Reviews Dark Theme Realignment */
   .review-card {
     background: #1e1e1e;
     border: 3px solid #4da3ff;
@@ -449,4 +552,4 @@ iframe {
     border: 3px solid #4da3ff !important; 
     background: #ffffff; 
   }
-    }
+}
