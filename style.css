@@ -397,6 +397,17 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
   padding: 0 12px;       /* ← side padding so button doesn't touch border */
 }
 
+.main-reviews-heading {
+  font-size: 1.5rem;
+  color: #0e5a95;
+  margin: 0;
+  padding: 16px 20px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: left;
+}
+
 .review-carousel {
   width: 100%;
   max-width: 100%;
@@ -559,6 +570,11 @@ iframe {
   /* Reviews Dark Theme Realignment */
 .review-section {
   border: 3px solid #4da3ff;
+}
+
+.main-reviews-heading {
+  color: #4da3ff;
+  text-shadow: 0 0 10px rgba(77, 163, 255, 0.3);
 }
 
 .review-card {
