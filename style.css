@@ -390,6 +390,11 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
   margin: 15px auto;
   border: 3px solid #0e5a95;
   border-radius: 12px;
+  padding-bottom: 12px;
+}
+
+.review-section .more-link {
+  padding: 0 12px;       /* ← side padding so button doesn't touch border */
 }
 
 .review-carousel {
