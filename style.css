@@ -149,7 +149,6 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
   background: #ffffff;
   background: linear-gradient(135deg, rgba(240, 247, 255, 0.95), rgba(255, 255, 255, 1));
   border: 3px solid #0e5a95;
-  border-left: 5px solid #0e5a95; /* Matched to vCard brand blue */
   padding: 20px;
   border-radius: 12px;
   margin: 15px auto;
@@ -389,7 +388,6 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
   max-width: 100%;
   margin: 15px auto;
   border: 3px solid #0e5a95;
-  border-left: 5px solid #0e5a95;
   border-radius: 12px;
   padding-bottom: 12px;
   background: linear-gradient(135deg, rgba(240, 247, 255, 0.95), rgba(255, 255, 255, 1));
@@ -512,7 +510,6 @@ iframe {
   .services-box {
     background: linear-gradient(135deg, #121824, #0b0f17) !important;
     border: 3px solid #4da3ff !important;
-    border-left: 5px solid #4da3ff !important;
   }
   .main-services-heading, .service-category {
     color: #4da3ff !important;
@@ -572,7 +569,6 @@ iframe {
   /* Reviews Dark Theme Realignment */
 .review-section {
   border: 3px solid #4da3ff;
-  border-left: 5px solid #4da3ff !important;
   background: linear-gradient(135deg, #121824, #0b0f17) !important;
 }
 
