@@ -148,7 +148,7 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
 .services-box {
   background: #ffffff;
   background: linear-gradient(135deg, rgba(240, 247, 255, 0.95), rgba(255, 255, 255, 1));
-  border: 2px solid #0e5a95;
+  border: 3px solid #0e5a95;
   border-left: 5px solid #0e5a95; /* Matched to vCard brand blue */
   padding: 20px;
   border-radius: 12px;
@@ -510,7 +510,7 @@ iframe {
   /* Upgraded Services Block Dark Mode Configuration */
   .services-box {
     background: linear-gradient(135deg, #121824, #0b0f17) !important;
-    border: 2px solid #4da3ff !important;
+    border: 3px solid #4da3ff !important;
     border-left: 5px solid #4da3ff !important;
   }
   .main-services-heading, .service-category {
