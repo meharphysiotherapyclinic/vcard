@@ -148,7 +148,7 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
 .services-box {
   background: #ffffff;
   background: linear-gradient(135deg, rgba(240, 247, 255, 0.95), rgba(255, 255, 255, 1));
-  border: 2px solid #0e5a95;
+  border: 1px solid #0e5a95;
   border-left: 5px solid #0e5a95; /* Matched to vCard brand blue */
   padding: 20px;
   border-radius: 12px;
@@ -296,8 +296,8 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
   max-width: 100%;
   margin: 15px auto;
   text-align: left;
-  background: var(--card);
-  border: 3px solid #0e5a95; 
+  background: linear-gradient(135deg, rgba(240, 247, 255, 0.95), rgba(255, 255, 255, 1)); /* ← change from var(--card) */
+  border: 3px solid #0e5a95;
   border-radius: 14px;
   overflow: hidden;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -391,6 +391,7 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
   border: 3px solid #0e5a95;
   border-radius: 12px;
   padding-bottom: 12px;
+  background: linear-gradient(135deg, rgba(240, 247, 255, 0.95), rgba(255, 255, 255, 1));
 }
 
 .review-section .more-link {
@@ -439,7 +440,7 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
   margin: 0 8px;
   padding: 16px;
   border-radius: 14px;
-  background: var(--card);
+  background: #f0f7ff;
   border: 3px solid #0e5a95;
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
   display: flex;
@@ -509,7 +510,7 @@ iframe {
   /* Upgraded Services Block Dark Mode Configuration */
   .services-box {
     background: linear-gradient(135deg, #121824, #0b0f17) !important;
-    border: 2px solid #4da3ff !important;
+    border: 1px solid #4da3ff !important;
     border-left: 5px solid #4da3ff !important;
   }
   .main-services-heading, .service-category {
@@ -561,7 +562,7 @@ iframe {
   .about-section { 
     border-color: #4da3ff !important; 
     border-width: 3px;
-    background: #1e1e1e;
+    background: linear-gradient(135deg, #121824, #0b0f17) !important;
   }
   .about-section summary { color: #4da3ff; }
   .about-content { color: #ffffff; }
@@ -570,6 +571,7 @@ iframe {
   /* Reviews Dark Theme Realignment */
 .review-section {
   border: 3px solid #4da3ff;
+  background: linear-gradient(135deg, #121824, #0b0f17) !important;
 }
 
 .main-reviews-heading {
@@ -578,7 +580,7 @@ iframe {
 }
 
 .review-card {
-  background: #1e1e1e;
+  background: #1e2d40;
   border: 3px solid #4da3ff;
 }
 
@@ -598,4 +600,4 @@ iframe {
     background: #ffffff; 
   }
   }
-  
+    
