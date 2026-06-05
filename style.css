@@ -384,10 +384,17 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
 /* ========================================= */
 /* REVIEWS (FIXED FOR OVERFLOW COMPLIANCE)   */
 /* ========================================= */
-.review-carousel {
+.review-section {
   width: 100%;
   max-width: 100%;
   margin: 15px auto;
+  border: 3px solid #0e5a95;
+  border-radius: 12px;
+}
+
+.review-carousel {
+  width: 100%;
+  max-width: 100%;
   overflow-x: auto;
   overflow-y: hidden;
   padding: 10px 4px;
@@ -545,11 +552,20 @@ iframe {
   .doctor-img { border-color: #0e5a95 !important; }
 
   /* Reviews Dark Theme Realignment */
-  .review-card {
-    background: #1e1e1e;
-    border: 3px solid #4da3ff;
-  }
-  .review-author { border-top: 1px solid rgba(255,255,255,0.1); }
+.review-section {
+  border: 3px solid #4da3ff;
+}
+
+.review-card {
+  background: #1e1e1e;
+  border: 3px solid #4da3ff;
+}
+
+.review-stars { color: #fbbc04; }          /* ← same as light mode */
+
+.review-author { border-top: 1px solid rgba(255,255,255,0.1); }
+.review-author strong { color: #f0f0f0; }
+.review-author span { color: #8da2bb; }    /* ← override var(--muted) for dark */
 
   /* Map & QR */
   iframe {
@@ -560,4 +576,5 @@ iframe {
     border: 3px solid #4da3ff !important; 
     background: #ffffff; 
   }
-}
+  }
+  
