@@ -74,60 +74,209 @@ h1 { font-size: 20px; font-weight: 800; margin: 6px 0 4px; color: #2f68ba; }
 .title { font-size: 14px; font-weight: 600; }
 .addr, .phone { font-size: 14px; font-weight: 700; line-height: 1.4; }
 
-/* ========================================= */
-/* BUTTONS                                   */
-/* ========================================= */
-.btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  text-decoration: none;
-  padding: 14px;
-  border-radius: var(--btn-radius);
-  font-weight: 700;
-  font-size: 17px;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  transition: 0.2s;
-  outline: none;
-  -webkit-tap-highlight-color: transparent;
+/* =========================================
+   BUTTONS - REFINED PREMIUM VERSION
+========================================= */
+
+.btn{
+
+display:flex;
+align-items:center;
+justify-content:center;
+gap:8px;
+
+text-decoration:none;
+
+width:100%;
+
+padding:12px 10px;
+
+border:none;
+
+border-radius:14px;
+
+font-size:14px;
+font-weight:700;
+line-height:1.2;
+
+color:#fff;
+
+cursor:pointer;
+
+position:relative;
+overflow:hidden;
+
+outline:none;
+
+-webkit-tap-highlight-color:transparent;
+
+box-shadow:
+0 4px 12px rgba(0,0,0,.12);
+
+transition:
+transform .22s ease,
+box-shadow .22s ease,
+filter .22s ease;
+
 }
 
-.btn:hover { transform: translateY(-2px); }
-.btn:active { transform: scale(0.96); }
+/* Icon sizing */
 
-/* Colors */
-.call { background: var(--call); }
-.website { background: var(--site); }
-.location { background: var(--loc); }
-.whatsapp { background: var(--wa); }
-.vcf { background: var(--vcf); }
-.share { background: var(--share); }
-.copy { background: var(--copy); }
-.google-btn { background: #4285F4; }
+.btn img{
 
-/* Grid Layouts - Fixed to fit completely within 440px card limits */
-.btn-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  width: 100%;
-  max-width: 100%;
-  margin: 10px 0;
+width:18px;
+height:18px;
+
+object-fit:contain;
+
+flex-shrink:0;
+
 }
-.btn-grid .btn { width: 100%; padding: 16px 4px; border-radius: 16px; font-size: 15px; }
 
-.btn-row {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  width: 100%;
-  max-width: 100%; /* Scales dynamically inside card */
-  margin: 10px auto;
+/* Subtle glass highlight */
+
+.btn::before{
+
+content:'';
+
+position:absolute;
+
+top:0;
+left:0;
+right:0;
+
+height:35%;
+
+background:
+linear-gradient(
+180deg,
+rgba(255,255,255,.12),
+transparent);
+
+pointer-events:none;
+
 }
-.btn.small { font-size: 14px; padding: 12px; }
+
+/* Hover */
+
+@media (hover:hover){
+
+.btn:hover{
+
+transform:translateY(-2px);
+
+box-shadow:
+0 8px 18px rgba(0,0,0,.18);
+
+filter:brightness(1.04);
+
+}
+
+}
+
+/* Touch feedback */
+
+.btn:active{
+
+transform:scale(.98);
+
+box-shadow:
+0 3px 8px rgba(0,0,0,.16);
+
+}
+
+/* =========================================
+   BUTTON COLORS
+========================================= */
+
+.call{ background:var(--call); }
+
+.whatsapp{ background:var(--wa); }
+
+.website{ background:var(--site); }
+
+.share{ background:var(--share); }
+
+.vcf{ background:var(--vcf); }
+
+.copy{ background:var(--copy); }
+
+.google-btn{ background:#4285F4; }
+
+/* =========================================
+   PRIMARY GRID
+========================================= */
+
+.btn-grid{
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+gap:12px;
+
+width:100%;
+
+margin:12px 0;
+
+}
+
+.btn-grid .btn{
+
+min-height:58px;
+
+border-radius:14px;
+
+}
+
+/* =========================================
+   SECONDARY GRID
+========================================= */
+
+.btn-row{
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+gap:12px;
+
+width:100%;
+
+margin:12px 0 4px;
+
+}
+
+.btn-row .btn{
+
+min-height:58px;
+
+border-radius:14px;
+
+}
+
+/* =========================================
+   DARK MODE
+========================================= */
+
+@media(prefers-color-scheme:dark){
+
+.btn{
+
+box-shadow:
+0 4px 14px rgba(0,0,0,.40);
+
+}
+
+.btn:hover{
+
+box-shadow:
+0 8px 20px rgba(0,0,0,.50);
+
+}
+
+}
+
 
 /* Google Button Icon */
 .google-btn img {
