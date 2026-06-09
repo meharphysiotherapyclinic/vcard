@@ -475,6 +475,68 @@ margin-top:4px;
 }
 
 /* =====================================================
+   CLINIC INFO SECTION
+===================================================== */
+
+.clinic-info-section{
+
+padding:18px 18px 16px;
+
+margin-top:16px;
+
+}
+
+.clinic-info-section .contact-item{
+
+display:flex;
+
+align-items:flex-start;
+
+gap:12px;
+
+padding:12px 0;
+
+}
+
+.clinic-info-section .contact-item + .contact-item{
+
+border-top:1px solid rgba(14,90,149,.10);
+
+}
+
+.clinic-info-section .contact-item img{
+
+width:20px !important;
+
+height:20px !important;
+
+margin-top:3px;
+
+flex-shrink:0;
+
+}
+
+.clinic-info-section strong{
+
+font-size:.92rem;
+
+line-height:1.65;
+
+font-weight:600;
+
+color:#1e293b;
+
+}
+
+.clinic-info-section a{
+
+color:inherit;
+
+text-decoration:none;
+
+}
+
+/* =====================================================
    BUTTONS
 ===================================================== */
 
