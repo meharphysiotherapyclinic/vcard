@@ -1,845 +1,924 @@
 /* =====================================================
-   PREMIUM VCARD UPGRADE
-   LOAD AFTER style.css
-   Blue Brand Version
+   PREMIUM UNIFIED VCARD STYLESHEET
+   Fonts: DM Sans & DM Serif Display Fully Integrated
+   Fixes: Mobile/Touch Hover States & Specificity Issues
 ===================================================== */
 
+/* 1. CORRECT FONT IMPORT AT THE ABSOLUTE TOP OF FILE */
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600;700&display=swap');
 
-/* =====================================================
-   GLOBAL
-===================================================== */
+:root {
+  --bg: #f7fafc;
+  --card-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.97), rgba(245, 249, 255, 0.98));
+  --section-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(245, 249, 255, 0.98));
+  --text: #161617;
+  --muted: #555555;
+  --brand-primary: #0e5a95;
+  --brand-light: #4da3ff;
+  --brand-link: #2f68ba;
 
-body{
+  /* Button Brand Colors */
+  --call: #ab214d;
+  --site: #0e5a95;
+  --loc: #145369;
+  --wa: #0a7833;
+  --vcf: #9C27B0;
+  --share: #036a60;
+  --copy: #a15a25;
 
-font-family:'DM Sans',sans-serif !important;
+  --success-bg: #e8f5e9;
+  --success-color: #2e7d32;
+}
 
-background:
-radial-gradient(
-circle at top right,
-rgba(14,90,149,.06),
-transparent 40%),
-#f7fafc;
-
+* { 
+  box-sizing: border-box; 
 }
 
 /* =====================================================
-   CARD
+   GLOBAL & FONTS APPLICATION
 ===================================================== */
-
-.card{
-
-position:relative;
-
-overflow:hidden;
-
-border:2px solid rgba(14,90,149,.32);
-
-border-radius:22px;
-
-padding:22px 22px 28px;
-
-background:
-
-linear-gradient(
-135deg,
-rgba(255,255,255,.97),
-rgba(245,249,255,.98));
-
-box-shadow:
-
-0 14px 40px rgba(0,0,0,.08),
-
-0 3px 12px rgba(14,90,149,.08);
-
+body {
+  -webkit-user-select: none; 
+  -moz-user-select: none;    
+  -ms-user-select: none;     
+  user-select: none;         
+  -webkit-touch-callout: none;
+  
+  /* Applying DM Sans globally as required */
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  background: radial-gradient(circle at top right, rgba(14, 90, 149, 0.06), transparent 40%), var(--bg);
+  margin: 0;
+  padding: 16px 12px 40px;
+  padding-bottom: calc(40px + env(safe-area-inset-bottom));
+  color: var(--text);
+  text-align: center;
+  min-height: 100vh;
 }
 
-/* gradient border */
-
-.card::before{
-
-content:'';
-
-position:absolute;
-
-inset:0;
-
-border-radius:22px;
-
-padding:1.5px;
-
-background:
-
-linear-gradient(
-135deg,
-rgba(14,90,149,.75),
-rgba(77,163,255,.32),
-rgba(14,90,149,.50));
-
--webkit-mask:
-linear-gradient(#fff 0 0) content-box,
-linear-gradient(#fff 0 0);
-
--webkit-mask-composite:xor;
-
-mask-composite: exclude;
-
-pointer-events:none;
-
-}
-
-/* mesh overlay */
-
-.card::after{
-
-content:'';
-
-position:absolute;
-
-inset:0;
-
-pointer-events:none;
-
-background:
-
-radial-gradient(
-circle at 90% 10%,
-rgba(14,90,149,.07),
-transparent 30%),
-
-radial-gradient(
-circle at 10% 90%,
-rgba(77,163,255,.05),
-transparent 35%);
-
-}
-
-/* content above overlays */
-
-.card > *{
-
-position:relative;
-
-z-index:2;
-
+/* Enable text copying for patient convenience */
+.addr, .phone, .clinic-info-section strong {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
 }
 
 /* =====================================================
-   LOGO
+   MAIN CARD STRUCTURAL CONTAINER
 ===================================================== */
+.card {
+  position: relative;
+  max-width: 440px;
+  width: 100%;
+  margin: 10px auto;
+  padding: 22px 22px 28px;
+  border-radius: 22px;
+  background: var(--card-bg);
+  border: 2px solid rgba(14, 90, 149, 0.32);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.08), 0 3px 12px rgba(14, 90, 149, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
 
-.logo{
+/* Premium Gradient Border Accent */
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 22px;
+  padding: 1.5px;
+  background: linear-gradient(135deg, rgba(14, 90, 149, 0.75), rgba(77, 163, 255, 0.32), rgba(14, 90, 149, 0.50));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
 
-width:115px;
+/* Subtle Architectural Background Grid Background */
+.card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at 90% 10%, rgba(14, 90, 149, 0.07), transparent 30%),
+              radial-gradient(circle at 10% 90%, rgba(77, 163, 255, 0.05), transparent 35%);
+}
 
-border-radius:8px;
+.card > * {
+  position: relative;
+  z-index: 2;
+}
 
-border:none !important;
-
-box-shadow:
-0 8px 22px rgba(14,90,149,.18);
-
-transition:all .28s ease;
-
+.logo { 
+  width: 115px;
+  max-width: 100px; 
+  margin-bottom: 10px; 
+  border-radius: 8px; 
+  border: none !important;
+  box-shadow: 0 8px 22px rgba(14, 90, 149, 0.18);
+  transition: all 0.28s ease;
 }
 
 /* =====================================================
-   TYPOGRAPHY
+   TYPOGRAPHY SYSTEM (DM Serif Display Setup)
 ===================================================== */
-
-h1{
-
-font-family:'DM Serif Display',serif;
-
-font-size:1.45rem;
-
-color:#0e5a95;
-
-line-height:1.2;
-
-letter-spacing:-0.3px;
-
-margin-top:10px;
-
+h1 { 
+  font-family: 'DM Serif Display', serif !important;
+  font-size: 1.45rem; 
+  color: var(--brand-primary); 
+  line-height: 1.2;
+  letter-spacing: -0.3px;
+  margin: 10px 0 4px; 
 }
 
-h1::after{
-
-content:'';
-
-display:block;
-
-width:55px;
-
-height:3px;
-
-margin:10px auto 0;
-
-border-radius:5px;
-
-background:
-
-linear-gradient(
-90deg,
-#0e5a95,
-#4da3ff);
-
+h1::after {
+  content: '';
+  display: block;
+  width: 55px;
+  height: 3px;
+  margin: 10px auto 0;
+  border-radius: 5px;
+  background: linear-gradient(90deg, var(--brand-primary), var(--brand-light));
 }
 
-.name{
-
-font-size:1rem;
-
-color:#1e293b;
-
+.name { 
+  font-size: 1rem; 
+  font-weight: 700; 
+  color: #1e293b;
 }
 
-.title{
-
-color:#2f68ba;
-
-font-weight:700;
-
-letter-spacing:.4px;
-
+.title { 
+  font-size: 14px; 
+  font-weight: 700; 
+  color: var(--brand-link);
+  letter-spacing: 0.4px;
 }
 
-/* H4 HEADINGS */
-
-h4{
-
-font-family:'DM Serif Display',serif;
-
-font-size:0.95rem;
-
-font-weight:700;
-
-color:#0e5a95;
-
-letter-spacing:-0.2px;
-
-margin:18px 0 10px;
-
-position:relative;
-
-display:inline-block;
-
-padding-bottom:4px;
-
+h4 {
+  font-family: 'DM Serif Display', serif !important;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--brand-primary);
+  letter-spacing: -0.2px;
+  margin: 18px 0 10px;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 4px;
 }
 
-/* Premium underline */
-
-h4::after{
-
-content:'';
-
-position:absolute;
-
-left:0;
-
-bottom:0;
-
-width:70%;
-
-height:2px;
-
-border-radius:10px;
-
-background:
-
-linear-gradient(
-90deg,
-#0e5a95,
-#4da3ff);
-
+h4::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 70%;
+  height: 2px;
+  border-radius: 10px;
+  background: linear-gradient(90deg, var(--brand-primary), var(--brand-light));
 }
 
 /* =====================================================
    TAGLINES
 ===================================================== */
-
-.tagline{
-
-display:inline-flex;
-
-align-items:center;
-
-gap:8px;
-
-background:
-rgba(14,90,149,.08);
-
-border:
-1px solid rgba(14,90,149,.18);
-
-padding:8px 16px;
-
-border-radius:999px;
-
-margin:10px 0 6px;
-
-font-size:.72rem;
-
-font-weight:600;
-
-color:#2f68ba;
-
+.tagline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(14, 90, 149, 0.08);
+  border: 1px solid rgba(14, 90, 149, 0.18);
+  padding: 8px 16px;
+  border-radius: 999px;
+  margin: 10px 0 6px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--brand-link);
 }
 
-.tagline-icon{
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-width:34px;
-
-height:34px;
-
-border-radius:50%;
-
-background:#ffffff;
-
-border:2px solid #0e5a95;
-
-box-shadow:
-0 3px 8px rgba(14,90,149,.18);
-
-flex-shrink:0;
-
+.tagline-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 2px solid var(--brand-primary);
+  box-shadow: 0 3px 8px rgba(14, 90, 149, 0.18);
+  flex-shrink: 0;
 }
 
-.tagline-icon img{
-
-width:22px;
-
-height:22px;
-
-object-fit:contain;
-
-filter:none;
-
+.tagline-icon img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  filter: none;
 }
 
 /* =====================================================
-   ADDRESS
+   PREMIUM BLOCK CONSTRUCTS (SHARED SECTIONS)
 ===================================================== */
-
-.addr{
-
-background:
-rgba(14,90,149,.04);
-
-border-radius:16px;
-
-padding:14px;
-
-margin-top:10px;
-
-line-height:1.65;
-
-}
-
-.clinic-info-section .contact-item img{
-
-width:20px !important;
-
-height:20px !important;
-
-flex-shrink:0;
-
-}
-
-/* =====================================================
-   PREMIUM SECTIONS
-===================================================== */
-
 .about-section,
 .services-box,
 .review-section,
 .contact-section,
-.clinic-info-section{
-
-position:relative;
-
-border:none !important;
-
-border-radius:20px;
-
-overflow:hidden;
-
-background:
-
-linear-gradient(
-135deg,
-rgba(255,255,255,.95),
-rgba(245,249,255,.98));
-
-box-shadow:
-0 8px 24px rgba(0,0,0,.06);
-
-transition:all .28s ease;
-
+.clinic-info-section {
+  position: relative;
+  width: 100%;
+  margin: 15px auto;
+  border: none !important;
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--section-bg);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  transition: all 0.28s ease;
+  text-align: left;
 }
 
+/* Left Indicator Border Bar Accent */
 .about-section::before,
 .services-box::before,
 .review-section::before,
 .contact-section::before,
-.clinic-info-section::before{
-
-content:'';
-
-position:absolute;
-
-top:0;
-left:0;
-
-width:4px;
-
-height:100%;
-
-background:#0e5a95;
-
-pointer-events:none;
-
+.clinic-info-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--brand-primary);
+  pointer-events: none;
+  z-index: 3;
 }
 
 .about-section::after,
 .services-box::after,
 .review-section::after,
 .contact-section::after,
-.clinic-info-section::after{
-
-content:'';
-
-position:absolute;
-
-inset:0;
-
-pointer-events:none;
-
-background:
-
-radial-gradient(
-ellipse at 95% 10%,
-rgba(14,90,149,.05),
-transparent 55%);
-
+.clinic-info-section::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 95% 10%, rgba(14, 90, 149, 0.05), transparent 55%);
 }
-
-/* =====================================================
-   HEADINGS
-===================================================== */
 
 .main-services-heading,
 .main-reviews-heading,
-.about-section summary{
-
-font-family:'DM Serif Display',serif;
-
-font-size:1.15rem;
-
-font-weight:700;
-
-color:#0e5a95 !important;
-
-letter-spacing:-0.2px;
-
-line-height:1.3;
-
+.about-section summary {
+  font-family: 'DM Serif Display', serif !important;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--brand-primary) !important;
+  letter-spacing: -0.2px;
+  line-height: 1.3;
 }
 
-/* Optional: slightly smaller helper text under headings */
-
-.main-services-heading .tap-note,
-.main-reviews-heading .tap-note{
-
-display:block;
-
-font-family:'DM Sans',sans-serif;
-
-font-size:0.7rem;
-
-font-weight:500;
-
-color:#64748b;
-
-letter-spacing:0;
-
-margin-top:4px;
-
+.main-services-heading, .main-reviews-heading {
+  margin: 0;
+  padding: 16px 20px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
-/* =====================================================
-   CLINIC INFO SECTION
-===================================================== */
-
-.clinic-info-section{
-
-padding:18px 18px 16px;
-
-margin-top:16px;
-
+.tap-note {
+  display: block;
+  font-family: 'DM Sans', sans-serif !important;
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: #64748b;
+  letter-spacing: 0;
+  margin-top: 4px;
 }
 
-.clinic-info-section .contact-item{
-
-display:flex;
-
-align-items:flex-start;
-
-gap:12px;
-
-padding:14px 0;
-
+/* ==========================================================================
+   SERVICES GRID SYSTEM & FIX FOR HOVER STATES (LIGHT MODE)
+   ========================================================================== */
+.services-box {
+  padding: 20px;
 }
 
-.clinic-info-section .contact-item:last-child{
-
-justify-content:center;
-
-align-items:center;
-
-text-align:center;
-
-padding-top:16px;
-
+.services-box .main-services-heading {
+  padding: 0 0 20px 0;
 }
 
-/* Phone row centered */
-
-.clinic-info-section .contact-item:last-child{
-
-justify-content:center;
-
-align-items:center;
-
-text-align:center;
-
+.service-category {
+  font-size: 14.5px;
+  color: var(--brand-primary) !important;
+  margin: 22px 0 10px;
+  border-bottom: 1px solid rgba(14, 90, 149, 0.15);
+  padding-bottom: 6px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-.clinic-info-section .contact-item:last-child a{
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-width:100%;
-
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 4px;
 }
 
-.clinic-info-section .contact-item:last-child strong{
-
-font-size:1rem;
-
-font-weight:700;
-
+.services-grid a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  width: 100%;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.clinic-info-section .contact-item img{
-
-width:20px !important;
-
-height:20px !important;
-
-margin-top:3px;
-
-flex-shrink:0;
-
+.services-grid.highlight-row a {
+  grid-column: 1 / -1; 
 }
 
-.clinic-info-section strong{
-
-font-size:.92rem;
-
-line-height:1.65;
-
-font-weight:600;
-
-color:#1e293b;
-
+/* Base Service Pills Setup with Strong Defaults */
+.services-grid .service-pill {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 11px 8px;
+  border-radius: 6px;
+  background: #ffffff !important;
+  color: #333333 !important;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.3;
+  text-align: center;
+  border: 1px solid rgba(0, 0, 0, 0.14) !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  background-clip: padding-box;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 
-.clinic-info-section a{
-
-color:inherit;
-
-text-decoration:none;
-
+/* Specific Variant Light Theme Settings */
+.services-grid .service-pill.neuro {
+  background: #eef7ff !important;
+  border: 1px solid #adcffa !important;
+  color: var(--brand-primary) !important;
+  font-weight: 600;
 }
 
-/* =====================================================
-   BUTTONS
-===================================================== */
-
-.btn{
-
-border-radius:16px;
-
-position:relative;
-
-overflow:hidden;
-
-will-change:transform;
-
-box-shadow:
-0 6px 18px rgba(0,0,0,.12);
-
-transition:
-transform .25s ease,
-box-shadow .25s ease,
-filter .25s ease;
-
+.services-grid .service-pill.highlight {
+  background: #e8f5e9 !important;
+  border: 1px solid #c8e6c9 !important;
+  color: #2e7d32 !important;
+  font-weight: 700;
+  padding: 13px 8px;
+  letter-spacing: 0.5px;
 }
 
-@media (hover:hover){
-
-.btn:hover{
-
-transform:translateY(-3px);
-
-box-shadow:
-0 12px 26px rgba(0,0,0,.16);
-
-filter:brightness(1.05);
-
+/* FIXED HOVER/ACTIVE INTERACTION STATES FOR BOTH MOBILE AND DESKTOP */
+.services-grid a:hover .service-pill,
+.services-grid a:active .service-pill {
+  background: #eef7ff !important;
+  border-color: var(--brand-primary) !important;
+  color: var(--brand-primary) !important;
+  transform: translateY(-2px) translateZ(0);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
 }
 
+.services-grid a:hover .service-pill.neuro,
+.services-grid a:active .service-pill.neuro {
+  background: #dcecff !important;
+  border-color: #8ebeea !important;
+  color: var(--brand-primary) !important;
 }
 
-.btn:active{
-
-transform:scale(.96);
-
-box-shadow:
-0 4px 10px rgba(0,0,0,.18);
-
+.services-grid a:hover .service-pill.highlight,
+.services-grid a:active .service-pill.highlight {
+  background: #dff3e2 !important;
+  border-color: #9fd3a5 !important;
+  color: #2e7d32 !important;
 }
 
-.btn::after{
-
-content:'';
-
-position:absolute;
-
-top:0;
-
-left:-120%;
-
-width:60%;
-
-height:100%;
-
-background:
-
-linear-gradient(
-90deg,
-transparent,
-rgba(255,255,255,.22),
-transparent);
-
-transition:left .6s ease;
-
-}
-
-@media (hover:hover){
-
-.btn:hover::after{
-
-left:150%;
-
-}
-
+.services-grid a:active .service-pill {
+  transform: scale(0.97) translateZ(0);
 }
 
 /* =====================================================
-   REVIEWS
+   ABOUT ACCORDION ACTION SYSTEM
 ===================================================== */
-
-.review-card{
-
-background:#ffffff;
-
-border:none !important;
-
-box-shadow:
-0 8px 20px rgba(0,0,0,.08);
-
-transition:all .28s ease;
-
+.about-section summary {
+  padding: 16px 20px;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.05);
 }
 
-.qr img{
+.about-section summary::after {
+  content: '▼';
+  font-size: 12px;
+  transition: transform 0.4s;
+}
 
-border:none !important;
+.about-section[open] summary::after { 
+  transform: rotate(180deg); 
+}
 
-box-shadow:
-0 8px 25px rgba(0,0,0,.10);
+.doctor-img {
+  width: 100px;
+  height: 115px;
+  object-fit: cover;
+  border-radius: 14px;
+  display: block;
+  margin: 0 auto 15px auto;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  border: 2px solid #adcffa;
+}
 
+.about-content {
+  padding: 0 20px 20px;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--text);
+  opacity: 0;
+  transform: translateY(-40px);
+  pointer-events: none;
+}
+
+@keyframes slowSlideIn {
+  0% { opacity: 0; transform: translateY(-40px) scale(0.92); filter: blur(10px); }
+  100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+}
+
+.about-section[open] .about-content {
+  opacity: 1; 
+  transform: translateY(0);
+  pointer-events: auto;
+  animation: slowSlideIn 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.about-section[open] {
+  box-shadow: 0 12px 35px rgba(14, 90, 149, 0.25);
+  transform: translateY(-4px) scale(1.01);
 }
 
 /* =====================================================
-   DARK MODE
+   ADDRESS & CLINIC INFO SECTION MODULE
 ===================================================== */
-
-@media(prefers-color-scheme:dark){
-
-body{
-
-background:#111827;
-
+.addr {
+  background: rgba(14, 90, 149, 0.04);
+  border-radius: 16px;
+  padding: 14px;
+  margin-top: 10px;
+  line-height: 1.65;
+  font-size: 14px;
+  font-weight: 700;
 }
 
-.card{
-
-border:2px solid rgba(77,163,255,.40);
-
+.contact-section {
+  padding: 0 12px 12px;
 }
 
-.card,
-.services-box,
-.review-section,
-.about-section,
-.contact-section,
-.clinic-info-section{
-
-background:
-
-linear-gradient(
-135deg,
-#121824,
-#0f172a);
-
+.clinic-info-section {
+  padding: 18px 18px 16px;
+  margin-top: 16px;
 }
 
-h1,
-.main-services-heading,
-.main-reviews-heading,
-.about-section summary{
-
-color:#4da3ff !important;
-
+.clinic-info-section .contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 0;
 }
 
-.main-services-heading .tap-note,
-.main-reviews-heading .tap-note{
-
-color:#94a3b8;
-
+.clinic-info-section .contact-item:last-child {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding-top: 16px;
 }
 
-h4{
-
-color:#4da3ff;
-
+.clinic-info-section .contact-item:last-child a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
 
-.tagline{
-
-background:
-rgba(14,90,149,.18);
-
-color:#4da3ff;
-
+.clinic-info-section .contact-item:last-child strong {
+  font-size: 1rem;
+  font-weight: 700;
 }
 
-.tagline-icon{
-
-background:
-linear-gradient(
-135deg,
-#0e5a95,
-#4da3ff);
-
+.clinic-info-section .contact-item img {
+  width: 20px !important;
+  height: 20px !important;
+  margin-top: 3px;
+  flex-shrink: 0;
 }
 
-.addr{
-
-background:
-rgba(255,255,255,.04);
-
+.clinic-info-section strong {
+  font-size: 0.92rem;
+  line-height: 1.65;
+  font-weight: 600;
+  color: #1e293b;
 }
 
-.name,
-.title,
-.addr,
-.phone{
-
-color:#f0f0f0;
-
+.clinic-info-section a {
+  color: inherit;
+  text-decoration: none;
 }
 
-.logo{
-
-box-shadow:
-0 8px 24px rgba(0,0,0,.5);
-
+/* =====================================================
+   REVIEWS ROTATOR CORRIDOR
+===================================================== */
+.review-section {
+  padding-bottom: 12px;
 }
 
-.clinic-info-section strong{
-
-color:#f0f0f0;
-
+.review-section .more-link {
+  padding: 0 12px;       
 }
 
-.btn{
-
-box-shadow:
-0 6px 18px rgba(0,0,0,.45);
-
+.review-carousel {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 10px 4px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: pan-x pan-y;
+  overscroll-behavior-x: contain;
 }
 
-.services-grid .service-pill{
-
-background:#1e293b !important;
-
-border-color:#334155 !important;
-
-color:#f0f0f0 !important;
-
+.review-carousel::-webkit-scrollbar { 
+  display: none; 
 }
 
-@media (hover:hover){
-
-.services-grid a:hover .service-pill{
-
-background:#0e5a95 !important;
-
-border-color:#4da3ff !important;
-
+.review-carousel:active { 
+  cursor: grabbing; 
 }
 
+.review-track {
+  display: flex;
+  width: max-content;
+  flex-wrap: nowrap;
+  padding-right: 15px;
 }
 
-.review-card{
-
-background:#1f2937;
-
+.review-card {
+  width: 260px;
+  min-width: 260px;
+  margin: 0 8px;
+  padding: 16px;
+  border-radius: 14px;
+  background: #ffffff;
+  border: none !important;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-shrink: 0;
+  text-align: left;
+  transition: all 0.28s ease;
 }
 
-.review-text{
-
-color:#f0f0f0;
-
+.review-stars { 
+  color: #fbbc04; 
+  font-size: 14px; 
+  margin-bottom: 8px; 
 }
 
-.review-author span{
-
-color:#a8b3c2;
-
+.review-text { 
+  font-size: 13px; 
+  line-height: 1.5; 
+  margin: 0; 
+  color: var(--text); 
+  font-style: italic; 
 }
 
-.addr img,
-.phone img{
-
-filter:brightness(1.15);
-
+.review-author { 
+  margin-top: 12px; 
+  padding-top: 8px; 
+  border-top: 1px solid rgba(0,0,0,0.05); 
+  font-size: 12px; 
 }
 
+.review-author strong { 
+  display: block; 
+  color: var(--text); 
+}
+
+.review-author span { 
+  font-size: 11px; 
+  color: #a8b3c2; 
+}
+
+/* =====================================================
+   PREMIUM CONTROL BUTTONS MATRIX
+===================================================== */
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-decoration: none;
+  width: 100%;
+  padding: 12px 10px;
+  border: none;
+  border-radius: 16px;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #fff;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  will-change: transform;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+}
+
+.btn img {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 35%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.12), transparent);
+  pointer-events: none;
+}
+
+.btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.22), transparent);
+  transition: left 0.6s ease;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.16);
+  filter: brightness(1.05);
+}
+
+.btn:hover::after {
+  left: 150%;
+}
+
+.btn:active {
+  transform: scale(0.96);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.18);
+}
+
+.btn-grid, .btn-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  width: 100%;
+  margin: 12px 0;
+}
+
+.btn-grid .btn, .btn-row .btn {
+  min-height: 58px;
+}
+
+.btn-row { 
+  margin: 12px 0 4px; 
+}
+
+/* Button Theming Directives */
+.call { background: var(--call); }
+.whatsapp { background: var(--wa); }
+.website { background: var(--site); }
+.share { background: var(--share); }
+.vcf { background: var(--vcf); }
+.copy { background: var(--copy); }
+.google-btn { background: #4285F4; }
+
+.google-btn img {
+  background-color: #3c4043;
+  border-radius: 50%;
+  padding: 3px;
+  width: 28px;
+  height: 28px;
+}
+
+/* =====================================================
+   FEEDBACKS, MAPS & EXTERNAL ASSETS
+===================================================== */
+.feedback {
+  opacity: 0;
+  transition: 0.3s;
+  font-size: 13px;
+  margin-top: 8px;
+  border-radius: 12px;
+  padding: 10px 16px;
+  background: var(--section-bg);
+  color: var(--success-color);
+  width: 100%;
+  border: 3px solid var(--brand-primary);
+  text-align: left;
+}
+.feedback.show { 
+  opacity: 1; 
+}
+
+iframe {
+  border: 3px solid var(--brand-primary) !important; 
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 
+  margin-top: 20px !important;
+  width: 100% !important;
+  max-width: 100% !important; 
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.qr {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.qr img {
+  width: 130px; 
+  border: none !important; 
+  border-radius: 14px;
+  padding: 8px; 
+  background: #ffffff; 
+  box-shadow: 0 8px 25px rgba(0,0,0,0.10);
+  margin: 0 auto 20px auto;
+}
+
+/* ==========================================================================
+   COMPLETE PRECISE DARK MODE ENHANCEMENT ENGINE (DEVICE-SAFE)
+   ========================================================================== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #111827;
+    --text: #f0f0f0;
+    --card-bg: linear-gradient(135deg, #121824, #0f172a);
+    --section-bg: linear-gradient(135deg, #121824, #0f172a);
+    --brand-primary: #4da3ff;
+    --success-bg: #143521;
+    --success-color: #69ff99;
+  }
+
+  body {
+    background: var(--bg);
+  }
+
+  .card {
+    border: 2px solid rgba(77, 163, 255, 0.40);
+  }
+
+  .logo {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  }
+
+  .name, .title, .clinic-info-section strong, .addr, .phone {
+    color: #f0f0f0;
+  }
+
+  h1, .main-services-heading, .main-reviews-heading, .about-section summary {
+    color: #4da3ff !important;
+  }
+
+  .main-services-heading .tap-note, .main-reviews-heading .tap-note {
+    color: #94a3b8;
+  }
+
+  h4 {
+    color: #4da3ff;
+  }
+
+  .tagline {
+    background: rgba(14, 90, 149, 0.18);
+    color: #4da3ff;
+  }
+
+  .tagline-icon {
+    background: linear-gradient(135deg, #0e5a95, #4da3ff);
+  }
+
+  .addr {
+    background: rgba(255, 255, 255, 0.04);
+  }
+  
+  .addr img, .phone img {
+    filter: brightness(1.15);
+  }
+
+  .about-content {
+    color: #ffffff;
+  }
+
+  .doctor-img {
+    border-color: #0e5a95 !important;
+  }
+
+  /* CORE DARK MODE SERVICE PILLS AND HOVERS - DESIGNED SAFELY FOR TOUCH SCREEN EVENTS */
+  .services-grid .service-pill {
+    background: #1e293b !important;
+    border-color: #334155 !important;
+    color: #f0f0f0 !important;
+  }
+
+  .services-grid .service-pill.neuro {
+    background: #112240 !important;
+    border: 1px solid #00796b !important;
+    color: #4da3ff !important;
+  }
+
+  .services-grid .service-pill.highlight {
+    background: #143521 !important;
+    border-color: #2e7d32 !important;
+    color: #69ff99 !important;
+  }
+
+  /* NO REMOVED OR STRIPPED INTERACTION COLORS - RE-ENGINEERED DEVICE INDEPENDENTLY */
+  .services-grid a:hover .service-pill,
+  .services-grid a:active .service-pill {
+    background: #0e5a95 !important;
+    border-color: #4da3ff !important;
+    color: #ffffff !important;
+  }
+
+  .services-grid a:hover .service-pill.neuro,
+  .services-grid a:active .service-pill.neuro {
+    background: #00796b !important;
+    border-color: #4db6ac !important;
+    color: #ffffff !important;
+  }
+
+  .services-grid a:hover .service-pill.highlight,
+  .services-grid a:active .service-pill.highlight {
+    background: #2e7d32 !important;
+    border-color: #69ff99 !important;
+    color: #ffffff !important;
+  }
+
+  /* Review Adaptive Cards and Wraps */
+  .review-section {
+    border: 3px solid #4da3ff;
+  }
+
+  .review-card {
+    background: #1f2937;
+  }
+
+  .review-text {
+    color: #f0f0f0;
+  }
+
+  .review-author {
+    border-top-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .review-author strong {
+    color: #f0f0f0;
+  }
+
+  .review-author span {
+    color: #8da2bb;
+  }
+
+  .btn {
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+  }
+
+  iframe {
+    border-color: #4da3ff !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+  }
+
+  .qr img {
+    border: 3px solid #4da3ff !important;
+  }
 }
