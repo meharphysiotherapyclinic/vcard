@@ -761,6 +761,12 @@ h4::after {
   padding: 0 20px 20px;
 }
 
+/* Fix: Strips double-padding to align perfectly with other headers */
+.map-section .main-map-heading {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
 .map-section iframe {
   border: 1px solid rgba(14, 90, 149, 0.15) !important; 
   border-radius: 12px;
