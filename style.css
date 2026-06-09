@@ -734,15 +734,18 @@ h4::after {
   opacity: 0;
   transition: 0.3s;
   font-size: 13px;
-  margin: 12px auto 0; /* Centers the box horizontally and adds top spacing */
+  margin: 12px auto 0;
   border-radius: 12px;
-  padding: 10px 24px;   /* Added slightly more side padding for text breathing room */
-  background: linear-gradient(135deg, rgba(240, 247, 255, 0.95), rgba(255, 255, 255, 1));
-  color: var(--success-color);
-  width: fit-content;   /* Shrinks the box to perfectly fit the "Copied!" text */
-  min-width: 150px;     /* Prevents it from being too narrow */
-  border: 3px solid #0e5a95;
+  padding: 10px 24px;
+  background: rgba(14, 90, 149, 0.07) !important; /* Soft alpha-translucent blue brand tint */
+  color: #0e5a95 !important;                      /* Crisp matching blue text */
+  border: 2px solid rgba(14, 90, 149, 0.4) !important; /* Elegant semi-transparent blue border */
+  width: fit-content;
+  min-width: 150px;
   text-align: center;
+  box-shadow: 0 6px 16px rgba(14, 90, 149, 0.1);  /* Smooth notification drop shadow */
+  backdrop-filter: blur(6px);                     /* Premium frosted-glass style depth effect */
+  -webkit-backdrop-filter: blur(6px);
 }
 .feedback.show { 
   opacity: 1; 
