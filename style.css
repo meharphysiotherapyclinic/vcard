@@ -727,21 +727,22 @@ h4::after {
   height: 28px;
 }
 
-/* =====================================================
-   FEEDBACKS, MAPS & EXTERNAL ASSETS
-===================================================== */
+/* ========================================= */
+/* FEEDBACK NOTIFICATION                     */
+/* ========================================= */
 .feedback {
   opacity: 0;
   transition: 0.3s;
   font-size: 13px;
-  margin-top: 8px;
+  margin: 12px auto 0; /* Centers the box horizontally and adds top spacing */
   border-radius: 12px;
-  padding: 10px 16px;
-  background: var(--section-bg);
+  padding: 10px 24px;   /* Added slightly more side padding for text breathing room */
+  background: linear-gradient(135deg, rgba(240, 247, 255, 0.95), rgba(255, 255, 255, 1));
   color: var(--success-color);
-  width: 100%;
-  border: 3px solid var(--brand-primary);
-  text-align: left;
+  width: fit-content;   /* Shrinks the box to perfectly fit the "Copied!" text */
+  min-width: 150px;     /* Prevents it from being too narrow */
+  border: 3px solid #0e5a95;
+  text-align: center;
 }
 .feedback.show { 
   opacity: 1; 
