@@ -1,11 +1,11 @@
 /* =====================================================
    PREMIUM UNIFIED VCARD STYLESHEET
    Fonts: DM Sans & DM Serif Display Fully Integrated
-   Fixes: Mobile/Touch Hover States & Specificity Issues
+   Fixes: Left Aligned Phone Number under Clinic Info
 ===================================================== */
 
-/* 1. CORRECT FONT IMPORT AT THE ABSOLUTE TOP OF FILE */
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600;700&display=swap');
+/* CORRECT FONT IMPORT AT THE ABSOLUTE TOP OF FILE */
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght=400;500;600;700&display=swap');
 
 :root {
   --bg: #f7fafc;
@@ -44,7 +44,6 @@ body {
   user-select: none;         
   -webkit-touch-callout: none;
   
-  /* Applying DM Sans globally as required */
   font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
   background: radial-gradient(circle at top right, rgba(14, 90, 149, 0.06), transparent 40%), var(--bg);
   margin: 0;
@@ -55,7 +54,7 @@ body {
   min-height: 100vh;
 }
 
-/* Enable text copying for patient convenience */
+/* Enable text copying for elements */
 .addr, .phone, .clinic-info-section strong {
   -webkit-user-select: text;
   -moz-user-select: text;
@@ -96,7 +95,7 @@ body {
   pointer-events: none;
 }
 
-/* Subtle Architectural Background Grid Background */
+/* Subtle Background Glow Accent */
 .card::after {
   content: '';
   position: absolute;
@@ -122,7 +121,7 @@ body {
 }
 
 /* =====================================================
-   TYPOGRAPHY SYSTEM (DM Serif Display Setup)
+   TYPOGRAPHY SYSTEM
 ===================================================== */
 h1 { 
   font-family: 'DM Serif Display', serif !important;
@@ -236,7 +235,6 @@ h4::after {
   text-align: left;
 }
 
-/* Left Indicator Border Bar Accent */
 .about-section::before,
 .services-box::before,
 .review-section::before,
@@ -294,9 +292,9 @@ h4::after {
   margin-top: 4px;
 }
 
-/* ==========================================================================
-   SERVICES GRID SYSTEM & FIX FOR HOVER STATES (LIGHT MODE)
-   ========================================================================== */
+/* =====================================================
+   SERVICES GRID SYSTEM
+===================================================== */
 .services-box {
   padding: 20px;
 }
@@ -336,7 +334,6 @@ h4::after {
   grid-column: 1 / -1; 
 }
 
-/* Base Service Pills Setup with Strong Defaults */
 .services-grid .service-pill {
   display: flex;
   align-items: center;
@@ -361,7 +358,6 @@ h4::after {
   transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 
-/* Specific Variant Light Theme Settings */
 .services-grid .service-pill.neuro {
   background: #eef7ff !important;
   border: 1px solid #adcffa !important;
@@ -378,7 +374,7 @@ h4::after {
   letter-spacing: 0.5px;
 }
 
-/* FIXED HOVER/ACTIVE INTERACTION STATES FOR BOTH MOBILE AND DESKTOP */
+/* Interactions */
 .services-grid a:hover .service-pill,
 .services-grid a:active .service-pill {
   background: #eef7ff !important;
@@ -407,7 +403,7 @@ h4::after {
 }
 
 /* =====================================================
-   ABOUT ACCORDION ACTION SYSTEM
+   ABOUT ACCORDION SYSTEM
 ===================================================== */
 .about-section summary {
   padding: 16px 20px;
@@ -470,7 +466,7 @@ h4::after {
 }
 
 /* =====================================================
-   ADDRESS & CLINIC INFO SECTION MODULE
+   ADDRESS & CLINIC INFORMATION SECTION (FIXED ALIGNMENT)
 ===================================================== */
 .addr {
   background: rgba(14, 90, 149, 0.04);
@@ -494,27 +490,31 @@ h4::after {
 .clinic-info-section .contact-item {
   display: flex;
   align-items: flex-start;
+  justify-content: flex-start; /* Forced left alignment */
   gap: 12px;
   padding: 14px 0;
+  text-align: left; /* Forced left text alignment */
 }
 
+/* FIXED: Phone item no longer overrides center layout rules */
 .clinic-info-section .contact-item:last-child {
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding-top: 16px;
+  justify-content: flex-start !important;
+  align-items: flex-start !important;
+  text-align: left !important;
+  padding-top: 14px;
 }
 
 .clinic-info-section .contact-item:last-child a {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
+  align-items: flex-start !important;
+  justify-content: flex-start !important;
+  text-align: left !important;
+  width: auto;
 }
 
 .clinic-info-section .contact-item:last-child strong {
-  font-size: 1rem;
-  font-weight: 700;
+  font-size: 0.92rem;
+  font-weight: 600;
 }
 
 .clinic-info-section .contact-item img {
@@ -843,7 +843,6 @@ iframe {
     border-color: #0e5a95 !important;
   }
 
-  /* CORE DARK MODE SERVICE PILLS AND HOVERS - DESIGNED SAFELY FOR TOUCH SCREEN EVENTS */
   .services-grid .service-pill {
     background: #1e293b !important;
     border-color: #334155 !important;
@@ -862,7 +861,6 @@ iframe {
     color: #69ff99 !important;
   }
 
-  /* NO REMOVED OR STRIPPED INTERACTION COLORS - RE-ENGINEERED DEVICE INDEPENDENTLY */
   .services-grid a:hover .service-pill,
   .services-grid a:active .service-pill {
     background: #0e5a95 !important;
@@ -884,7 +882,6 @@ iframe {
     color: #ffffff !important;
   }
 
-  /* Review Adaptive Cards and Wraps */
   .review-section {
     border: 3px solid #4da3ff;
   }
@@ -920,5 +917,13 @@ iframe {
 
   .qr img {
     border: 3px solid #4da3ff !important;
+  }
+
+  /* Dark mode alignment insurance */
+  .clinic-info-section .contact-item:last-child,
+  .clinic-info-section .contact-item:last-child a {
+    justify-content: flex-start !important;
+    align-items: flex-start !important;
+    text-align: left !important;
   }
 }
