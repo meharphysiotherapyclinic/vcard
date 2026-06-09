@@ -916,9 +916,18 @@ iframe {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
   }
 
-  .qr img {
+    .qr img {
     border: 3px solid #4da3ff !important;
   }
+
+  /* Feedback Dark Mode - Vivid High-Contrast Version */
+  .feedback {
+    background: rgba(105, 255, 153, 0.1) !important; /* Translucent green fill */
+    border-color: #69ff99 !important;               /* Vibrant green border */
+    color: #69ff99 !important;                      /* Sharp crisp text */
+    box-shadow: 0 0 14px rgba(105, 255, 153, 0.15); /* Soft premium glow */
+  }
+}
 
   /* Dark mode alignment insurance */
   .clinic-info-section .contact-item:last-child,
