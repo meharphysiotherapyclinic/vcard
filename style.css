@@ -730,6 +730,9 @@ h4::after {
 /* ========================================= */
 /* FEEDBACK NOTIFICATION                     */
 /* ========================================= */
+/* ========================================= */
+/* FEEDBACK NOTIFICATION                     */
+/* ========================================= */
 .feedback {
   opacity: 0;
   transition: 0.3s;
@@ -737,15 +740,14 @@ h4::after {
   margin: 12px auto 0;
   border-radius: 12px;
   padding: 10px 24px;
-  background: rgba(14, 90, 149, 0.07) !important; /* Soft alpha-translucent blue brand tint */
-  color: #0e5a95 !important;                      /* Crisp matching blue text */
-  border: 2px solid rgba(14, 90, 149, 0.4) !important; /* Elegant semi-transparent blue border */
+  background: rgba(77, 163, 255, 0.16) !important; /* Saturated translucent electric blue tint */
+  border: 2.5px solid #4da3ff !important;          /* Sharp, highly-vibrant blue border */
+  color: #0e5a95 !important;                      /* Deep crisp blue text for absolute clarity */
+  font-weight: 700;                               /* Bold text style to maximize presence */
   width: fit-content;
   min-width: 150px;
   text-align: center;
-  box-shadow: 0 6px 16px rgba(14, 90, 149, 0.1);  /* Smooth notification drop shadow */
-  backdrop-filter: blur(6px);                     /* Premium frosted-glass style depth effect */
-  -webkit-backdrop-filter: blur(6px);
+  box-shadow: 0 0 16px rgba(77, 163, 255, 0.45);  /* Radiant colored neon glow effect */
 }
 .feedback.show { 
   opacity: 1; 
