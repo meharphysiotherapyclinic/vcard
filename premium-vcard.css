@@ -1,0 +1,739 @@
+/* =====================================================
+   PREMIUM VCARD UPGRADE
+   LOAD AFTER style.css
+   Blue Brand Version
+===================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600;700&display=swap');
+
+/* =====================================================
+   GLOBAL
+===================================================== */
+
+body{
+
+font-family:'DM Sans',sans-serif !important;
+
+background:
+radial-gradient(
+circle at top right,
+rgba(14,90,149,.06),
+transparent 40%),
+#f7fafc;
+
+}
+
+/* =====================================================
+   CARD
+===================================================== */
+
+.card{
+
+position:relative;
+
+overflow:hidden;
+
+border:2px solid rgba(14,90,149,.32);
+
+border-radius:22px;
+
+padding:22px 22px 28px;
+
+background:
+
+linear-gradient(
+135deg,
+rgba(255,255,255,.97),
+rgba(245,249,255,.98));
+
+box-shadow:
+
+0 14px 40px rgba(0,0,0,.08),
+
+0 3px 12px rgba(14,90,149,.08);
+
+}
+
+/* gradient border */
+
+.card::before{
+
+content:'';
+
+position:absolute;
+
+inset:0;
+
+border-radius:22px;
+
+padding:1.5px;
+
+background:
+
+linear-gradient(
+135deg,
+rgba(14,90,149,.75),
+rgba(77,163,255,.32),
+rgba(14,90,149,.50));
+
+-webkit-mask:
+linear-gradient(#fff 0 0) content-box,
+linear-gradient(#fff 0 0);
+
+-webkit-mask-composite:xor;
+
+mask-composite: exclude;
+
+pointer-events:none;
+
+}
+
+/* mesh overlay */
+
+.card::after{
+
+content:'';
+
+position:absolute;
+
+inset:0;
+
+pointer-events:none;
+
+background:
+
+radial-gradient(
+circle at 90% 10%,
+rgba(14,90,149,.07),
+transparent 30%),
+
+radial-gradient(
+circle at 10% 90%,
+rgba(77,163,255,.05),
+transparent 35%);
+
+}
+
+/* content above overlays */
+
+.card > *{
+
+position:relative;
+
+z-index:2;
+
+}
+
+/* =====================================================
+   LOGO
+===================================================== */
+
+.logo{
+
+width:115px;
+
+border-radius:8px;
+
+border:none !important;
+
+box-shadow:
+0 8px 22px rgba(14,90,149,.18);
+
+transition:all .28s ease;
+
+}
+
+/* =====================================================
+   TYPOGRAPHY
+===================================================== */
+
+h1{
+
+font-family:'DM Serif Display',serif;
+
+font-size:1.45rem;
+
+color:#0e5a95;
+
+line-height:1.2;
+
+letter-spacing:-0.3px;
+
+margin-top:10px;
+
+}
+
+h1::after{
+
+content:'';
+
+display:block;
+
+width:55px;
+
+height:3px;
+
+margin:10px auto 0;
+
+border-radius:5px;
+
+background:
+
+linear-gradient(
+90deg,
+#0e5a95,
+#4da3ff);
+
+}
+
+.name{
+
+font-size:1rem;
+
+color:#1e293b;
+
+}
+
+.title{
+
+color:#2f68ba;
+
+font-weight:700;
+
+letter-spacing:.4px;
+
+}
+
+/* H4 HEADINGS */
+
+h4{
+
+font-family:'DM Serif Display',serif;
+
+font-size:0.95rem;
+
+font-weight:700;
+
+color:#0e5a95;
+
+letter-spacing:-0.2px;
+
+margin:18px 0 10px;
+
+position:relative;
+
+display:inline-block;
+
+padding-bottom:4px;
+
+}
+
+/* Premium underline */
+
+h4::after{
+
+content:'';
+
+position:absolute;
+
+left:0;
+
+bottom:0;
+
+width:70%;
+
+height:2px;
+
+border-radius:10px;
+
+background:
+
+linear-gradient(
+90deg,
+#0e5a95,
+#4da3ff);
+
+}
+
+/* =====================================================
+   TAGLINES
+===================================================== */
+
+.tagline{
+
+display:inline-flex;
+
+align-items:center;
+
+gap:8px;
+
+background:
+rgba(14,90,149,.08);
+
+border:
+1px solid rgba(14,90,149,.18);
+
+padding:8px 16px;
+
+border-radius:999px;
+
+margin:10px 0 6px;
+
+font-size:.72rem;
+
+font-weight:600;
+
+color:#2f68ba;
+
+}
+
+.tagline-icon{
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+width:34px;
+
+height:34px;
+
+border-radius:50%;
+
+background:#ffffff;
+
+border:2px solid #0e5a95;
+
+box-shadow:
+0 3px 8px rgba(14,90,149,.18);
+
+flex-shrink:0;
+
+}
+
+.tagline-icon img{
+
+width:22px;
+
+height:22px;
+
+object-fit:contain;
+
+filter:none;
+
+}
+
+/* =====================================================
+   ADDRESS
+===================================================== */
+
+.addr{
+
+background:
+rgba(14,90,149,.04);
+
+border-radius:16px;
+
+padding:14px;
+
+margin-top:10px;
+
+line-height:1.65;
+
+}
+
+.clinic-info-section .contact-item img{
+
+width:20px !important;
+
+height:20px !important;
+
+flex-shrink:0;
+
+}
+
+/* =====================================================
+   PREMIUM SECTIONS
+===================================================== */
+
+.about-section,
+.services-box,
+.review-section,
+.contact-section,
+.clinic-info-section{
+
+position:relative;
+
+border:none !important;
+
+border-radius:20px;
+
+overflow:hidden;
+
+background:
+
+linear-gradient(
+135deg,
+rgba(255,255,255,.95),
+rgba(245,249,255,.98));
+
+box-shadow:
+0 8px 24px rgba(0,0,0,.06);
+
+transition:all .28s ease;
+
+}
+
+.about-section::before,
+.services-box::before,
+.review-section::before,
+.contact-section::before,
+.clinic-info-section::before{
+
+content:'';
+
+position:absolute;
+
+top:0;
+left:0;
+
+width:4px;
+
+height:100%;
+
+background:#0e5a95;
+
+pointer-events:none;
+
+}
+
+.about-section::after,
+.services-box::after,
+.review-section::after,
+.contact-section::after,
+.clinic-info-section::after{
+
+content:'';
+
+position:absolute;
+
+inset:0;
+
+pointer-events:none;
+
+background:
+
+radial-gradient(
+ellipse at 95% 10%,
+rgba(14,90,149,.05),
+transparent 55%);
+
+}
+
+/* =====================================================
+   HEADINGS
+===================================================== */
+
+.main-services-heading,
+.main-reviews-heading,
+.about-section summary{
+
+font-family:'DM Serif Display',serif;
+
+font-size:1.15rem;
+
+font-weight:700;
+
+color:#0e5a95 !important;
+
+letter-spacing:-0.2px;
+
+line-height:1.3;
+
+}
+
+/* Optional: slightly smaller helper text under headings */
+
+.main-services-heading .tap-note,
+.main-reviews-heading .tap-note{
+
+display:block;
+
+font-family:'DM Sans',sans-serif;
+
+font-size:0.7rem;
+
+font-weight:500;
+
+color:#64748b;
+
+letter-spacing:0;
+
+margin-top:4px;
+
+}
+
+/* =====================================================
+   BUTTONS
+===================================================== */
+
+.btn{
+
+border-radius:16px;
+
+position:relative;
+
+overflow:hidden;
+
+will-change:transform;
+
+box-shadow:
+0 6px 18px rgba(0,0,0,.12);
+
+transition:
+transform .25s ease,
+box-shadow .25s ease,
+filter .25s ease;
+
+}
+
+@media (hover:hover){
+
+.btn:hover{
+
+transform:translateY(-3px);
+
+box-shadow:
+0 12px 26px rgba(0,0,0,.16);
+
+filter:brightness(1.05);
+
+}
+
+}
+
+.btn:active{
+
+transform:scale(.96);
+
+box-shadow:
+0 4px 10px rgba(0,0,0,.18);
+
+}
+
+.btn::after{
+
+content:'';
+
+position:absolute;
+
+top:0;
+
+left:-120%;
+
+width:60%;
+
+height:100%;
+
+background:
+
+linear-gradient(
+90deg,
+transparent,
+rgba(255,255,255,.22),
+transparent);
+
+transition:left .6s ease;
+
+}
+
+@media (hover:hover){
+
+.btn:hover::after{
+
+left:150%;
+
+}
+
+}
+
+/* =====================================================
+   REVIEWS
+===================================================== */
+
+.review-card{
+
+background:#ffffff;
+
+border:none !important;
+
+box-shadow:
+0 8px 20px rgba(0,0,0,.08);
+
+transition:all .28s ease;
+
+}
+
+.qr img{
+
+border:none !important;
+
+box-shadow:
+0 8px 25px rgba(0,0,0,.10);
+
+}
+
+/* =====================================================
+   DARK MODE
+===================================================== */
+
+@media(prefers-color-scheme:dark){
+
+body{
+
+background:#111827;
+
+}
+
+.card{
+
+border:2px solid rgba(77,163,255,.40);
+
+}
+
+.card,
+.services-box,
+.review-section,
+.about-section,
+.contact-section,
+.clinic-info-section{
+
+background:
+
+linear-gradient(
+135deg,
+#121824,
+#0f172a);
+
+}
+
+h1,
+.main-services-heading,
+.main-reviews-heading,
+.about-section summary{
+
+color:#4da3ff !important;
+
+}
+
+.main-services-heading .tap-note,
+.main-reviews-heading .tap-note{
+
+color:#94a3b8;
+
+}
+
+h4{
+
+color:#4da3ff;
+
+}
+
+.tagline{
+
+background:
+rgba(14,90,149,.18);
+
+color:#4da3ff;
+
+}
+
+.tagline-icon{
+
+background:
+linear-gradient(
+135deg,
+#0e5a95,
+#4da3ff);
+
+}
+
+.addr{
+
+background:
+rgba(255,255,255,.04);
+
+}
+
+.name,
+.title,
+.addr,
+.phone{
+
+color:#f0f0f0;
+
+}
+
+.logo{
+
+box-shadow:
+0 8px 24px rgba(0,0,0,.5);
+
+}
+
+.btn{
+
+box-shadow:
+0 6px 18px rgba(0,0,0,.45);
+
+}
+
+.services-grid .service-pill{
+
+background:#1e293b !important;
+
+border-color:#334155 !important;
+
+color:#f0f0f0 !important;
+
+}
+
+@media (hover:hover){
+
+.services-grid a:hover .service-pill{
+
+background:#0e5a95 !important;
+
+border-color:#4da3ff !important;
+
+}
+
+}
+
+.review-card{
+
+background:#1f2937;
+
+}
+
+.review-text{
+
+color:#f0f0f0;
+
+}
+
+.review-author span{
+
+color:#a8b3c2;
+
+}
+
+.addr img,
+.phone img{
+
+filter:brightness(1.15);
+
+}
+
+}
