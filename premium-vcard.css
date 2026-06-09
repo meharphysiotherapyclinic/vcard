@@ -494,13 +494,51 @@ align-items:flex-start;
 
 gap:12px;
 
-padding:12px 0;
+padding:14px 0;
 
 }
 
-.clinic-info-section .contact-item + .contact-item{
+.clinic-info-section .contact-item:last-child{
 
-border-top:1px solid rgba(14,90,149,.10);
+justify-content:center;
+
+align-items:center;
+
+text-align:center;
+
+padding-top:16px;
+
+}
+
+/* Phone row centered */
+
+.clinic-info-section .contact-item:last-child{
+
+justify-content:center;
+
+align-items:center;
+
+text-align:center;
+
+}
+
+.clinic-info-section .contact-item:last-child a{
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+width:100%;
+
+}
+
+.clinic-info-section .contact-item:last-child strong{
+
+font-size:1rem;
+
+font-weight:700;
 
 }
 
