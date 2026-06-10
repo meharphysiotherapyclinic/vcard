@@ -54,6 +54,15 @@ body {
   min-height: 100vh;
 }
 
+/* ========================================= */
+/* ULTRA-NARROW SCREEN OPTIMIZATIONS         */
+/* ========================================= */
+@media (max-width: 360px) {
+  h1 { font-size: 18px; }
+  .name { font-size: 15px; }
+  .btn { font-size: 13px; }
+}
+
 /* Enable text copying for elements */
 .addr, .phone, .clinic-info-section strong {
   -webkit-user-select: text;
