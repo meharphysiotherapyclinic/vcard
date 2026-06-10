@@ -8,9 +8,9 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght=400;500;600;700&display=swap');
 
 :root {
-  --bg: #f7fafc;
-  --card-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.97), rgba(245, 249, 255, 0.98));
-  --section-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(245, 249, 255, 0.98));
+  --bg: #f1f5f9; /* Slate page background to let the main card stand out */
+  --card-bg: linear-gradient(135deg, #f8fafc, #edf2f7); /* Elegant off-white card canvas */
+  --section-bg: #ffffff; /* Pure crisp white for inner sections to give maximum card-pop contrast */
   --text: #161617;
   --muted: #555555;
   --brand-primary: #0e5a95;
@@ -235,7 +235,8 @@ h4::after {
   border-radius: 20px;
   overflow: hidden;
   background: var(--section-bg);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  /* Enhanced multi-depth shadow to make inner items lift up from the card base */
+  box-shadow: 0 10px 28px rgba(14, 90, 149, 0.06), 0 3px 10px rgba(0, 0, 0, 0.03);
   transition: all 0.28s ease;
   text-align: left;
 }
@@ -803,10 +804,10 @@ h4::after {
    ========================================================================== */
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #111827;
+    --bg: #0b0f19; /* Deeper midnight background */
     --text: #f0f0f0;
-    --card-bg: linear-gradient(135deg, #121824, #0f172a);
-    --section-bg: linear-gradient(135deg, #121824, #0f172a);
+    --card-bg: linear-gradient(135deg, #111622, #0d121c); /* Dark baseline canvas */
+    --section-bg: #1e293b; /* Distinctly lighter Slate-800 surface layer that POPs out beautifully */
     --brand-primary: #4da3ff;
     --success-bg: #143521;
     --success-color: #69ff99;
@@ -865,9 +866,9 @@ h4::after {
     border-color: #0e5a95 !important;
   }
 
-  .services-grid .service-pill {
-    background: #1e293b !important;
-    border-color: #334155 !important;
+    .services-grid .service-pill {
+    background: #131c2a !important; /* Darker navy-tinted insert look for clear definition */
+    border-color: rgba(77, 163, 255, 0.15) !important;
     color: #f0f0f0 !important;
   }
 
@@ -908,8 +909,9 @@ h4::after {
     border: 3px solid #4da3ff;
   }
 
-  .review-card {
-    background: #1f2937;
+    .review-card {
+    background: #131c2a; /* Balanced dark container matching pills */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   }
 
   .review-text {
@@ -941,14 +943,13 @@ h4::after {
     border: 3px solid #4da3ff !important;
   }
 
-  /* Feedback Dark Mode - Vivid High-Contrast Version */
+    /* Feedback Dark Mode - Vivid High-Contrast Version */
   .feedback {
-    background: rgba(105, 255, 153, 0.1) !important; /* Translucent green fill */
-    border-color: #69ff99 !important;               /* Vibrant green border */
-    color: #69ff99 !important;                      /* Sharp crisp text */
-    box-shadow: 0 0 14px rgba(105, 255, 153, 0.15); /* Soft premium glow */
+    background: rgba(105, 255, 153, 0.1) !important; 
+    border-color: #69ff99 !important;               
+    color: #69ff99 !important;                      
+    box-shadow: 0 0 14px rgba(105, 255, 153, 0.15); 
   }
-}
 
   /* Dark mode alignment insurance */
   .clinic-info-section .contact-item:last-child,
@@ -957,13 +958,14 @@ h4::after {
     align-items: flex-start !important;
     text-align: left !important;
   }
-}
+} /* This bracket correctly closes the dark mode query block */
 
-/* ========================================= */
-/* ULTRA-NARROW SCREEN OPTIMIZATIONS         */
-/* ========================================= */
+/* ==========================================================================
+   ULTRA-NARROW SCREEN OPTIMIZATIONS (CORRECTED STRUCTURE)
+   ========================================================================== */
 @media (max-width: 360px) {
   h1 { font-size: 18px; }
   .name { font-size: 15px; }
   .btn { font-size: 13px; }
 }
+
