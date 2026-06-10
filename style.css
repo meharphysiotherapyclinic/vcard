@@ -199,8 +199,8 @@ h4::after {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 34px;
-  height: 34px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   background: #ffffff;
   border: 2px solid var(--brand-primary);
@@ -209,8 +209,8 @@ h4::after {
 }
 
 .tagline-icon img {
-  width: 22px;
-  height: 22px;
+  width: 18px;
+  height: 18px;
   object-fit: contain;
   filter: none;
 }
