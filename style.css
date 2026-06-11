@@ -209,7 +209,7 @@ h4::after {
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background: #ffffff;
+  background: var(--brand-primary);
   border: 2px solid var(--brand-primary);
   box-shadow: 0 3px 8px rgba(14, 90, 149, 0.18);
   flex-shrink: 0;
