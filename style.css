@@ -105,14 +105,16 @@ body {
 }
 
 .logo { 
-  width: 115px;
-  max-width: 100px; 
-  margin-bottom: 10px; 
-  border-radius: 8px; 
+  width: 85px;                 /* Fixed sleek width for mobile */
+  height: 60px;                /* Proportional height to fit your landscape logo perfectly */
+  display: block;              /* Allows proper centering */
+  margin: 0 auto 10px auto;    /* Centers the logo horizontally with spacing below */
+  border-radius: 6px;          /* Applies clean, visible rounded corners */
   border: none !important;
-  box-shadow: 0 8px 22px rgba(14, 90, 149, 0.18);
+  box-shadow: 0 4px 14px rgba(14, 90, 149, 0.14); /* Soft, elegant shadow */
   transition: all 0.28s ease;
 }
+
 
 /* =====================================================
    TYPOGRAPHY SYSTEM
@@ -424,6 +426,8 @@ h4::after {
   outline: none;
   -webkit-tap-highlight-color: transparent;
   text-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .about-section summary::after {
@@ -524,14 +528,6 @@ h4::after {
   font-size: 0.92rem;
   font-weight: 600;
 }
-
-.clinic-info-section .contact-item img {
-  width: 20px !important;
-  height: 20px !important;
-  margin-top: 3px;
-  flex-shrink: 0;
-}
-
 .clinic-info-section strong {
   font-size: 0.92rem;
   line-height: 1.65;
@@ -667,13 +663,6 @@ h4::after {
   transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
 }
 
-.btn img {
-  width: 18px;
-  height: 18px;
-  object-fit: contain;
-  flex-shrink: 0;
-}
-
 .btn::before {
   content: '';
   position: absolute;
@@ -734,12 +723,10 @@ h4::after {
 .copy { background: var(--copy); }
 .google-btn { background: #4285F4; }
 
-.google-btn img {
-  background-color: #3c4043;
-  border-radius: 50%;
-  padding: 3px;
-  width: 28px;
-  height: 28px;
+.more-link {
+  width: 100%;
+  max-width: 360px;
+  margin: 15px auto;
 }
 
 /* ========================================= */
@@ -855,10 +842,6 @@ h4::after {
   .addr {
     background: rgba(255, 255, 255, 0.04);
   }
-  
-  .addr img, .phone img {
-    filter: brightness(1.15);
-  }
 
   .about-content {
     color: #ffffff;
@@ -956,6 +939,81 @@ h4::after {
     text-align: left !important;
   }
 } 
+
+/* =====================================================
+   SECTION HEADING (Clinic Info & Contact)
+===================================================== */
+.section-heading {
+  font-family: 'DM Serif Display', serif !important;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--brand-primary) !important;
+  letter-spacing: -0.2px;
+  line-height: 1.3;
+  margin: 0;
+  padding: 16px 8px 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* =====================================================
+   QR LABEL
+===================================================== */
+.qr-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+  margin: 0 0 8px;
+  text-align: center;
+}
+
+/* =====================================================
+   SVG ICON SYSTEM
+===================================================== */
+.icon {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  flex-shrink: 0;
+  vertical-align: middle;
+}
+
+.contact-item .icon {
+  color: #e53935;
+}
+
+.clinic-info-section .contact-item .icon {
+  margin-top: 3px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .clinic-info-section .contact-item .icon {
+    filter: brightness(1.15);
+  }
+}
+
+.btn .icon {
+  color: #fff;
+}
+
+/* Google icon override */
+.google-btn svg.google-icon {
+  color: #111622 !important;
+  width: 28px !important;
+  height: 28px !important;
+  vertical-align: -6px !important;
+}
+
+.tagline-icon {
+  color: #FFCC00;
+}
+
+@media (prefers-color-scheme: dark) {
+  .contact-item .icon {
+    color: #e53935;
+  }
+}
 
 /* ==========================================================================
    ULTRA-NARROW SCREEN OPTIMIZATIONS (CORRECTED STRUCTURE)
