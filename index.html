@@ -12,12 +12,16 @@
     <meta name="color-scheme" content="light dark">
     <!-- PWA -->
     <link rel="manifest" href="manifest.json">
-    <link rel="apple-touch-icon" href="logo.png">
-    <meta property="og:title" content="Dr. Govindpreet Singh | Mehar Physiotherapy Clinic" />
+    <link class="apple-touch-icon" href="logo.png">
+    
+    <!-- Fix 7: Aligned og:title with <title> and added og:site_name -->
+    <meta property="og:title" content="Best Physiotherapist in Gaur City 2 | Mehar Physiotherapy Clinic Greater Noida West" />
+    <meta property="og:site_name" content="Mehar Physiotherapy Clinic" />
     <meta property="og:description" content="Senior Physiotherapist in Gaur City 2, Greater Noida West. Professional care for pain relief and rehab." />
     <meta property="og:image" content="https://meharphysiotherapyclinic.github.io/vcard/logo.webp" />
     <meta property="og:url" content="https://meharphysiotherapyclinic.github.io/vcard/" />
     <meta property="og:type" content="website" />
+    
     <meta name="google-site-verification" content="google6d91481cd7d4c371" />
     <meta name="msvalidate.01" content="E76D8F3241A1CA7BF1BA3E868527348B" />
     <link rel="stylesheet" href="style.css">
@@ -49,7 +53,8 @@
           "latitude": 28.6237519,
           "longitude": 77.4219542
         },
-        "areaServed": ["Gaur City 1", "Gaur City 2", "Greater Noida West", "Noida Extension", "Techzone 4"],
+        /* Fix 5: Added Crossing Republic to areaServed schema */
+        "areaServed": ["Gaur City 1", "Gaur City 2", "Greater Noida West", "Noida Extension", "Techzone 4", "Crossing Republic"],
         "openingHoursSpecification": {
           "@type": "OpeningHoursSpecification",
           "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
@@ -103,46 +108,70 @@
     </script>
   </head>
   <body>
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+ <symbol id="icon-award" viewBox="0 0 24 24">
+  <path fill="currentColor" d="M12 2a7 7 0 1 0 0 14a7 7 0 0 0 0-14zm0 3a4 4 0 1 1 0 8a4 4 0 0 1 0-8zm-2 8l-2 9l4-2l4 2l-2-9z"/>
+</symbol>
+ <symbol id="icon-phone" viewBox="0 0 24 24">
+    <path fill="currentColor" d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 0 0-1.01.24l-2.2 2.2c-2.83-1.44-5.15-3.75-6.59-6.59l2.2-2.21c.28-.26.36-.65.25-1A11.36 11.36 0 0 1 8.6 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17c.55 0 1-.45 1-1v-3.58c0-.57-.46-1.04-1-1.04z"/>
+  </symbol>
+  <symbol id="icon-location" viewBox="0 0 24 24">
+    <path fill="currentColor" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5s2.5 1.12 2.5 2.5s-1.12 2.5-2.5 2.5z"/>
+  </symbol>
+  <symbol id="icon-website" viewBox="0 0 24 24">
+    <path fill="currentColor" d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm6.93 6h-2.95a15.65 15.65 0 0 0-1.38-3.56A8.03 8.03 0 0 1 18.93 8zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2s.06 1.34.14 2H4.26zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56A7.987 7.987 0 0 1 5.08 16zm2.95-8H5.08a7.987 7.987 0 0 1 4.33-3.56A15.65 15.65 0 0 0 8.03 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66c-.09-.66-.16-1.32-.16-2s.07-1.34.16-2h4.68c.09.65.16 1.32.16 2s-.07 1.34-.16 2zm.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95a7.987 7.987 0 0 1-4.33 3.56zM16.36 14c.08-.66.14-1.32.14-2s-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2h-3.38z"/>
+  </symbol>
+  <symbol id="icon-whatsapp" viewBox="0 0 24 24">
+  <path fill="currentColor" d="M12 2a10 10 0 0 0-8.78 14.79L2 22l5.37-1.18A10 10 0 1 0 12 2zm5.02 13.62c-.21.58-1.23 1.11-1.7 1.18c-.44.07-.99.1-1.6-.1c-.37-.12-.85-.28-1.46-.54c-2.57-1.11-4.25-3.84-4.38-4.01c-.13-.17-1.04-1.38-1.04-2.64s.66-1.88.89-2.14c.23-.26.5-.33.66-.33h.48c.15 0 .35-.06.54.39c.21.5.71 1.73.77 1.85c.06.13.1.28.02.45c-.08.17-.12.28-.25.43c-.13.15-.27.33-.39.44c-.13.13-.26.27-.11.53c.15.26.66 1.09 1.42 1.77c.98.87 1.81 1.14 2.07 1.27c.26.13.41.11.56-.07c.15-.17.65-.76.82-1.02c.17-.26.35-.22.58-.13c.24.09 1.5.71 1.76.84c.26.13.43.19.5.3c.07.11.07.65-.14 1.23z"/>
+</symbol>
+        <symbol id="icon-google" viewBox="0 0 24 24">
+  <path fill="currentColor" d="M12 2a9.96 9.96 0 0 1 6.29 2.226a1 1 0 0 1 .04 1.52l-1.51 1.362a1 1 0 0 1 -1.265 .06a6 6 0 1 0 2.103 6.836l.001 -.004h-3.66a1 1 0 0 1 -.992 -.883l-.007 -.117v-2a1 1 0 0 1 1 -1h6.945a1 1 0 0 1 .994 .89c.04 .367 .061 .737 .061 1.11c0 5.523 -4.477 10 -10 10s-10 -4.477 -10 -10s4.477 -10 10 -10z" />
+</symbol>
+  <symbol id="icon-save" viewBox="0 0 24 24">
+    <path fill="currentColor" d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3s3 1.34 3 3s-1.34 3-3 3zm3-10H5V5h10v4z"/>
+  </symbol>
+  <symbol id="icon-share" viewBox="0 0 24 24">
+    <path fill="currentColor" d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81c1.66 0 3-1.34 3-3s-1.34-3-3-3s-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65c0 1.61 1.31 2.92 2.92 2.92c1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
+  </symbol>
+  <symbol id="icon-link" viewBox="0 0 24 24">
+    <path fill="currentColor" d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+  </symbol>
+</svg>
     <div class="card">
-      <img src="logo.webp" class="logo" alt="Mehar Physiotherapy Clinic Gaur City Greater Noida West" />
+      <!-- Fix 1: Added explicit layout width/height to avoid CLS layout shifts -->
+      <img src="logo.webp" class="logo" width="85" height="60" alt="Mehar Physiotherapy Clinic Gaur City Greater Noida West" />
      <h1>MEHAR PHYSIOTHERAPY CLINIC</h1>
-
 <h2 class="clinic-subheading">
 Best Physiotherapy Clinic in Gaur City 2, Greater Noida West
 </h2>
-
 <p class="name">
 <strong>Dr. Govindpreet Singh Arneja (B.P.T., M.I.A.P.)</strong>
 </p>
-
 <p class="title">
 <strong>Senior Physiotherapist</strong>
 </p>
-
 <div class="tagline">
-
   <span class="tagline-icon">
-    <img src="https://cdn-icons-png.flaticon.com/512/2966/2966327.png" alt="Experience">
+    <svg class="icon experience-icon">
+  <use href="#icon-award"></use>
+</svg>
   </span>
-
   20+ Years Experience • Advanced Rehab Care
-
 </div>
-
 <div class="tagline">
 Ortho Rehab • Neuro Rehab • Sports Physiotherapy
 </div>
       <div class="clinic-info-section">
-
-  <h3 class="main-services-heading" style="padding:16px 8px 4px;">
+  <h3 class="section-heading">
   Clinic Information
   <small class="tap-note">
     Address & Contact Details
   </small>
   </h3>
-
   <div class="contact-item">
-  <img src="https://cdn-icons-png.flaticon.com/512/684/684908.png" aria-hidden="true" alt="">
+  <svg class="icon location-icon">
+  <use href="#icon-location"></use>
+</svg>
   <strong>
     F-42 (Ground Floor), 16th Avenue,<br>
     Gaur City 2, Greater Noida West,<br>
@@ -151,33 +180,34 @@ Ortho Rehab • Neuro Rehab • Sports Physiotherapy
     Gautam Buddha Nagar – 201318 (U.P.)
   </strong>
 </div>
-
 <div class="contact-item">
-  <img src="https://cdn-icons-png.flaticon.com/512/3059/3059498.png" aria-hidden="true" alt="">
+  <svg class="icon phone-icon">
+  <use href="#icon-phone"></use>
+</svg>
   <a href="tel:+919810359247">
     <strong>+91 9810359247</strong>
   </a>
 </div>
-
 </div>
       
       <details class="about-section">
-  <summary style="user-select: none;">About Dr. Arneja</summary>
+  <summary>About Dr. Arneja</summary>
   
         <div class="about-content">
-<img src="doctor.webp" alt="Dr. Govindpreet Singh Arneja" class="doctor-img">
-
+<!-- Fix 6: Added loading="lazy" for doctor image -->
+<img src="doctor.webp" alt="Dr. Govindpreet Singh Arneja" class="doctor-img" loading="lazy">
 <p>
   <strong>Dr. Govindpreet Singh Arneja (B.P.T., M.I.A.P.)</strong> is a Senior Physiotherapist with <strong>over 20 years of clinical experience</strong> in Greater Noida West.
 </p>
-
 <p>
   At Mehar Physiotherapy Clinic, he provides specialized care for:
-  <br>• <strong>Neuro Rehab:</strong> Stroke, Paralysis, Parkinson’s, Bell’s Palsy.
-  <br>• <strong>Orthopedic:</strong> Slip Disc, Sciatica, Frozen Shoulder, Back/Neck Pain.
-  <br>• <strong>Advanced Care:</strong> Sports Injury & Post-Surgical Rehabilitation.
 </p>
-
+<!-- Fix 8: Converted raw br list tokens to standard semantic ul list elements -->
+<ul>
+  <li><strong>Neuro Rehab:</strong> Stroke, Paralysis, Parkinson’s, Bell’s Palsy.</li>
+  <li><strong>Orthopedic:</strong> Slip Disc, Sciatica, Frozen Shoulder, Back/Neck Pain.</li>
+  <li><strong>Advanced Care:</strong> Sports Injury & Post-Surgical Rehabilitation.</li>
+</ul>
 <p>
   Utilizing <strong>Manual Therapy</strong> and <strong>PNF techniques</strong>, Dr. Arneja delivers personalized, one-on-one treatment to restore your mobility and confidence.
 </p>
@@ -189,52 +219,47 @@ Ortho Rehab • Neuro Rehab • Sports Physiotherapy
     Physiotherapy Services
     <small class="tap-note">Tap any service to learn more ↗</small>
   </h3>
-
   <h4 class="service-category">Orthopaedic Conditions</h4>
   <div class="services-grid">
-    <a href="https://meharphysiotherapyclinic.github.io/website/blog5.html" target="_blank" rel="noopener" title="Back Pain Physiotherapy Treatment in Gaur City 2, Greater Noida West"><span class="service-pill">Back Pain ↗</span></a>
-    <a href="https://meharphysiotherapyclinic.github.io/website/blog4.html" target="_blank" rel="noopener" title="Neck Pain Physiotherapy Treatment in Gaur City 2, Greater Noida West"><span class="service-pill">Neck Pain ↗</span></a>
-    <a href="https://meharphysiotherapyclinic.github.io/website/blog18.html" target="_blank" rel="noopener" title="Knee Pain Physiotherapy Treatment in Gaur City 2, Greater Noida West"><span class="service-pill">Knee Pain ↗</span></a>
-    <a href="https://meharphysiotherapyclinic.github.io/website/blog12.html" target="_blank" rel="noopener" title="Frozen Shoulder Physiotherapy Treatment in Gaur City 2, Greater Noida West"><span class="service-pill">Frozen Shoulder ↗</span></a>
-    <a href="https://meharphysiotherapyclinic.github.io/website/blog17.html" target="_blank" rel="noopener" title="Slip Disc Physiotherapy Treatment in Gaur City 2, Greater Noida West"><span class="service-pill">Slip Disc ↗</span></a>
-    <a href="https://meharphysiotherapyclinic.github.io/website/blog14.html" target="_blank" rel="noopener" title="Sciatica Physiotherapy Treatment in Gaur City 2, Greater Noida West"><span class="service-pill">Sciatica ↗</span></a>
-    <a href="https://meharphysiotherapyclinic.github.io/website/blog13.html" target="_blank" rel="noopener" title="Tennis Elbow Physiotherapy Treatment in Gaur City 2, Greater Noida West"><span class="service-pill">Tennis Elbow ↗</span></a>
-    <a href="https://meharphysiotherapyclinic.github.io/website/blog28.html" target="_blank" rel="noopener" title="Tailbone Pain Coccydynia Physiotherapy Treatment in Gaur City 2, Greater Noida West"><span class="service-pill">Tailbone Pain (Coccydynia) ↗</span></a>
+    <!-- Fix 4: Appended noreferrer to all target="_blank" tags across service categories -->
+    <a href="https://meharphysiotherapyclinic.github.io/website/blog5.html" target="_blank" rel="noopener noreferrer" title="Back Pain Physiotherapy Treatment in Gaur City 2, Greater Noida West"><span class="service-pill">Back Pain ↗</span></a>
+    <a href="https://meharphysiotherapyclinic.github.io/website/blog4.html" target="_blank" rel="noopener noreferrer" title="Neck Pain Physiotherapy Treatment in Gaur City 2, Greater Noida West"><span class="service-pill">Neck Pain ↗</span></a>
+    <a href="https://meharphysiotherapyclinic.github.io/website/blog18.html" target="_blank" rel="noopener noreferrer" title="Knee Pain Physiotherapy Treatment in Gaur City 2, Greater Noida West"><span class="service-pill">Knee Pain ↗</span></a>
+    <a href="https://meharphysiotherapyclinic.github.io/website/blog12.html" target="_blank" rel="noopener noreferrer" title="Frozen Shoulder Physiotherapy Treatment in Gaur City 2, Greater Noida West"><span class="service-pill">Frozen Shoulder ↗</span></a>
+    <a href="https://meharphysiotherapyclinic.github.io/website/blog17.html" target="_blank" rel="noopener noreferrer" title="Slip Disc Physiotherapy Treatment in Gaur City 2, Greater Noida West"><span class="service-pill">Slip Disc ↗</span></a>
+    <a href="https://meharphysiotherapyclinic.github.io/website/blog14.html" target="_blank" rel="noopener noreferrer" title="Sciatica Physiotherapy Treatment in Gaur City 2, Greater Noida West"><span class="service-pill">Sciatica ↗</span></a>
+    <a href="https://meharphysiotherapyclinic.github.io/website/blog13.html" target="_blank" rel="noopener noreferrer" title="Tennis Elbow Physiotherapy Treatment in Gaur City 2, Greater Noida West"><span class="service-pill">Tennis Elbow ↗</span></a>
+    <a href="https://meharphysiotherapyclinic.github.io/website/blog28.html" target="_blank" rel="noopener noreferrer" title="Tailbone Pain Coccydynia Physiotherapy Treatment in Gaur City 2, Greater Noida West"><span class="service-pill">Tailbone Pain (Coccydynia) ↗</span></a>
   </div>
-
   <h4 class="service-category">Neurological Conditions</h4>
   <div class="services-grid">
-    <a href="https://meharphysiotherapyclinic.github.io/website/blog10.html" target="_blank" rel="noopener" title="Stroke Rehabilitation Physiotherapy in Gaur City 2, Greater Noida West"><span class="service-pill neuro">Stroke Recovery ↗</span></a>
-    <a href="https://meharphysiotherapyclinic.github.io/website/blog19.html" target="_blank" rel="noopener" title="Paralysis Physiotherapy Treatment in Gaur City 2, Greater Noida West"><span class="service-pill neuro">Paralysis Care ↗</span></a>
-    <a href="https://meharphysiotherapyclinic.github.io/website/blog8.html" target="_blank" rel="noopener" title="Parkinson’s Physiotherapy Treatment in Gaur City 2, Greater Noida West"><span class="service-pill neuro">Parkinson's ↗</span></a>
-    <a href="https://meharphysiotherapyclinic.github.io/website/blog20.html" target="_blank" rel="noopener" title="Bell’s Palsy Physiotherapy Treatment in Gaur City 2, Greater Noida West"><span class="service-pill neuro">Bell's Palsy ↗</span></a>
-    <a href="https://meharphysiotherapyclinic.github.io/website/blog6.html" target="_blank" rel="noopener" title="Balance Training Physiotherapy in Gaur City 2, Greater Noida West"><span class="service-pill neuro">Balance Training ↗</span></a>
+    <a href="https://meharphysiotherapyclinic.github.io/website/blog10.html" target="_blank" rel="noopener noreferrer" title="Stroke Rehabilitation Physiotherapy in Gaur City 2, Greater Noida West"><span class="service-pill neuro">Stroke Recovery ↗</span></a>
+    <a href="https://meharphysiotherapyclinic.github.io/website/blog19.html" target="_blank" rel="noopener noreferrer" title="Paralysis Physiotherapy Treatment in Gaur City 2, Greater Noida West"><span class="service-pill neuro">Paralysis Care ↗</span></a>
+    <a href="https://meharphysiotherapyclinic.github.io/website/blog8.html" target="_blank" rel="noopener noreferrer" title="Parkinson’s Physiotherapy Treatment in Gaur City 2, Greater Noida West"><span class="service-pill neuro">Parkinson's ↗</span></a>
+    <a href="https://meharphysiotherapyclinic.github.io/website/blog20.html" target="_blank" rel="noopener noreferrer" title="Bell’s Palsy Physiotherapy Treatment in Gaur City 2, Greater Noida West"><span class="service-pill neuro">Bell's Palsy ↗</span></a>
+    <a href="https://meharphysiotherapyclinic.github.io/website/blog6.html" target="_blank" rel="noopener noreferrer" title="Balance Training Physiotherapy in Gaur City 2, Greater Noida West"><span class="service-pill neuro">Balance Training ↗</span></a>
   </div>
-
   <h4 class="service-category">Sports Injuries</h4>
   <div class="services-grid">
-    <a href="https://meharphysiotherapyclinic.github.io/website/blog26.html" target="_blank" rel="noopener" title="Sprain and Strain Physiotherapy Treatment in Gaur City 2, Greater Noida West"><span class="service-pill">Sprains & Strains ↗</span></a>
-    <a href="https://meharphysiotherapyclinic.github.io/website/blog27.html" target="_blank" rel="noopener" title="Ligament Injury Physiotherapy Treatment in Gaur City 2, Greater Noida West"><span class="service-pill">Ligament Injuries ↗</span></a>
-    <a href="https://meharphysiotherapyclinic.github.io/website/blog3.html" target="_blank" rel="noopener" title="Sports Injury Rehabilitation in Gaur City 2, Greater Noida West"><span class="service-pill">Sports Rehab ↗</span></a>
+    <a href="https://meharphysiotherapyclinic.github.io/website/blog26.html" target="_blank" rel="noopener noreferrer" title="Sprain and Strain Physiotherapy Treatment in Gaur City 2, Greater Noida West"><span class="service-pill">Sprains & Strains ↗</span></a>
+    <a href="https://meharphysiotherapyclinic.github.io/website/blog27.html" target="_blank" rel="noopener noreferrer" title="Ligament Injury Physiotherapy Treatment in Gaur City 2, Greater Noida West"><span class="service-pill">Ligament Injuries ↗</span></a>
+    <a href="https://meharphysiotherapyclinic.github.io/website/blog3.html" target="_blank" rel="noopener noreferrer" title="Sports Injury Rehabilitation in Gaur City 2, Greater Noida West"><span class="service-pill">Sports Rehab ↗</span></a>
   </div>
-
   <h4 class="service-category">Post-Surgery & Paediatric</h4>
   <div class="services-grid">
-    <a href="https://meharphysiotherapyclinic.github.io/website/blog9.html" target="_blank" rel="noopener" title="Joint Replacement Physiotherapy in Gaur City 2, Greater Noida West"><span class="service-pill">Joint Replacement ↗</span></a>
-    <a href="https://meharphysiotherapyclinic.github.io/website/blog21.html" target="_blank" rel="noopener" title="Fracture Rehabilitation Physiotherapy in Gaur City 2, Greater Noida West"><span class="service-pill">Fracture Rehab ↗</span></a>
-    <a href="https://meharphysiotherapyclinic.github.io/website/blog11.html" target="_blank" rel="noopener" title="Spinal Surgery Rehabilitation Physiotherapy in Gaur City 2, Greater Noida West"><span class="service-pill">Spinal Surgery ↗</span></a>
-    <a href="https://meharphysiotherapyclinic.github.io/website/blog22.html" target="_blank" rel="noopener" title="Cerebral Palsy Physiotherapy Treatment in Gaur City 2, Greater Noida West"><span class="service-pill">Cerebral Palsy ↗</span></a>
-    <a href="https://meharphysiotherapyclinic.github.io/website/blog23.html" target="_blank" rel="noopener" title="Developmental Delay Physiotherapy in Gaur City 2, Greater Noida West"><span class="service-pill">Developmental Delays ↗</span></a>
+    <a href="https://meharphysiotherapyclinic.github.io/website/blog9.html" target="_blank" rel="noopener noreferrer" title="Joint Replacement Physiotherapy in Gaur City 2, Greater Noida West"><span class="service-pill">Joint Replacement ↗</span></a>
+    <a href="https://meharphysiotherapyclinic.github.io/website/blog21.html" target="_blank" rel="noopener noreferrer" title="Fracture Rehabilitation Physiotherapy in Gaur City 2, Greater Noida West"><span class="service-pill">Fracture Rehab ↗</span></a>
+    <a href="https://meharphysiotherapyclinic.github.io/website/blog11.html" target="_blank" rel="noopener noreferrer" title="Spinal Surgery Rehabilitation Physiotherapy in Gaur City 2, Greater Noida West"><span class="service-pill">Spinal Surgery ↗</span></a>
+    <a href="https://meharphysiotherapyclinic.github.io/website/blog22.html" target="_blank" rel="noopener noreferrer" title="Cerebral Palsy Physiotherapy Treatment in Gaur City 2, Greater Noida West"><span class="service-pill">Cerebral Palsy ↗</span></a>
+    <a href="https://meharphysiotherapyclinic.github.io/website/blog23.html" target="_blank" rel="noopener noreferrer" title="Developmental Delay Physiotherapy in Gaur City 2, Greater Noida West"><span class="service-pill">Developmental Delays ↗</span></a>
   </div>
-
   <h4 class="service-category">Specialised Treatments</h4>
   <div class="services-grid">
-    <a href="https://meharphysiotherapyclinic.github.io/website/blog24.html" target="_blank" rel="noopener" title="Manual Therapy Physiotherapy in Gaur City 2, Greater Noida West"><span class="service-pill">Manual Therapy ↗</span></a>
-    <a href="https://meharphysiotherapyclinic.github.io/website/blog29.html" target="_blank" rel="noopener" title="Gait Analysis Physiotherapy in Gaur City 2, Greater Noida West"><span class="service-pill">Gait Analysis ↗</span></a>
-    <a href="https://meharphysiotherapyclinic.github.io/website/blog25.html" target="_blank" rel="noopener" title="PNF Techniques Physiotherapy in Gaur City 2, Greater Noida West"><span class="service-pill">PNF Techniques ↗</span></a>
-    <a href="https://meharphysiotherapyclinic.github.io/website/blog2.html" target="_blank" rel="noopener" title="Postural Correction Physiotherapy in Gaur City 2, Greater Noida West"><span class="service-pill">Postural Correction ↗</span></a>
+    <a href="https://meharphysiotherapyclinic.github.io/website/blog24.html" target="_blank" rel="noopener noreferrer" title="Manual Therapy Physiotherapy in Gaur City 2, Greater Noida West"><span class="service-pill">Manual Therapy ↗</span></a>
+    <a href="https://meharphysiotherapyclinic.github.io/website/blog29.html" target="_blank" rel="noopener noreferrer" title="Gait Analysis Physiotherapy in Gaur City 2, Greater Noida West"><span class="service-pill">Gait Analysis ↗</span></a>
+    <a href="https://meharphysiotherapyclinic.github.io/website/blog25.html" target="_blank" rel="noopener noreferrer" title="PNF Techniques Physiotherapy in Gaur City 2, Greater Noida West"><span class="service-pill">PNF Techniques ↗</span></a>
+    <a href="https://meharphysiotherapyclinic.github.io/website/blog2.html" target="_blank" rel="noopener noreferrer" title="Postural Correction Physiotherapy in Gaur City 2, Greater Noida West"><span class="service-pill">Postural Correction ↗</span></a>
   </div>
-
   <!-- Highlight Row -->
   <div class="services-grid highlight-row">
     <a href="#feedback" title="Book Home Visit Physiotherapy in Gaur City 2, Greater Noida West"><span class="service-pill highlight">Home Visit Physiotherapy →</span></a>
@@ -248,86 +273,93 @@ Ortho Rehab • Neuro Rehab • Sports Physiotherapy
   <div class="review-carousel">
     <div id="review-track" class="review-track"></div>
   </div>
-  <div class="more-link" style="width: 100%; max-width: 360px; margin: 15px auto;">
+  <div class="more-link">
+    <!-- Fix 4 applied -->
     <a href="https://search.google.com/local/reviews?placeid=ChIJ4_vGaUnvDDkR5vtYeucjsNU"
        target="_blank"
+       rel="noopener noreferrer"
        class="btn google-btn">
-      <img width="20" src="https://cdn-icons-png.flaticon.com/512/281/281764.png" alt="Google">
+      <svg class="icon google-icon">
+  <use href="#icon-google"></use>
+</svg>
       View All on Google
     </a>
   </div>
       </div>
       <!-- MAIN BUTTON GRID -->
       <div class="contact-section">
-
-  <h3 class="main-reviews-heading" style="padding:16px 8px 4px;">
+  <h3 class="section-heading">
     Contact
     <small class="tap-note">For home visits & clinic appointments</small>
     <small class="tap-note">
       Areas Served: Gaur City 1 • Gaur City 2 • Noida Extension • Greater Noida West • Techzone 4 • Noida • Crossing Republic
     </small>
   </h3>
-
   <div id="feedback" class="feedback"></div>
-
   <!-- PRIMARY BUTTONS -->
-
   <div class="btn-grid">
-
   <a href="tel:+919810359247" class="btn call">
-    <img width="20" src="https://cdn-icons-png.flaticon.com/512/3059/3059498.png" aria-hidden="true" alt="">
+    <svg class="icon phone-icon">
+  <use href="#icon-phone"></use>
+</svg>
     Call
   </a>
-
+  <!-- Fix 4 applied -->
   <a href="https://wa.me/919810359247?text=Hello%20Dr.%20Arneja%2C%20I%20would%20like%20to%20book%20an%20appointment."
      target="_blank"
+     rel="noopener noreferrer"
      class="btn whatsapp">
-    <img width="20" src="https://cdn-icons-png.flaticon.com/512/733/733585.png" aria-hidden="true" alt="">
+    <svg class="icon">
+  <use href="#icon-whatsapp"></use>
+</svg>
     WhatsApp
   </a>
-
   <button onclick="shareVCard()" class="btn share">
-    <img width="20" src="https://cdn-icons-png.flaticon.com/512/929/929610.png" aria-hidden="true" alt="">
+    <svg class="icon">
+  <use href="#icon-share"></use>
+</svg>
     Share vCard
   </button>
-
+  <!-- Fix 4 applied -->
   <a href="https://meharphysiotherapyclinic.github.io/website/"
      target="_blank"
+     rel="noopener noreferrer"
      class="btn website">
-    <img width="20" src="https://cdn-icons-png.flaticon.com/512/1006/1006669.png" aria-hidden="true" alt="">
+    <svg class="icon">
+  <use href="#icon-website"></use>
+</svg>
     Website
   </a>
-
 </div>
-
  <div class="btn-row">
-
   <a href="govindpreet.vcf"
      download
      class="btn vcf">
-    <img width="18" src="https://cdn-icons-png.flaticon.com/512/724/724933.png" aria-hidden="true" alt="">
+    <svg class="icon">
+  <use href="#icon-save"></use>
+</svg>
     Save .vcf
   </a>
-
   <button onclick="copyLink()"
           class="btn copy">
-    <img width="18" src="https://cdn-icons-png.flaticon.com/512/1621/1621635.png" aria-hidden="true" alt="">
+    <svg class="icon">
+  <use href="#icon-link"></use>
+</svg>
     Copy Link
   </button>
-
 </div>
-
 </div>
       <div class="map-section">
   <h3 class="main-map-heading">
     Find us
     <span class="tap-note">Visit our clinic for customized care</span>
   </h3>
-  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3503.266205463774!2d77.41937927550044!3d28.62177577566904!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cee4969c6fb23%3A0xd5b023e77a58fbe6!2sMehar%20Physiotherapy%20Clinic!5e0!3m2!1sen!2sin!4v1714000000000!5m2!1sen!2sin" width="100%" height="150" allowfullscreen="" loading="lazy"></iframe>
+  <!-- Fix 2: Added a descriptive title attribute for modern a11y compliance -->
+  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3503.266205463774!2d77.41937927550044!3d28.62177577566904!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cee4969c6fb23%3A0xd5b023e77a58fbe6!2sMehar%20Physiotherapy%20Clinic!5e0!3m2!1sen!2sin!4v1714000000000!5m2!1sen!2sin" width="100%" height="150" allowfullscreen="" loading="lazy" title="Mehar Physiotherapy Clinic Map Location"></iframe>
 </div>
       <div class="qr">
-        <p>Scan QR</p>
-        <img src="qr_vcard.png" />
+        <p class="qr-label">Scan QR</p>
+        <img src="qr_vcard.png" alt="Scan QR code to open Mehar Physiotherapy Clinic vCard" />
       </div>
     </div>
     <script>
@@ -338,18 +370,30 @@ Ortho Rehab • Neuro Rehab • Sports Physiotherapy
         setTimeout(() => fb.classList.remove('show'), 2000);
       }
 
+      /* Fix 3: Implemented modern promise-based .then().catch() pipeline for safe clipboard handling */
       function copyLink() {
-        navigator.clipboard.writeText(location.href);
-        showFeedback("Copied!");
+        navigator.clipboard.writeText(location.href)
+          .then(() => {
+            showFeedback("Copied!");
+          })
+          .catch(err => {
+            console.error("Failed to copy text: ", err);
+            showFeedback("Failed to copy link");
+          });
       }
 
+      /* Fix 3: Caught rejected promise gracefully if the native sharing modal is closed/cancelled by user */
       function shareVCard() {
         if (navigator.share) {
           navigator.share({
             title: "Mehar Physiotherapy Clinic",
             url: location.href
+          }).catch(err => {
+            console.warn("Share dialog closed or failed: ", err);
           });
-        } else copyLink();
+        } else {
+          copyLink();
+        }
       }
       /* PWA Service Worker */
       if ('serviceWorker' in navigator) {
@@ -410,14 +454,12 @@ const clinicReviews = [
 ];
 
 function initReviews() {
-
   const carousel = document.querySelector(".review-carousel");
   const track = document.getElementById("review-track");
 
   if (!carousel || !track || track.children.length > 0) return;
 
   /* ───────────────── CONFIG ───────────────── */
-
   const TOUCH_THRESHOLD   = 8;
   const MOUSE_THRESHOLD   = 4;
   const GHOST_CLICK_DELAY = 600;
@@ -427,15 +469,10 @@ function initReviews() {
   const STEP_DELAY        = 1000;
 
   /* ───────────── Build cards ───────────── */
-
   for (let i = 0; i < 3; i++) {
-
     clinicReviews.forEach(rev => {
-
       const card = document.createElement("div");
-
       card.className = "review-card";
-
       card.innerHTML = `
         <div class="review-stars">★★★★★</div>
         <p class="review-text">"${rev.text}"</p>
@@ -444,29 +481,21 @@ function initReviews() {
           <span>${rev.service}</span>
         </div>
       `;
-
       track.appendChild(card);
-
     });
   }
 
   function tryInit(attempts) {
-
     const singleSetWidth = track.scrollWidth / 3;
-
     if (!singleSetWidth) {
-
       if (attempts > 0) {
         setTimeout(() => tryInit(attempts - 1), 100);
       }
-
       return;
     }
 
     const cardEl = track.querySelector(".review-card");
-
     const style = getComputedStyle(cardEl);
-
     const cardWidth =
       cardEl.offsetWidth +
       parseFloat(style.marginLeft) +
@@ -482,7 +511,6 @@ function initReviews() {
       singleSetWidth - centerOffset;
 
     /* ───────────── State ───────────── */
-
     let isPaused = false;
     let isTapPaused = false;
     let isTouching = false;
@@ -494,15 +522,12 @@ function initReviews() {
     let scrollTimer = null;
 
     /* ───────────── Helpers ───────────── */
-
     function maintainLoop() {
-
       if (
         carousel.scrollLeft + centerOffset >= singleSetWidth * 2
       ) {
         carousel.scrollLeft -= singleSetWidth;
       }
-
       if (
         carousel.scrollLeft + centerOffset < singleSetWidth
       ) {
@@ -511,74 +536,53 @@ function initReviews() {
     }
 
     function pauseAll() {
-
       isPaused = true;
-
       cancelAnimationFrame(scrollRaf);
-
       clearTimeout(stepTimer);
       clearTimeout(scrollTimer);
     }
 
     function resumeAll() {
-
       if (isTapPaused) return;
-
       isPaused = false;
-
       scrollToNext();
     }
 
     function delayedResume(delay = RESUME_DELAY) {
-
       setTimeout(() => {
-
         if (!isTouching) {
-
           maintainLoop();
-
           resumeAll();
-
         }
-
       }, delay);
     }
 
     /* ───────── Scroll correction ───────── */
-
     carousel.addEventListener(
       "scroll",
       () => {
-
         if (!isPaused) return;
-
         clearTimeout(scrollTimer);
-
         scrollTimer = setTimeout(
           maintainLoop,
           SCROLL_DELAY
         );
-
       },
       { passive: true }
     );
 
     /* ───────── Animation ───────── */
-
     function smoothScrollTo(
       target,
       duration,
       onDone
     ) {
-
       cancelAnimationFrame(scrollRaf);
-
       const start = carousel.scrollLeft;
       const distance = target - start;
       const t0 = performance.now();
 
       function step(now) {
-
         const t =
           Math.min(
             (now - t0) / duration,
@@ -594,23 +598,17 @@ function initReviews() {
           start + distance * ease;
 
         if (t < 1) {
-
           scrollRaf =
             requestAnimationFrame(step);
-
         } else {
-
           onDone?.();
-
         }
       }
-
       scrollRaf =
         requestAnimationFrame(step);
     }
 
     function scrollToNext() {
-
       if (
         isPaused ||
         isTapPaused
@@ -637,10 +635,8 @@ function initReviews() {
         nextPos + centerOffset >=
         singleSetWidth * 2
       ) {
-
         carousel.scrollLeft -=
           singleSetWidth;
-
         nextPos -=
           singleSetWidth;
       }
@@ -649,22 +645,18 @@ function initReviews() {
         nextPos,
         SCROLL_DURATION,
         () => {
-
           stepTimer =
             setTimeout(
               () => {
-
                 if (
                   !isPaused &&
                   !isTapPaused
                 ) {
                   scrollToNext();
                 }
-
               },
               STEP_DELAY
             );
-
         }
       );
     }
@@ -672,31 +664,22 @@ function initReviews() {
     scrollToNext();
 
     /* ───────── Touch ───────── */
-
     let touchStartX = 0;
     let touchStartY = 0;
 
     carousel.addEventListener(
       "touchstart",
       e => {
-
         const touch =
           e.touches?.[0];
-
         if (!touch) return;
-
         isTouching = true;
-
         pauseAll();
-
         hasMoved = false;
-
         touchStartX =
           touch.clientX;
-
         touchStartY =
           touch.clientY;
-
       },
       { passive: true }
     );
@@ -704,10 +687,8 @@ function initReviews() {
     carousel.addEventListener(
       "touchmove",
       e => {
-
         const touch =
           e.touches?.[0];
-
         if (
           !touch ||
           !isTouching
@@ -716,24 +697,18 @@ function initReviews() {
         }
 
         if (
-
           Math.abs(
             touch.clientX -
             touchStartX
           ) > TOUCH_THRESHOLD ||
-
           Math.abs(
             touch.clientY -
             touchStartY
           ) > TOUCH_THRESHOLD
-
         ) {
-
           hasMoved = true;
-
           isTapPaused = false;
         }
-
       },
       { passive: true }
     );
@@ -741,26 +716,19 @@ function initReviews() {
     carousel.addEventListener(
       "touchend",
       () => {
-
         isTouching = false;
-
         lastTouchTime =
           Date.now();
 
         if (!hasMoved) {
-
           isTapPaused =
             !isTapPaused;
-
           if (!isTapPaused) {
             resumeAll();
           }
-
         } else {
-
           delayedResume();
         }
-
       },
       { passive: true }
     );
@@ -768,20 +736,15 @@ function initReviews() {
     carousel.addEventListener(
       "touchcancel",
       () => {
-
         isTouching = false;
-
         lastTouchTime =
           Date.now();
-
         delayedResume();
-
       },
       { passive: true }
     );
 
     /* ───────── Mouse ───────── */
-
     let isDown = false;
     let startX = 0;
     let startScrollLeft = 0;
@@ -790,7 +753,6 @@ function initReviews() {
     carousel.addEventListener(
       "mouseenter",
       () => {
-
         if (
           Date.now() -
             lastTouchTime <
@@ -798,18 +760,15 @@ function initReviews() {
         ) {
           return;
         }
-
         if (!isTapPaused) {
           pauseAll();
         }
-
       }
     );
 
     carousel.addEventListener(
       "mouseleave",
       () => {
-
         if (
           Date.now() -
             lastTouchTime <
@@ -817,20 +776,16 @@ function initReviews() {
         ) {
           return;
         }
-
         isDown = false;
-
         if (!isTapPaused) {
           resumeAll();
         }
-
       }
     );
 
     carousel.addEventListener(
       "mousedown",
       e => {
-
         if (
           Date.now() -
             lastTouchTime <
@@ -838,80 +793,57 @@ function initReviews() {
         ) {
           return;
         }
-
         pauseAll();
-
         isDown = true;
-
         hasMoved = false;
-
         mouseStartX =
           e.pageX;
-
         startX =
           e.pageX -
           carousel.offsetLeft;
-
         startScrollLeft =
           carousel.scrollLeft;
-
       }
     );
 
     document.addEventListener(
       "mouseup",
       () => {
-
         if (!isDown) return;
-
         isDown = false;
-
         if (!hasMoved) {
-
           isTapPaused =
             !isTapPaused;
-
           if (!isTapPaused) {
             resumeAll();
           }
-
         } else {
-
           delayedResume(700);
         }
-
       }
     );
 
     carousel.addEventListener(
       "mousemove",
       e => {
-
         if (!isDown) return;
-
         if (
-
           Math.abs(
             e.pageX -
             mouseStartX
           ) > MOUSE_THRESHOLD
-
         ) {
-
           hasMoved = true;
-
           isTapPaused = false;
         }
 
         carousel.scrollLeft =
           startScrollLeft -
-
           (
             e.pageX -
             carousel.offsetLeft -
             startX
           ) * 1.5;
-
       }
     );
   }
