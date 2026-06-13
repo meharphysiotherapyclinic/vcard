@@ -4,8 +4,47 @@
    Fixes: Left Aligned Phone Number under Clinic Info
 ===================================================== */
 
-/* CORRECT FONT IMPORT AT THE ABSOLUTE TOP OF FILE */
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght=400;500;600;700&display=swap');
+/* DM Sans */
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./fonts/dm-sans-v17-latin-regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('./fonts/dm-sans-v17-latin-500.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('./fonts/dm-sans-v17-latin-600.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('fonts/dm-sans-v17-latin-700.woff2') format('woff2');
+}
+
+/* DM Serif Display */
+@font-face {
+  font-family: 'DM Serif Display';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./fonts/dm-serif-display-v17-latin-regular.woff2') format('woff2');
+}
 
 :root {
   --bg: #f1f5f9; /* Slate page background to let the main card stand out */
