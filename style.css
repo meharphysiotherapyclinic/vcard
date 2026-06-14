@@ -776,7 +776,7 @@ h4::after {
   transition: 0.3s;
   font-size: 13px;
   position: fixed;
-  top: 38%;
+  top: 30%;
   left: 50%;
   transform: translateX(-50%);
   margin: 0;
