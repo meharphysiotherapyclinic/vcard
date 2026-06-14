@@ -300,7 +300,6 @@ Ortho Rehab • Neuro Rehab • Sports Physiotherapy
       Areas Served: Gaur City 1 • Gaur City 2 • Noida Extension • Greater Noida West • Techzone 4 • Noida • Crossing Republic
     </small>
   </h3>
-  <div id="feedback" class="feedback"></div>
   <!-- PRIMARY BUTTONS -->
   <div class="btn-grid">
   <a href="tel:+919810359247" class="btn call">
@@ -394,11 +393,33 @@ observer.observe(document.getElementById('map-placeholder'));
     </div>
     <script>
       function showFeedback(msg) {
-        const fb = document.getElementById('feedback');
-        fb.textContent = msg;
-        fb.classList.add('show');
-        setTimeout(() => fb.classList.remove('show'), 2000);
-      }
+  const toast = document.createElement('div');
+  toast.textContent = msg;
+  toast.style.cssText = `
+    position: fixed;
+    top: calc(env(safe-area-inset-top) + 16px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: #0e5a95;
+    color: white;
+    padding: 10px 24px;
+    border-radius: 24px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95em;
+    font-weight: 600;
+    box-shadow: 0 4px 14px rgba(14, 90, 149, 0.40);
+    z-index: 99999;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    white-space: nowrap;
+  `;
+  document.body.appendChild(toast);
+  requestAnimationFrame(() => { toast.style.opacity = '1'; });
+  setTimeout(() => {
+    toast.style.opacity = '0';
+    toast.addEventListener('transitionend', () => toast.remove());
+  }, 2000);
+}
 
       /* Fix 3: Implemented modern promise-based .then().catch() pipeline for safe clipboard handling */
       function copyLink() {
