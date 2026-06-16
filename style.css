@@ -676,21 +676,20 @@ h4::after {
 }
 
 /* =====================================================
-   PREMIUM CONTROL BUTTONS MATRIX
+   PREMIUM CONTROL BUTTONS MATRIX (Sleeker & Symmetrical)
 ===================================================== */
 .btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 4px;                  /* Snug gap to give text maximum breathing room */
   text-decoration: none;
   width: 100%;
-  padding: 12px 10px;
+  padding: 8px 6px;          /* Sleeker, optimized padding */
   border: none;
   border-radius: 16px;
-  font-size: 14px;
+  font-size: 13px;           /* Clean text size matching your website's sleek feel */
   font-weight: 700;
-  line-height: 1.2;
   color: #fff;
   cursor: pointer;
   position: relative;
@@ -700,6 +699,12 @@ h4::after {
   will-change: transform;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
   transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+
+  /* Forces text to adjust to the layout rules instead of breaking them */
+  white-space: normal;       /* Allows layout wrapping */
+  word-break: break-word;    /* Stops long words from bursting borders */
+  line-height: 1.2;          /* Tight, professional line height for wraps */
+  text-align: center;
 }
 
 .btn::before {
@@ -739,14 +744,15 @@ h4::after {
 
 .btn-grid, .btn-row {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  /* Crucial: Forces columns to perfectly match 50/50 without letting text push width */
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px;                  /* Clean spacing matching your website */
   width: 100%;
   margin: 12px 0;
 }
 
 .btn-grid .btn, .btn-row .btn {
-  min-height: 58px;
+  min-height: 42px;          /* Sleeker minimum height; easily allows 1 or 2 text lines */
 }
 
 .btn-row { 
@@ -1064,5 +1070,6 @@ h4::after {
 @media (max-width: 360px) {
   h1 { font-size: 18px; }
   .name { font-size: 15px; }
-  .btn { font-size: 13px; }
+  /* Custom scaling fallback for tiny screens to preserve layout structure */
+  .btn { font-size: 12px; padding: 6px 4px; } 
 }
