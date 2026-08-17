@@ -53,14 +53,6 @@ No traditional backend is required.
 └── README.md
 ```
 
-## Contact
-
-**Dr. Govindpreet Singh Arneja, B.P.T., M.I.A.P.**  
-**Mehar Physiotherapy Clinic**  
-Gaur City-2, Greater Noida West, Uttar Pradesh, India
-
-**Phone:** +91 9810359247
-
 ## Deployment
 
 This is a static website designed for **GitHub Pages**.
